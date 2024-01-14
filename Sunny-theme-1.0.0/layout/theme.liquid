@@ -1,0 +1,32 @@
+<!doctype html>
+<html
+  lang="{{ request.locale.iso_code }}"
+  data-template="{{ template.name }}"
+>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunny Theme v1.0.0</title>
+    <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'theme-global.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
+    {{ content_for_header }}
+  </head>
+  <body>
+    {%- liquid
+      sections 'header-group'
+    -%}
+
+    <main role="main" id="MainContent">
+      {{ content_for_layout }}
+    </main>
+
+    {%- liquid
+      sections 'footer-group'
+    -%}
+
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'swiper.min.js' | asset_url }}" defer="defer"></script>
+  </body>
+</html>

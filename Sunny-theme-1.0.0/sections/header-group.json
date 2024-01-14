@@ -1,0 +1,29 @@
+{
+    "type": "header",
+    "name": "Header",
+    "sections": {
+        "729ed7ff-cd70-41ab-97b7-db284c5764da": {
+            "type": "announcement-bar",
+            "custom_css": [
+            ],
+            "blocks": {
+                "block-section-1":{
+                    "type": "text"
+                }
+            },
+            "block_order": ["block-section-1"]
+          },
+        "729ed7ff-cd70-41ab-97b7-db284c5764d5": {
+            "type": "header",
+            "custom_css": [
+            ],
+            "settings": {
+             
+            }
+          }
+    },
+    "order": [
+        "729ed7ff-cd70-41ab-97b7-db284c5764da",
+        "729ed7ff-cd70-41ab-97b7-db284c5764d5"
+    ]
+  }

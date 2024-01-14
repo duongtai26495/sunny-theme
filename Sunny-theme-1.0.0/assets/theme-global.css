@@ -1,0 +1,24 @@
+.justify-center {justify-content: center !important;}
+.justify-end {justify-content: end !important;}
+.swiper-button:after {
+    font-size: 15px !important;
+    color: white;
+}
+.swiper-button-prev{left: 0 !important;}
+.swiper-button-next{right: 0 !important;}
+.sn-button{padding: 3px 7px;border-radius: 3px;font-weight: 500;}
+.list-menu--link::after{
+    content: "";
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    left: 0;
+    z-index: 99;
+    color: black;
+    background-color: black;
+    transition-duration: 500ms;
+}
+.list-menu--link:hover::after{
+    width: 100%;
+}

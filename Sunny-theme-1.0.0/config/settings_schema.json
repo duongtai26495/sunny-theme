@@ -1,0 +1,606 @@
+[
+    {
+        "name": "theme_info",
+        "theme_name": "Sunny",
+        "theme_version": "1.0.0",
+        "theme_author": "SunEcom",
+        "theme_documentation_url": "https://google.com",
+        "theme_support_url": "https://google.com"
+    },
+    {
+        "name": "General",
+        "settings": [
+            {
+                "type": "text",
+                "default": "Sunny",
+                "label": "Store name",
+                "placeholder": "Store name",
+                "id": "store_name"
+            },
+            {
+                "type": "header",
+                "content": "Logo"
+            },
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Logo"
+            },
+            {
+                "type": "range",
+                "id": "logo_width_desktop",
+                "label": "Desktop logo width",
+                "min": 50,
+                "max": 250,
+                "step": 10,
+                "unit": "px",
+                "default": 100
+            },
+            {
+                "type": "range",
+                "id": "logo_width_mobile",
+                "label": "Mobile logo width",
+                "min": 50,
+                "max": 250,
+                "step": 10,
+                "unit": "px",
+                "default": 100
+            },
+            {
+                "type": "header",
+                "content": "Favicon"
+            },
+            {
+                "type": "checkbox",
+                "id": "use_favicon",
+                "label": "Use favicon icon (32px x 32px)",
+                "default": true
+            },
+            {
+                "type": "image_picker",
+                "id": "favicon",
+                "label": "Add favicon (32px x 32px)",
+                "info": "Will be scaled down to 32 x 32px"
+            },
+            {
+                "type": "header",
+                "content": "Scroll to top button"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_scroll_top_button",
+                "label": "Show scroll to top button",
+                "default": true
+            }
+        ]
+    },
+    {
+        "name": "Layout",
+        "settings": [
+            {
+                "type": "range",
+                "id": "template_width",
+                "label": "Template width",
+                "default": 1280,
+                "min": 1200,
+                "max": 1920,
+                "step": 10,
+                "unit": "px"
+            }
+        ]
+    },
+    {
+        "name": "Typography",
+        "settings": [
+            {
+                "type": "header",
+                "content": "BODY TEXT"
+            },
+            {
+                "type": "font_picker",
+                "id": "type_base_font",
+                "label": "Font",
+                "default": "helvetica_n4"
+            },
+            {
+                "type": "checkbox",
+                "id": "use_custom_font_body",
+                "label": "Use custom font",
+                "default": false
+            },
+            {
+                "type": "header",
+                "content": "Custom font for Body text"
+            },
+            {
+                "id": "custom_body_font",
+                "type": "textarea",
+                "label": "Font URL",
+                "placeholder": "https:\/\/cdn.shopify.com\/s\/files\/1\/0075\/files\/roboto.woff2@400",
+                "info": "Format: Link_to_font@font_weight"
+            },
+            {
+                "id": "custom_body_weight",
+                "type": "select",
+                "label": "Default font weight",
+                "default": "400",
+                "options": [
+                    {
+                        "value": "100",
+                        "label": "Thin 100"
+                    },
+                    {
+                        "value": "200",
+                        "label": "Extra-light 200"
+                    },
+                    {
+                        "value": "300",
+                        "label": "Light 300"
+                    },
+                    {
+                        "value": "400",
+                        "label": "Regular 400"
+                    },
+                    {
+                        "value": "500",
+                        "label": "Medium 500"
+                    },
+                    {
+                        "value": "600",
+                        "label": "Semi-bold 600"
+                    },
+                    {
+                        "value": "700",
+                        "label": "Bold 700"
+                    },
+                    {
+                        "value": "800",
+                        "label": "Extra-bold 800"
+                    },
+                    {
+                        "value": "900",
+                        "label": "Black 900"
+                    }
+                ]
+            },
+            {
+                "type": "range",
+                "id": "type_base_size",
+                "label": "Base size",
+                "default": 16,
+                "min": 14,
+                "max": 20,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "type_base_line_height",
+                "label": "Line height",
+                "default": 28,
+                "min": 14,
+                "max": 100,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "header",
+                "content": "HEADINGS"
+            },
+            {
+                "type": "font_picker",
+                "id": "type_header_font",
+                "label": "Font",
+                "default": "helvetica_n7"
+            },
+            {
+                "type": "checkbox",
+                "id": "use_custom_font_heading",
+                "label": "Use custom font",
+                "default": false
+            },
+            {
+                "type": "header",
+                "content": "Custom font for Headings"
+            },
+            {
+                "type": "paragraph",
+                "content": "Allow multiple links, each link in a new line. Please upload to [Shopify files](\/admin\/settings\/files) and paste link here. These formats TTF, OTF, WOFF & WOFF2 are supported."
+            },
+            {
+                "id": "custom_heading_font",
+                "type": "textarea",
+                "label": "Font file URLS",
+                "placeholder": "https:\/\/cdn.shopify.com\/s\/files\/1\/0075\/files\/roboto.woff2@400",
+                "info": "Format: Link_to_font@font_weight"
+            },
+            {
+                "id": "custom_heading_weight",
+                "type": "select",
+                "label": "Default font weight",
+                "default": "400",
+                "options": [
+                    {
+                        "value": "100",
+                        "label": "Thin 100"
+                    },
+                    {
+                        "value": "200",
+                        "label": "Extra-light 200"
+                    },
+                    {
+                        "value": "300",
+                        "label": "Light 300"
+                    },
+                    {
+                        "value": "400",
+                        "label": "Regular 400"
+                    },
+                    {
+                        "value": "500",
+                        "label": "Medium 500"
+                    },
+                    {
+                        "value": "600",
+                        "label": "Semi-bold 600"
+                    },
+                    {
+                        "value": "700",
+                        "label": "Bold 700"
+                    },
+                    {
+                        "value": "800",
+                        "label": "Extra-bold 800"
+                    },
+                    {
+                        "value": "900",
+                        "label": "Black 900"
+                    }
+                ]
+            },
+            {
+                "type": "range",
+                "id": "h1_font_size",
+                "label": "H1 font size",
+                "default": 60,
+                "min": 36,
+                "max": 100,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "h2_font_size",
+                "label": "H2 font size",
+                "default": 42,
+                "min": 36,
+                "max": 60,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "type_header_base_size",
+                "label": "H3 font size",
+                "default": 36,
+                "min": 24,
+                "max": 42,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "h4_font_size",
+                "label": "H4 font size",
+                "default": 24,
+                "min": 16,
+                "max": 36,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "type_header_spacing",
+                "label": {
+                    "en": "Letter spacing"
+                },
+                "default": 0,
+                "min": 0,
+                "max": 10,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "header",
+                "content": "BUTTONS"
+            },
+            {
+                "type": "paragraph",
+                "content": "The button font is inherited from body text."
+            },
+            {
+                "type": "checkbox",
+                "id": "btn_uppercase_text",
+                "label": {
+                    "en": "Uppercase text label"
+                },
+                "default": false
+            },
+            {
+                "type": "range",
+                "id": "btn_base_size",
+                "label": {
+                    "en": "Font size"
+                },
+                "default": 16,
+                "min": 14,
+                "max": 20,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "btn_letter_spacing",
+                "label": {
+                    "en": "Letter spacing"
+                },
+                "default": 0,
+                "min": 0,
+                "max": 20,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "btn_border_width",
+                "label": "Border width",
+                "default": 1,
+                "min": 1,
+                "max": 5,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "btn_border_radius",
+                "label": {
+                    "en": "Border radius"
+                },
+                "default": 5,
+                "min": 0,
+                "max": 100,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "btn_line_height",
+                "label": {
+                    "en": "Line height"
+                },
+                "default": 23,
+                "min": 1,
+                "max": 50,
+                "step": 1,
+                "unit": "px"
+            },
+            {
+                "id": "btn_weight",
+                "type": "select",
+                "label": "Font weight",
+                "default": "500",
+                "options": [
+                    {
+                        "value": "100",
+                        "label": "Thin 100"
+                    },
+                    {
+                        "value": "200",
+                        "label": "Extra-light 200"
+                    },
+                    {
+                        "value": "300",
+                        "label": "Light 300"
+                    },
+                    {
+                        "value": "400",
+                        "label": "Regular 400"
+                    },
+                    {
+                        "value": "500",
+                        "label": "Medium 500"
+                    },
+                    {
+                        "value": "600",
+                        "label": "Semi-bold 600"
+                    },
+                    {
+                        "value": "700",
+                        "label": "Bold 700"
+                    },
+                    {
+                        "value": "800",
+                        "label": "Extra-bold 800"
+                    },
+                    {
+                        "value": "900",
+                        "label": "Black 900"
+                    }
+                ]
+            },
+            {
+                "type": "header",
+                "content": "INPUTS"
+            },
+            {
+                "type": "range",
+                "id": "inputs_border_thickness",
+                "label": "Thickness",
+                "min": 0,
+                "max": 12,
+                "step": 1,
+                "unit": "px",
+                "default": 1
+            },
+            {
+                "type": "range",
+                "id": "inputs_border_radius",
+                "label": "Corner radius",
+                "min": 0,
+                "max": 60,
+                "step": 1,
+                "unit": "px",
+                "default": 5
+            }
+        ]
+    },
+    {
+        "name": "Additional pages",
+        "settings": [
+            {
+                "type": "page",
+                "id":"wishlist_page",
+                "label":"Wishlist page"
+            },
+            {
+                "type": "page",
+                "id":"comparison_page",
+                "label":"Comparison page"
+            }
+        ]
+    },
+    {
+        "name": "Colors",
+        "settings": [
+            {
+                "type": "color_scheme_group",
+                "id": "color_schemes",
+                "definition": [
+                    {
+                        "type": "color",
+                        "id": "primary_accent",
+                        "label": "Primary accent",
+                        "default": "#222222",
+                        "info": "Use for focus, active, links"
+                    },
+                    {
+                        "type": "color",
+                        "id": "background",
+                        "label": "Background",
+                        "default": "#FFFFFF"
+                    },
+                    {
+                        "type": "color_background",
+                        "id": "background_gradient",
+                        "label": "Background gradient",
+                        "info": "Background gradient replaces background where possible."
+                    },
+                    {
+                        "type": "color",
+                        "id": "text",
+                        "label": "Text",
+                        "default": "#222222"
+                    },
+                    {
+                        "type": "color",
+                        "id": "subtext",
+                        "label": "Subtext",
+                        "default": "#666666"
+                    },
+                    {
+                        "type": "color",
+                        "id": "button",
+                        "label": "Solid button background",
+                        "default": "#222222"
+                    },
+                    {
+                        "type": "color",
+                        "id": "button_label",
+                        "label": "Solid button label",
+                        "default": "#FFFFFF"
+                    },
+                    {
+                        "type": "color",
+                        "id": "secondary_button",
+                        "label": "Secondary button background",
+                        "default": "#F2F2F2"
+                    },
+                    {
+                        "type": "color",
+                        "id": "secondary_button_label",
+                        "label": "Secondary button label",
+                        "default": "#222222"
+                    },
+                    {
+                        "type": "color",
+                        "id": "outline_button_label",
+                        "label": "Outline",
+                        "default": "#222222"
+                    },
+                    {
+                        "type": "color",
+                        "id": "border",
+                        "label": "Border",
+                        "default": "#EEEEEE"
+                    },
+                    {
+                        "type": "color",
+                        "id": "price_sale",
+                        "label": "Price sale",
+                        "default": "#E02B2B"
+                    },
+                    {
+                        "type": "color",
+                        "id": "price_regular",
+                        "label": "Price regular",
+                        "default": "#666666"
+                    },
+                    {
+                        "type": "color",
+                        "id": "form_field",
+                        "label": "Form field background",
+                        "default": "#FFFFFF"
+                    },
+                    {
+                        "type": "color",
+                        "id": "form_field_label",
+                        "label": "Form field text",
+                        "default": "#222222"
+                    },
+                    {
+                        "type": "color",
+                        "id": "tooltip",
+                        "label": "Tooltip background",
+                        "default": "#222222"
+                    },
+                    {
+                        "type": "color",
+                        "id": "tooltip_label",
+                        "label": "Tooltip text",
+                        "default": "#FFFFFF"
+                    },
+                    {
+                        "type": "header",
+                        "content": "menu"
+                    }
+                ],
+                "role": {
+                    "text": "text",
+                    "background": {
+                        "solid": "background",
+                        "gradient": "background_gradient"
+                    },
+                    "links": "primary_accent",
+                    "icons": "text",
+                    "primary_button": "button",
+                    "on_primary_button": "button_label",
+                    "primary_button_border": "button",
+                    "secondary_button": "background",
+                    "on_secondary_button": "outline_button_label",
+                    "secondary_button_border": "outline_button_label"
+                }
+            }
+        ]
+    }
+   
+]

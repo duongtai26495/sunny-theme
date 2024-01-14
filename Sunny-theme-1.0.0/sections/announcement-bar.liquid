@@ -1,0 +1,178 @@
+<div
+  class="swiper w-full mx-auto annountcement-bar relative {% if section.settings.container == "container" %}w-full max-w-[1920px]{% elsif section.settings.container == "narrow_width" %}w-full md:max-w-7xl{% else %}w-full{% endif %}"
+  section-id="{{section.id}}"
+  duration="{{ section.settings.duration }}"
+>
+
+  <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+      <div class="swiper-slide">
+      {% if block.settings.use_button %}
+          <div
+      class="{% if section.settings.show_navigations %}px-7{% endif %} h-10 w-full announcement-bar--inner flex items-center justify-{{block.settings.position}}"
+            style="background-color:{{block.settings.background}};"
+          >
+      {% else %}
+        <a
+          href="{{block.settings.url}}"
+          class="announcement-bar--inner flex items-center h-10 justify-{{block.settings.position}}"
+          style="background-color:{{block.settings.background}}"
+        >
+      {% endif %}
+      <div class="w-fit max-w-full flex items-center gap-3" style="color:{{block.settings.content_color}}">
+        {{ block.settings.content }}
+        {% if block.settings.use_button -%}
+          <a class="button sn-button" style="background-color: {{block.settings.button_background}};color:{{block.settings.button_title_color}}" href="{{block.settings.url}}">
+            {{- block.settings.button_title -}}
+          </a>
+        {%- endif %}
+      </div>
+      {% if block.settings.use_button %}
+        </div>
+      {% else %}
+        </a>
+      {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "limit": 2,
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "options": [
+        {
+          "label": "Container",
+          "value": "container"
+        },
+        {
+          "label": "Narrow",
+          "value": "narrow_width"
+        },
+        {
+          "label": "Full width",
+          "value": "full_width"
+        }
+      ],
+      "default": "container",
+      "info": "Width value of section content"
+    },
+    {
+      "type": "range",
+      "id": "duration",
+      "min": 3,
+      "max": 10,
+      "default": 5,
+      "step": 1,
+      "unit": "s",
+      "info": "Content conversion speed",
+      "label": "Duration"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "limit": 5,
+      "name": "Text block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "content",
+          "placeholder": "Your text here",
+          "label": "Content",
+          "default": "Welcome to the world !"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "content_color",
+          "label": "Content color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Content position",
+          "options": [
+            {
+              "value": "start",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "end",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_button",
+          "label": "Use button",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_title",
+          "default": "See more",
+          "placeholder": "Button title",
+          "label": "Button title"
+        },
+        {
+          "type": "color",
+          "id": "button_background",
+          "label": "Button background color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id":"button_title_color",
+          "label": "Button title color",
+          "default": "#000000"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
