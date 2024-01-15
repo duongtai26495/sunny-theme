@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ 'base.css' | asset_url }}">
     <link rel="stylesheet" href="{{ 'theme-global.css' | asset_url }}">
     <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
+    <link type="text/css" href="{{ 'theme.css' | asset_url }}" rel="stylesheet">
     {{ content_for_header }}
   </head>
   <body>
@@ -27,6 +28,7 @@
     -%}
 
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'theme-global.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'swiper.min.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

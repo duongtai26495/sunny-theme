@@ -1,156 +1,179 @@
-<header class="mx-auto py-2 px-2 md:py-5 header header--{{section.settings.header_style}} {% if section.settings.container == "container" %}w-full max-w-[1920px]{% elsif section.settings.container == "narrow_width" %}w-full md:max-w-7xl{% else %}w-full{% endif %} flex items-center ">
-  {% if section.settings.header_style == 'menu_left_logo_center' %}
-    <nav class="header__inline-menu w-2/5">
-      {%- liquid
-        if section.settings.menu != blank
-          if section.settings.menu_type_desktop == 'default'
-            render 'header-menu'
-          elsif section.settings.menu_type_desktop == 'mega'
-            render 'header-mega-menu'
+<header class="w-full {% if section.settings.is_show_divider %}border-b{% endif %}">
+  <div
+    class="
+      mx-auto py-2 px-2 md:py-5 header header-wrapper header--{{section.settings.header_style}} {% if section.settings.container == "
+      container" %}w-full max-w-[1920px]{% elsif section.settings.container=="narrow_width" %}w-full md:max-w-7xl{% else
+      %}w-full{% endif %} flex items-center
+    "
+  >
+    {% if section.settings.header_style == 'menu_left_logo_center' %}
+      <nav class=" header__inline-menu w-2/5">
+        {%- liquid
+          if section.settings.menu != blank
+            if section.settings.menu_type_desktop == 'default'
+              render 'header-menu'
+            elsif section.settings.menu_type_desktop == 'mega'
+              render 'header-mega-menu'
+            endif
           endif
-        endif
-      %}
-    </nav>
-    {% comment %} Logo {% endcomment %}
-    {%- if request.page_type == 'index' -%}
-      <h1 class="header__head w-1/5 text-center">
-    {% else %}
-      <div class="header__head w-1/5 text-center">
-    {%- endif -%}
-    <a
-      href="{{ routes.root_url }}"
-      class="header__head-link link link--text focus-inset font-bold text-lg md:text-xl uppercase"
-    >
-      {%- if settings.logo != blank -%}
-        <div class="header__head-logo-wrapper flex justify-center">
-          {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-          {%- assign logo_height = settings.logo_width_desktop | divided_by: settings.logo.aspect_ratio -%}
-          {%- assign logo_height_mobile = settings.logo_width_mobile | divided_by: settings.logo.aspect_ratio -%}
-          {% capture sizes %}(max-width: {{ settings.logo_width_desktop | times: 2 }}px) 50vw, {{ settings.logo_width_desktop }}px{% endcapture %}
-          {% capture sizes_mobile %}(max-width: {{ settings.logo_width_mobile | times: 2 }}px) 50vw, {{ settings.logo_width_mobile }}px{% endcapture %}
-          {% capture widths %}{{ settings.logo_width_desktop }}, {{ settings.logo_width_desktop | times: 1.5 | round }}, {{ settings.logo_width_desktop | times: 2 }}{% endcapture %}
-          {% capture widths_mobile %}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 1.5 | round }}, {{ settings.logo_width_mobile | times: 2 }}{% endcapture %}
-          {{
-            settings.logo
-            | image_url: width: 600
-            | image_tag:
-              class: 'header__head-logo hidden md:block',
-              widths: widths,
-              height: logo_height,
-              width: settings.logo_width_desktop,
-              alt: logo_alt,
-              sizes: sizes,
-              preload: true
-          }}
-          {{
-            settings.logo
-            | image_url: width: 600
-            | image_tag:
-              class: 'header__head-logo block md:hidden',
-              widths: widths_mobile,
-              height: logo_height_mobile,
-              width: settings.logo_width_mobile,
-              alt: logo_alt,
-              sizes: sizes_mobile,
-              preload: true
-          }}
-        </div>
-      {%- else -%}
-        {{ settings.store_name }}
+        %}
+      </nav>
+      {% comment %} Logo {% endcomment %}
+      {%- if request.page_type == 'index' -%}
+        <h1 class="header__head w-1/5 text-center">
+      {% else %}
+        <div class="header__head w-1/5 text-center">
       {%- endif -%}
-    </a>
-    {%- if request.page_type == 'index' -%}
-      </h1>
-    {% else %}
-      </div>
-    {%- endif -%}
-    {% comment %} End logo {% endcomment %}
-
-  {% elsif section.settings.header_style == 'menu_center_logo_left' %}
-    {% comment %} Logo {% endcomment %}
-    {%- if request.page_type == 'index' -%}
-      <h1 class="header__head w-1/6 text-left">
-    {% else %}
-      <div class="header__head w-1/6 text-left">
-    {%- endif -%}
-    <a
-      href="{{ routes.root_url }}"
-      class="header__head-link link link--text focus-inset font-bold text-lg md:text-xl uppercase"
-    >
-      {%- if settings.logo != blank -%}
-        <div class="header__head-logo-wrapper flex justify-start">
-          {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-          {%- assign logo_height = settings.logo_width_desktop | divided_by: settings.logo.aspect_ratio -%}
-          {%- assign logo_height_mobile = settings.logo_width_mobile | divided_by: settings.logo.aspect_ratio -%}
-          {% capture sizes %}(max-width: {{ settings.logo_width_desktop | times: 2 }}px) 50vw, {{ settings.logo_width_desktop }}px{% endcapture %}
-          {% capture sizes_mobile %}(max-width: {{ settings.logo_width_mobile | times: 2 }}px) 50vw, {{ settings.logo_width_mobile }}px{% endcapture %}
-          {% capture widths %}{{ settings.logo_width_desktop }}, {{ settings.logo_width_desktop | times: 1.5 | round }}, {{ settings.logo_width_desktop | times: 2 }}{% endcapture %}
-          {% capture widths_mobile %}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 1.5 | round }}, {{ settings.logo_width_mobile | times: 2 }}{% endcapture %}
-          {{
-            settings.logo
-            | image_url: width: 600
-            | image_tag:
-              class: 'header__head-logo hidden lg:block',
-              widths: widths,
-              height: logo_height,
-              width: settings.logo_width_desktop,
-              alt: logo_alt,
-              sizes: sizes,
-              preload: true
-          }}
-          {{
-            settings.logo
-            | image_url: width: 600
-            | image_tag:
-              class: 'header__head-logo block lg:hidden',
-              widths: widths_mobile,
-              height: logo_height_mobile,
-              width: settings.logo_width_mobile,
-              alt: logo_alt,
-              sizes: sizes_mobile,
-              preload: true
-          }}
+      <a
+        href="{{ routes.root_url }}"
+        class="header__head-link link link--text focus-inset font-bold text-lg md:text-xl uppercase"
+      >
+        {%- if settings.logo != blank -%}
+          <div class="header__head-logo-wrapper flex justify-center">
+            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+            {%- assign logo_height = settings.logo_width_desktop | divided_by: settings.logo.aspect_ratio -%}
+            {%- assign logo_height_mobile = settings.logo_width_mobile | divided_by: settings.logo.aspect_ratio -%}
+            {% capture sizes %}(max-width: {{ settings.logo_width_desktop | times: 2 }}px) 50vw, {{
+            settings.logo_width_desktop }}px{% endcapture %}
+            {% capture sizes_mobile %}(max-width: {{ settings.logo_width_mobile | times: 2 }}px) 50vw, {{
+            settings.logo_width_mobile }}px{% endcapture %}
+            {% capture widths %}{{ settings.logo_width_desktop }}, {{ settings.logo_width_desktop | times: 1.5 | round
+            }}, {{ settings.logo_width_desktop | times: 2 }}{% endcapture %}
+            {% capture widths_mobile %}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 1.5 |
+            round }}, {{ settings.logo_width_mobile | times: 2 }}{% endcapture %}
+            {{
+              settings.logo
+              | image_url: width: 600
+              | image_tag:
+                class: 'header__head-logo hidden md:block',
+                widths: widths,
+                height: logo_height,
+                width: settings.logo_width_desktop,
+                alt: logo_alt,
+                sizes: sizes,
+                preload: true
+            }}
+            {{
+              settings.logo
+              | image_url: width: 600
+              | image_tag:
+                class: 'header__head-logo block md:hidden',
+                widths: widths_mobile,
+                height: logo_height_mobile,
+                width: settings.logo_width_mobile,
+                alt: logo_alt,
+                sizes: sizes_mobile,
+                preload: true
+            }}
+          </div>
+        {%- else -%}
+          {{ settings.store_name }}
+        {%- endif -%}
+      </a>
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {% else %}
         </div>
-      {%- else -%}
-        {{ settings.store_name }}
       {%- endif -%}
-    </a>
-    {%- if request.page_type == 'index' -%}
-      </h1>
-    {% else %}
-      </div>
-    {%- endif -%}
-    {% comment %} End logo {% endcomment %}
+      {% comment %} End logo {% endcomment %}
 
-    <nav class="header__inline-menu {% if section.settings.header_style == 'menu_left_logo_center' %}w-2/5{% elsif section.settings.header_style == 'menu_center_logo_left'  %}w-4/6{% endif %} flex justify-center">
-      {%- liquid
-        if section.settings.menu != blank
-          if section.settings.menu_type_desktop == 'default'
-            render 'header-menu'
-          elsif section.settings.menu_type_desktop == 'mega'
-            render 'header-mega-menu'
+    {% elsif section.settings.header_style == 'menu_center_logo_left' %}
+      {% comment %} Logo {% endcomment %}
+      {%- if request.page_type == 'index' -%}
+        <h1 class="header__head w-1/6 text-left">
+      {% else %}
+        <div class="header__head w-1/6 text-left">
+      {%- endif -%}
+      <a
+        href="{{ routes.root_url }}"
+        class="header__head-link link link--text focus-inset font-bold text-lg md:text-xl uppercase"
+      >
+        {%- if settings.logo != blank -%}
+          <div class="header__head-logo-wrapper flex justify-start">
+            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+            {%- assign logo_height = settings.logo_width_desktop | divided_by: settings.logo.aspect_ratio -%}
+            {%- assign logo_height_mobile = settings.logo_width_mobile | divided_by: settings.logo.aspect_ratio -%}
+            {% capture sizes %}(max-width: {{ settings.logo_width_desktop | times: 2 }}px) 50vw, {{
+          settings.logo_width_desktop }}px{% endcapture %}
+            {% capture sizes_mobile %}(max-width: {{ settings.logo_width_mobile | times: 2 }}px) 50vw, {{
+          settings.logo_width_mobile }}px{% endcapture %}
+            {% capture widths %}{{ settings.logo_width_desktop }}, {{ settings.logo_width_desktop | times: 1.5 | round }},
+          {{ settings.logo_width_desktop | times: 2 }}{% endcapture %}
+            {% capture widths_mobile %}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 1.5 |
+          round }}, {{ settings.logo_width_mobile | times: 2 }}{% endcapture %}
+            {{
+              settings.logo
+              | image_url: width: 600
+              | image_tag:
+                class: 'header__head-logo hidden lg:block',
+                widths: widths,
+                height: logo_height,
+                width: settings.logo_width_desktop,
+                alt: logo_alt,
+                sizes: sizes,
+                preload: true
+            }}
+            {{
+              settings.logo
+              | image_url: width: 600
+              | image_tag:
+                class: 'header__head-logo block lg:hidden',
+                widths: widths_mobile,
+                height: logo_height_mobile,
+                width: settings.logo_width_mobile,
+                alt: logo_alt,
+                sizes: sizes_mobile,
+                preload: true
+            }}
+          </div>
+        {%- else -%}
+          {{ settings.store_name }}
+        {%- endif -%}
+      </a>
+      {%- if request.page_type == 'index' -%}
+        </h1>
+      {% else %}
+        </div>
+      {%- endif -%}
+      {% comment %} End logo {% endcomment %}
+
+      <nav
+        class="header__inline-menu {% if section.settings.header_style == 'menu_left_logo_center' %}w-2/5{% elsif section.settings.header_style == 'menu_center_logo_left'  %}w-4/6{% endif %} flex justify-center"
+      >
+        {%- liquid
+          if section.settings.menu != blank
+            if section.settings.menu_type_desktop == 'default'
+              render 'header-menu'
+            elsif section.settings.menu_type_desktop == 'mega'
+              render 'header-mega-menu'
+            endif
           endif
-        endif
-      %}
-    </nav>
-  {% endif %}
+        %}
+      </nav>
+    {% endif %}
 
-  <div class="{% if section.settings.header_style == 'menu_left_logo_center' %}w-2/5{% elsif section.settings.header_style == 'menu_center_logo_left'  %}w-1/6{% endif %} text-end header__head flex justify-end gap-5">
-    <div class="justify-end gap-5 hidden lg:flex">
-    {% if section.settings.is_show_search %}
-      {%  render 'header-search-icon' %}
-    {% endif %}
-    {% if section.settings.is_show_compare %}
-      {% render 'header-compare-icon' %}
-    {% endif %}
-    {% if section.settings.is_show_wishlist %}
-      {% render 'header-wishlist-icon' %}
-    {% endif %}
-    {% if section.settings.is_show_account %}
-      {% render 'header-account-icon' %}
-    {% endif %}
+    <div
+      class="{% if section.settings.header_style == 'menu_left_logo_center' %}w-2/5{% elsif section.settings.header_style == 'menu_center_logo_left'  %}w-1/6{% endif %} text-end header__head flex justify-end gap-5"
+    >
+      <div class="justify-end gap-5 hidden lg:flex header-icons">
+        {% liquid
+          if section.settings.is_show_search
+              render 'header-search-icon'
+          endif
+        %}
+
+        {% if section.settings.is_show_compare %}
+          {% render 'header-compare-icon' %}
+        {% endif %}
+        {% if section.settings.is_show_wishlist %}
+          {% render 'header-wishlist-icon' %}
+        {% endif %}
+        {% if section.settings.is_show_account %}
+          {% render 'header-account-icon' %}
+        {% endif %}
+      </div>
+      {% render 'header-cart-icon' %}
     </div>
-    {% render 'header-cart-icon' %}
   </div>
 </header>
 
@@ -186,6 +209,12 @@
       ],
       "default": "container",
       "info": "Width value of section content"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_divider",
+      "label": "Show divider",
+      "default": true
     },
     {
       "type": "select",
@@ -239,6 +268,12 @@
     },
     {
       "type": "checkbox",
+      "id": "is_show_arrow",
+      "default": true,
+      "label": "Show arrow icons"
+    },
+    {
+      "type": "checkbox",
       "id": "is_show_wishlist",
       "default": true,
       "label": "Show wishlist icon"
@@ -257,21 +292,37 @@
     },
     {
       "type": "checkbox",
-      "id":"is_show_search",
+      "id": "is_show_search",
       "default": true,
-      "label":"Show search icon"
+      "label": "Show search icon"
     },
     {
       "type": "select",
-      "id":"cart_type",
+      "id": "search_type",
+      "label": "Icon search type",
       "options": [
         {
-          "label":"Drawer",
-          "value":"drawer"
+          "label": "Icon",
+          "value": "icon"
         },
         {
-          "label":"Page",
-          "value":"page"
+          "label": "Search bar",
+          "value": "input"
+        }
+      ],
+      "default": "input"
+    },
+    {
+      "type": "select",
+      "id": "cart_type",
+      "options": [
+        {
+          "label": "Drawer",
+          "value": "drawer"
+        },
+        {
+          "label": "Page",
+          "value": "page"
         }
       ],
       "default": "drawer",

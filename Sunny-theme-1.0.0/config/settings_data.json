@@ -122,51 +122,7 @@
     ],
     "blocks": {
      
-    },
-    "color_schemes": {
-      "schemes-1": {
-        "settings": {
-          "primary_accent": "#A10000",
-          "background": "#ffffff",
-          "background_gradient": "",
-          "text": "#000000",
-          "subtext": "#666666",
-          "button": "#000000",
-          "button_label": "#ffffff",
-          "secondary_button": "#D60000",
-          "secondary_button_label": "#ffffff",
-          "outline_button_label": "#D60000",
-          "border": "#eeeeee",
-          "price_sale": "#ae5000",
-          "price_regular": "#666666",
-          "form_field": "#f2f2f2",
-          "form_field_label": "#000000",
-          "tooltip": "#222222",
-          "tooltip_label": "#ffffff"
-        }
-      },
-      "schemes-2": {
-        "settings": {
-          "primary_accent": "#ffffff",
-          "background": "#000000",
-          "background_gradient": "",
-          "text": "#ffffff",
-          "subtext": "#eeeeee",
-          "button": "#ffffff",
-          "button_label": "#000000",
-          "secondary_button": "#ffffff",
-          "secondary_button_label": "#000000",
-          "outline_button_label": "#ffffff",
-          "border": "#ae5000",
-          "price_sale": "#ae5000",
-          "price_regular": "#eeeeee",
-          "form_field": "#ffffff",
-          "form_field_label": "#000000",
-          "tooltip": "#ffffff",
-          "tooltip_label": "#000000"
-        }
-      }
-    }
+    } 
   },
   "presets": {
 

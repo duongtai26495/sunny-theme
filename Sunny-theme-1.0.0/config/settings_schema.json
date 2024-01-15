@@ -473,132 +473,86 @@
         "name": "Colors",
         "settings": [
             {
-                "type": "color_scheme_group",
-                "id": "color_schemes",
-                "definition": [
-                    {
-                        "type": "color",
-                        "id": "primary_accent",
-                        "label": "Primary accent",
-                        "default": "#222222",
-                        "info": "Use for focus, active, links"
-                    },
-                    {
-                        "type": "color",
-                        "id": "background",
-                        "label": "Background",
-                        "default": "#FFFFFF"
-                    },
-                    {
-                        "type": "color_background",
-                        "id": "background_gradient",
-                        "label": "Background gradient",
-                        "info": "Background gradient replaces background where possible."
-                    },
-                    {
-                        "type": "color",
-                        "id": "text",
-                        "label": "Text",
-                        "default": "#222222"
-                    },
-                    {
-                        "type": "color",
-                        "id": "subtext",
-                        "label": "Subtext",
-                        "default": "#666666"
-                    },
-                    {
-                        "type": "color",
-                        "id": "button",
-                        "label": "Solid button background",
-                        "default": "#222222"
-                    },
-                    {
-                        "type": "color",
-                        "id": "button_label",
-                        "label": "Solid button label",
-                        "default": "#FFFFFF"
-                    },
-                    {
-                        "type": "color",
-                        "id": "secondary_button",
-                        "label": "Secondary button background",
-                        "default": "#F2F2F2"
-                    },
-                    {
-                        "type": "color",
-                        "id": "secondary_button_label",
-                        "label": "Secondary button label",
-                        "default": "#222222"
-                    },
-                    {
-                        "type": "color",
-                        "id": "outline_button_label",
-                        "label": "Outline",
-                        "default": "#222222"
-                    },
-                    {
-                        "type": "color",
-                        "id": "border",
-                        "label": "Border",
-                        "default": "#EEEEEE"
-                    },
-                    {
-                        "type": "color",
-                        "id": "price_sale",
-                        "label": "Price sale",
-                        "default": "#E02B2B"
-                    },
-                    {
-                        "type": "color",
-                        "id": "price_regular",
-                        "label": "Price regular",
-                        "default": "#666666"
-                    },
-                    {
-                        "type": "color",
-                        "id": "form_field",
-                        "label": "Form field background",
-                        "default": "#FFFFFF"
-                    },
-                    {
-                        "type": "color",
-                        "id": "form_field_label",
-                        "label": "Form field text",
-                        "default": "#222222"
-                    },
-                    {
-                        "type": "color",
-                        "id": "tooltip",
-                        "label": "Tooltip background",
-                        "default": "#222222"
-                    },
-                    {
-                        "type": "color",
-                        "id": "tooltip_label",
-                        "label": "Tooltip text",
-                        "default": "#FFFFFF"
-                    },
-                    {
-                        "type": "header",
-                        "content": "menu"
-                    }
-                ],
-                "role": {
-                    "text": "text",
-                    "background": {
-                        "solid": "background",
-                        "gradient": "background_gradient"
-                    },
-                    "links": "primary_accent",
-                    "icons": "text",
-                    "primary_button": "button",
-                    "on_primary_button": "button_label",
-                    "primary_button_border": "button",
-                    "secondary_button": "background",
-                    "on_secondary_button": "outline_button_label",
-                    "secondary_button_border": "outline_button_label"
-                }
+                "type": "header",
+                "content": "General"
+            },
+            {
+                "type": "color",
+                "id":"primary_color",
+                "default":"#ffffff",
+                "label":"Primary color",
+                "info":"Affect to background color"
+            },
+            {
+                "type": "color",
+                "id":"primary_accent",
+                "default":"#a00000",
+                "label":"Primary accent",
+                "info":"Affect to tooltip"
+            },
+            {
+                "type": "color",
+                "id":"primary_button",
+                "default":"#000000",
+                "label":"Primary button"
+            },
+            {
+                "type": "color",
+                "id":"primary_outline",
+                "default":"#000000",
+                "label":"Primary button outline"
+            },
+            {
+                "type": "color",
+                "id":"primary_text",
+                "default":"#ffffff",
+                "label":"Primary button title"
+            },
+            {
+                "type": "color",
+                "id":"secondary_button",
+                "default":"#ffffff",
+                "label":"Secondary button"
+            },
+            {
+                "type": "color",
+                "id":"secondary_outline",
+                "default":"#ffffff",
+                "label":"Secondary button outline"
+            },
+            {
+                "type": "color",
+                "id":"secondary_text",
+                "default":"#000000",
+                "label":"Secondary button title"
+            },
+            {
+                "type": "header",
+                "content": "Header - Menu"
+            },
+            {
+                "type": "color",
+                "id":"header_background",
+                "default":"#ffffff",
+                "label":"Header background"
+            },
+            {
+                "type": "color",
+                "id":"header_submenu_background",
+                "default":"#ffffff",
+                "label":"Header dropdown background"
+            },
+            {
+                "type": "color",
+                "id":"header_text_color",
+                "default":"#000000",
+                "label":"Header text color"
+            },
+            {
+                "type": "color",
+                "id":"header_submenu_text_color",
+                "default":"#000000",
+                "label":"Header dropdown text color"
             }
         ]
     }
