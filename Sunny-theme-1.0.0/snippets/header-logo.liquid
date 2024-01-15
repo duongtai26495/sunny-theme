@@ -1,0 +1,42 @@
+<a
+        href="{{ routes.root_url }}"
+        class="header__head-link link link--text focus-inset font-bold text-lg md:text-xl uppercase"
+      >
+        {%- if settings.logo != blank -%}
+          <div class="header__head-logo-wrapper flex justify-center">
+            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+            {%- assign logo_height = settings.logo_width_desktop | divided_by: settings.logo.aspect_ratio -%}
+            {%- assign logo_height_mobile = settings.logo_width_mobile | divided_by: settings.logo.aspect_ratio -%}
+            {% capture sizes %}(max-width: {{ settings.logo_width_desktop | times: 2 }}px) 50vw, {{ settings.logo_width_desktop }}px{% endcapture %}
+            {% capture sizes_mobile %}(max-width: {{ settings.logo_width_mobile | times: 2 }}px) 50vw, {{ settings.logo_width_mobile }}px{% endcapture %}
+            {% capture widths %}{{ settings.logo_width_desktop }}, {{ settings.logo_width_desktop | times: 1.5 | round }}, {{ settings.logo_width_desktop | times: 2 }}{% endcapture %}
+            {% capture widths_mobile %}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 1.5 | round }}, {{ settings.logo_width_mobile | times: 2 }}{% endcapture %}
+            {{
+              settings.logo
+              | image_url: width: 600
+              | image_tag:
+                class: 'header__head-logo hidden md:block',
+                widths: widths,
+                height: logo_height,
+                width: settings.logo_width_desktop,
+                alt: logo_alt,
+                sizes: sizes,
+                preload: true
+            }}
+            {{
+              settings.logo
+              | image_url: width: 600
+              | image_tag:
+                class: 'header__head-logo block md:hidden',
+                widths: widths_mobile,
+                height: logo_height_mobile,
+                width: settings.logo_width_mobile,
+                alt: logo_alt,
+                sizes: sizes_mobile,
+                preload: true
+            }}
+          </div>
+        {%- else -%}
+          {{ settings.store_name }}
+        {%- endif -%}
+      </a>

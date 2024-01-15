@@ -14,7 +14,7 @@
     <link type="text/css" href="{{ 'theme.css' | asset_url }}" rel="stylesheet">
     {{ content_for_header }}
   </head>
-  <body>
+  <body style="background-color: {{settings.primary_color}};">
     {%- liquid
       sections 'header-group'
     -%}

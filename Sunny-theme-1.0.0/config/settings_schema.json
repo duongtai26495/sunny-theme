@@ -488,7 +488,7 @@
                 "id":"primary_accent",
                 "default":"#a00000",
                 "label":"Primary accent",
-                "info":"Affect to tooltip"
+                "info":"Affect to link, active menu item"
             },
             {
                 "type": "color",
@@ -544,6 +544,18 @@
             },
             {
                 "type": "color",
+                "id":"header_mega_background",
+                "default":"#ffffff",
+                "label":"Mega menu background"
+            },
+            {
+                "type": "color",
+                "id":"header_mega_text",
+                "default":"#000000",
+                "label":"Mega menu text"
+            },
+            {
+                "type": "color",
                 "id":"header_text_color",
                 "default":"#000000",
                 "label":"Header text color"
@@ -553,6 +565,12 @@
                 "id":"header_submenu_text_color",
                 "default":"#000000",
                 "label":"Header dropdown text color"
+            },
+            {
+                "type": "color",
+                "id":"header_background_2l",
+                "default":"#ffffff",
+                "label":"Header 2 lines background color"
             }
         ]
     }

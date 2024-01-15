@@ -1,0 +1,53 @@
+<ul class="list-menu list-menu--inline items-center flex-wrap hidden lg:flex dropdown-menu">
+  {%- for link in section.settings.menu.links -%}
+    <li class="w-fit list-menu-item pr-4 mr-2">
+      {% if link.links != blank %}
+        <a
+          class="{%- if link.active %}menu_item_active{% endif %} py-1 font-bold {% if link.links != blank %}list-menu-empty{% endif %} list-menu--link relative text-base flex items-center gap-2"
+          href="{{ link.url }}"
+        >
+          {{- link.title | escape -}}
+          {% if section.settings.is_show_arrow %}
+            <span class="caret-submenu mt-1">
+              {% render 'icon-caret' %}
+            </span>
+          {% endif %}
+        </a>
+
+        <div class="absolute left-0 top-full list-submenu submenu_level-1 mega-menu mega-menu-wrapper shadow w-full">
+          <ul class="flex gap-10 items-start max-h-[60vh] min-h-64 mx-auto pt-2 {% if section.settings.container == 'container' %}w-full lg:max-w-[1920px]{% elsif section.settings.container=="narrow_width" %}w-full lg:max-w-7xl{% else %}w-full{% endif %}">
+            {% for childlink in link.links %}
+              <li class="p-2 relative list-menu--sub w-fit">
+                <a
+                  class="whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-base font-semibold justify-between"
+                  href="{{ childlink.url }}"
+                >
+                  {{- childlink.title | escape -}}
+                </a>
+                <ul class="w-full">
+                  {% for sub_childlink in childlink.links %}
+                    <li class="py-2 relative list-menu--sub w-fit">
+                      <a
+                        class="whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-sm justify-between"
+                        href="{{ sub_childlink.url }}"
+                      >
+                        {{- sub_childlink.title | escape -}}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% else %}
+        <a
+          class="{%- if link.active %}menu_item_active{% endif %} py-1 font-bold list-menu--link relative text-base"
+          href="{{ link.url }}"
+        >
+          {{- link.title | escape -}}
+        </a>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

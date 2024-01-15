@@ -1,5 +1,10 @@
 .caret-submenu svg, .list-menu--link {color: {{ settings.header_text_color }};}
-
+.header--menu_2l_logo_left, .header--menu_2l_logo_center { background-color: {{settings.header_background_2l}};}
 .dropdown-menu .list-menu--link::after {background-color: {{ settings.header_text_color }};}
-header.header.header-wrapper { background-color:{{ settings.header_background }};}
-header .list-submenu.submenu_level-1, header .list-submenu-child .submenu_level-2 { background-color:{{ settings.header_submenu_background }};}
+body header { background-color:{{ settings.header_background }};}
+header .list-submenu.submenu_level-1:not(.mega-menu), header .list-submenu-child .submenu_level-2:not(.mega-menu) { background-color:{{ settings.header_submenu_background }};}
+.mega-menu.mega-menu-wrapper{background-color: {{settings.header_mega_background}};}
+.mega-menu.mega-menu-wrapper a.list-menu--link{color: {{ settings.header_mega_text }};}
+.mega-menu.mega-menu-wrapper .list-menu--link::after{background-color: {{ settings.header_mega_text }};}
+.list-menu--link.menu_item_active, .list-menu--link.menu_item_active .icon-caret { color: {{ settings.primary_accent }};}
+.list-menu--link.menu_item_active:after { background-color: {{ settings.primary_accent }};}
