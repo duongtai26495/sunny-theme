@@ -1,8 +1,12 @@
-
-  <ul class="list-menu list-menu--inline items-center flex-wrap hidden lg:flex">
-    {%- for link in section.settings.menu.links -%}
-      <li class="w-fit list-menu-item pr-4">
-          <a class="py-1 font-bold list-menu--link relative text-base" href="{{ link.url }}">{{- link.title | escape -}}</a>
-      </li>
-    {% endfor %}
-  </ul>
+<ul class="list-menu list-menu--inline items-center flex-wrap hidden lg:flex">
+  {%- for link in section.settings.menu.links -%}
+    <li class="w-fit list-menu-item pr-4 relative">
+        <a
+          class="{%- if link.active %}menu_item_active{% endif %} py-1 font-bold list-menu--link relative text-base"
+          href="{{ link.url }}"
+        >
+          {{- link.title | escape -}}
+        </a>
+    </li>
+  {% endfor %}
+</ul>

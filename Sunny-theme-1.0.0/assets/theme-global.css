@@ -22,3 +22,4 @@
 .list-menu--link:hover::after{
     width: 100%;
 }
+.menu_item_active::after{width: 100%;}
