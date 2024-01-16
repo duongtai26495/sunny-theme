@@ -459,13 +459,13 @@
         "settings": [
             {
                 "type": "page",
-                "id":"wishlist_page",
-                "label":"Wishlist page"
+                "id": "wishlist_page",
+                "label": "Wishlist page"
             },
             {
                 "type": "page",
-                "id":"comparison_page",
-                "label":"Comparison page"
+                "id": "comparison_page",
+                "label": "Comparison page"
             }
         ]
     },
@@ -478,53 +478,53 @@
             },
             {
                 "type": "color",
-                "id":"primary_color",
-                "default":"#ffffff",
-                "label":"Primary color",
-                "info":"Affect to background color"
+                "id": "primary_color",
+                "default": "#ffffff",
+                "label": "Primary color",
+                "info": "Affect to background color"
             },
             {
                 "type": "color",
-                "id":"primary_accent",
-                "default":"#a00000",
-                "label":"Primary accent",
-                "info":"Affect to link, active menu item"
+                "id": "primary_accent",
+                "default": "#a00000",
+                "label": "Primary accent",
+                "info": "Affect to link, active menu item"
             },
             {
                 "type": "color",
-                "id":"primary_button",
-                "default":"#000000",
-                "label":"Primary button"
+                "id": "primary_button",
+                "default": "#000000",
+                "label": "Primary button"
             },
             {
                 "type": "color",
-                "id":"primary_outline",
-                "default":"#000000",
-                "label":"Primary button outline"
+                "id": "primary_outline",
+                "default": "#000000",
+                "label": "Primary button outline"
             },
             {
                 "type": "color",
-                "id":"primary_text",
-                "default":"#ffffff",
-                "label":"Primary button title"
+                "id": "primary_text",
+                "default": "#ffffff",
+                "label": "Primary button title"
             },
             {
                 "type": "color",
-                "id":"secondary_button",
-                "default":"#ffffff",
-                "label":"Secondary button"
+                "id": "secondary_button",
+                "default": "#ffffff",
+                "label": "Secondary button"
             },
             {
                 "type": "color",
-                "id":"secondary_outline",
-                "default":"#ffffff",
-                "label":"Secondary button outline"
+                "id": "secondary_outline",
+                "default": "#ffffff",
+                "label": "Secondary button outline"
             },
             {
                 "type": "color",
-                "id":"secondary_text",
-                "default":"#000000",
-                "label":"Secondary button title"
+                "id": "secondary_text",
+                "default": "#000000",
+                "label": "Secondary button title"
             },
             {
                 "type": "header",
@@ -532,47 +532,146 @@
             },
             {
                 "type": "color",
-                "id":"header_background",
-                "default":"#ffffff",
-                "label":"Header background"
+                "id": "topbar_background",
+                "default": "#ffffff",
+                "label": "Top bar background"
             },
             {
                 "type": "color",
-                "id":"header_submenu_background",
-                "default":"#ffffff",
-                "label":"Header dropdown background"
+                "id": "topbar_text",
+                "default": "#000000",
+                "label": "Top bar text color"
             },
             {
                 "type": "color",
-                "id":"header_mega_background",
-                "default":"#ffffff",
-                "label":"Mega menu background"
+                "id": "header_background",
+                "default": "#ffffff",
+                "label": "Header background"
             },
             {
                 "type": "color",
-                "id":"header_mega_text",
-                "default":"#000000",
-                "label":"Mega menu text"
+                "id": "header_submenu_background",
+                "default": "#ffffff",
+                "label": "Header dropdown background"
             },
             {
                 "type": "color",
-                "id":"header_text_color",
-                "default":"#000000",
-                "label":"Header text color"
+                "id": "header_mega_background",
+                "default": "#ffffff",
+                "label": "Mega menu background"
             },
             {
                 "type": "color",
-                "id":"header_submenu_text_color",
-                "default":"#000000",
-                "label":"Header dropdown text color"
+                "id": "header_mega_text",
+                "default": "#000000",
+                "label": "Mega menu text"
             },
             {
                 "type": "color",
-                "id":"header_background_2l",
-                "default":"#ffffff",
-                "label":"Header 2 lines background color"
+                "id": "header_text_color",
+                "default": "#000000",
+                "label": "Header text color"
+            },
+            {
+                "type": "color",
+                "id": "header_submenu_text_color",
+                "default": "#000000",
+                "label": "Header dropdown text color"
+            },
+            {
+                "type": "color",
+                "id": "header_background_2l",
+                "default": "#ffffff",
+                "label": "Header 2 lines background color"
+            }
+        ]
+    },
+    {
+        "name": "Store contact",
+        "settings": [
+            {
+                "type": "text",
+                "default": "Send us an email",
+                "id": "mail_label"
+            },
+            {
+                "type": "text",
+                "placeholder": "example@email.com",
+                "label": "Email address",
+                "id": "store_email"
+            },
+            {
+                "type": "text",
+                "default": "Contact me!",
+                "id": "phone_label",
+                "label": "Phone label"
+            },
+            {
+                "type": "text",
+                "placeholder": "+84123456789",
+                "label": "Phone number",
+                "id": "store_phone_number"
+            },
+            {
+                "type": "text",
+                "default": "Call me via Whatsapp",
+                "id": "whatsapp_label",
+                "label": "Whatsapp label"
+            },
+            {
+                "type": "text",
+                "placeholder": "+84123456789",
+                "label": "Whatsapp call link",
+                "id": "whatsapp_link"
+            },
+            {
+                "type": "text",
+                "default": "Facebook",
+                "id": "facebook_label",
+                "label": "Facebook label"
+            },
+            {
+                "type": "text",
+                "placeholder": "fb.com/",
+                "label": "Facebook link",
+                "id": "facebook_url"
+            },
+            {
+                "type": "text",
+                "default": "Instagram",
+                "id": "instagram_label",
+                "label": "Instagram label"
+            },
+            {
+                "type": "text",
+                "placeholder": "ig.com/",
+                "label": "Instagram link",
+                "id": "insta_url"
+            },
+            {
+                "type": "text",
+                "default": "X (twitter)",
+                "id": "tw_label",
+                "label": "X (twitter) label"
+            },
+            {
+                "type": "text",
+                "placeholder": "twitter.com/",
+                "label": "X link",
+                "id": "tw_url"
+            },
+            {
+                "type": "text",
+                "default": "Pinterest",
+                "id": "pinterest_label",
+                "label": "Pinterest label"
+            },
+            {
+                "type": "text",
+                "placeholder": "pinterest.com/",
+                "label": "Pinterest link",
+                "id": "pinterest_url"
             }
         ]
     }
-   
 ]

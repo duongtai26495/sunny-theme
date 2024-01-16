@@ -1,13 +1,44 @@
+
 <div class="sn-topbar w-full">
-  <div class=" flex items-center {% if section.settings.container == 'container' %}w-full lg:max-w-[1920px]{% elsif section.settings.container=='narrow_width' %}w-full lg:max-w-7xl{% else %}w-full{% endif %} h-[35px] mx-auto" >
+  <div style="background-color: {{settings.topbar_background}};" class="lg:justify-{{section.settings.content_position}} flex flex-col lg:flex-row items-center p-2 gap-1 {% if section.settings.container == 'container' %}w-full lg:max-w-[1920px]{% elsif section.settings.container=='narrow_width' %}w-full lg:max-w-7xl{% else %}w-full{% endif %} h-fit lg:max-h-[40px] mx-auto" >
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'message' %}
           {% if block.settings.message != blank %}
-            <div class="w-full text-center">
+            <div class="topbar-message w-fit text-sm md:text-[15px]">
               {{ block.settings.message }}
             </div>
           {% endif %}
+          {% when 'contact' %}
+            <div class="topbar-contact w-fit text-center flex items-center gap-3">
+              {% if block.settings.is_show_phone_num %}
+                {% if settings.store_phone_number %}
+                <div class="w-fit h-fit flex items-center gap-1">
+                  {%  render 'icons', type:'phone', color:{{settings.topbar_text}} %}<a class="underline text-[12px] lg:text-sm" href="tel:+{{ settings.store_phone_number }}">{{ settings.phone_label }}</a>
+                </div>
+                {% endif %}
+              {% endif %}
+              {% if block.settings.is_show_whatsapp %}
+                {% if settings.whatsapp_link %}
+                  <div class="w-fit h-fit flex items-center gap-1">
+                    {%  render 'icons', type:'whatsapp', color:{{settings.topbar_text}} %}<a class="underline text-[12px] lg:text-sm" href="https://wa.me/{{whatsapp_link}}">{{ settings.whatsapp_label }}</a>
+                  </div>
+                  {% endif %}
+              {% endif %}
+              {% if block.settings.is_show_email %}
+                {% if settings.store_email %}
+                  <div class="w-fit h-fit flex items-center gap-1">
+                    {%  render 'icons', type:'email', color:{{settings.topbar_text}} %}<a class="underline text-[12px] lg:text-sm" href="mailto:{{ settings.store_email }}">{{ settings.mail_label }}</a>
+                  </div>
+                  {% endif %}
+              {% endif %}
+            </div>
+          {% when 'social_media' %}
+
+          {% when 'international' %}
+
+          {% when 'divider' %}
+            <div class="hidden lg:block divider h-4 mx-2 w-[1px] bg-slate-700"></div>
       {% endcase %}
     {% endfor %}
   </div>
@@ -22,10 +53,32 @@
   },
   "settings": [
     {
-      "type": "checkbox",
-      "id": "is_show_divider",
-      "label": "Show divider",
-      "default": false
+      "type":"select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        {
+          "label":"Left",
+          "value": "start"
+        },
+        {
+          "label":"Center",
+          "value": "center"
+        },
+        {
+          "label":"Right",
+          "value": "end"
+        },
+        {
+          "label":"The blocks are equal",
+          "value": "evenly"
+        },
+        {
+          "label":"The blocks at the edges",
+          "value": "between"
+        }
+      ],
+      "default": "center"
     },
     {
       "type": "select",
@@ -77,6 +130,13 @@
         },
         {
           "type": "checkbox",
+          "id": "is_show_whatsapp",
+          "default": false,
+          "label": "Show whatsapp button",
+          "info": "Add your whatsapp link in Store contact setting"
+        },
+        {
+          "type": "checkbox",
           "id": "is_show_email",
           "default": false,
           "label": "Show store email",
@@ -116,6 +176,11 @@
           "id": "is_show_languages"
         }
       ]
+    },
+    {
+      "type":"divider",
+      "name":"Divider",
+      "limit": 3
     }
   ],
   "presets": [
