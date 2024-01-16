@@ -1,0 +1,135 @@
+<div class="sn-topbar w-full">
+  <div class=" flex items-center {% if section.settings.container == 'container' %}w-full lg:max-w-[1920px]{% elsif section.settings.container=='narrow_width' %}w-full lg:max-w-7xl{% else %}w-full{% endif %} h-[35px] mx-auto" >
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'message' %}
+          {% if block.settings.message != blank %}
+            <div class="w-full text-center">
+              {{ block.settings.message }}
+            </div>
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Top bar",
+  "limit": 1,
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "is_show_divider",
+      "label": "Show divider",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "options": [
+        {
+          "label": "Container",
+          "value": "container"
+        },
+        {
+          "label": "Narrow",
+          "value": "narrow_width"
+        },
+        {
+          "label": "Full width",
+          "value": "full_width"
+        }
+      ],
+      "default": "container",
+      "info": "Width value of section content"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Content",
+      "limit": 1,
+      "settings": [
+        {
+          "id": "message",
+          "type": "richtext",
+          "default": "<p>All products are 20$ today</p>",
+          "label": "Content"
+        }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Store contact",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "is_show_phone_num",
+          "default": false,
+          "label": "Show phone number",
+          "info": "Add your phone number in Store contact setting"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_email",
+          "default": false,
+          "label": "Show store email",
+          "info": "Add your email address in Store contact setting"
+        }
+      ]
+    },
+    {
+      "type": "social_media",
+      "name": "Social media icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "default": true,
+          "id": "is_show_social",
+          "label": "Show social media icons",
+          "info": "Add information in Store contact setting"
+        }
+      ]
+    },
+    {
+      "type": "international",
+      "name": "International",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "default": false,
+          "label": "Show currencies seletor",
+          "id": "is_show_currencies"
+        },
+        {
+          "type": "checkbox",
+          "default": false,
+          "label": "Show languages seletor",
+          "id": "is_show_languages"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Top bar",
+      "blocks": [
+        {
+          "type": "message"
+        },
+        {
+          "type": "social_media"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

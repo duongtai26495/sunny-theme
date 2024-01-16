@@ -1,89 +1,91 @@
 {% capture render_menu %}
-  {%- liquid
-          if section.settings.menu != blank
-            if section.settings.menu_type_desktop == 'default'
-              render 'header-menu'
-            elsif section.settings.menu_type_desktop == 'mega'
-              render 'header-mega-menu' 
-            endif
-          endif
-        %}
+{%- liquid
+if section.settings.menu != blank
+if section.settings.menu_type_desktop == 'default'
+render 'header-menu'
+elsif section.settings.menu_type_desktop == 'mega'
+render 'header-mega-menu'
+endif
+endif
+%}
 {% endcapture %}
 
 {% capture render_icons %}
-  <div class="justify-end gap-5 hidden lg:flex header-icons">
-        {% liquid
-          if section.settings.is_show_search
-            render 'header-search-icon'
-          endif
-        %}
-
-        {% if section.settings.is_show_compare %}
-          {% render 'header-compare-icon' %}
-        {% endif %}
-        {% if section.settings.is_show_wishlist %}
-          {% render 'header-wishlist-icon' %}
-        {% endif %}
-        {% if section.settings.is_show_account %}
-          {% render 'header-account-icon' %}
-        {% endif %}
-      </div>
-      {% render 'header-cart-icon' %}
+<div class="justify-end gap-5 hidden lg:flex header-icons">
+  {%  liquid 
+  if section.settings.is_show_account
+    render 'header-account-icon'
+  endif 
+  %} 
+</div>
+{% render 'header-cart-icon' %}
 {% endcapture %}
+
+{% capture render_search %} 
+  {% liquid
+  if section.settings.is_show_search
+    render 'header-search-icon'
+  endif
+  %}
+ {% endcapture %}
 
 <header class="w-full relative {% if section.settings.is_show_divider %}border-b{% endif %}">
   <div
     class="
-      mx-auto py-2 px-2 md:py-5 header header-wrapper header--{{section.settings.header_style}} {% if section.settings.container == 'container' %}w-full lg:max-w-[1920px]{% elsif section.settings.container=="narrow_width" %}w-full lg:max-w-7xl{% else %}w-full{% endif %}
-      {% if section.settings.header_style == 'menu_2l_logo_center' or section.settings.header_style == 'menu_2l_logo_left'%} block {% else %} flex {% endif %} items-center
+        mx-auto py-2 px-2 md:py-5 header header-wrapper header--{{section.settings.header_style}} {% if section.settings.container == 'container' %}w-full lg:max-w-[1920px]{% elsif section.settings.container=="
+      narrow_width" %}w-full lg:max-w-7xl{% else %}w-full{% endif %} {% if
+      section.settings.header_style=='menu_2l_logo_center' or section.settings.header_style=='menu_2l_logo_left' %} block
+      {% else %} flex {% endif %} items-center
     "
   >
-  {% case section.settings.header_style %}
-    {% when 'menu_left_logo_center' %}
-      <nav class=" header__inline-menu w-2/5">
-        {{ render_menu }}
-      </nav>
-      {% comment %} Logo {% endcomment %}
-      {%- if request.page_type == 'index' -%}
-        <h1 class="header__head w-1/5 text-center">
-      {% else %}
-        <div class="header__head w-1/5 text-center">
-      {%- endif -%}
-      {% render 'header-logo' %}
-      {%- if request.page_type == 'index' -%}
-        </h1>
-      {% else %}
+    {% case section.settings.header_style %}
+      {% when 'menu_left_logo_center' %}
+        <nav class=" header__inline-menu w-2/5">
+          {{ render_menu }}
+        </nav>
+        {% comment %} Logo {% endcomment %}
+        {%- if request.page_type == 'index' -%}
+          <h1 class="header__head w-1/5 text-center">
+        {% else %}
+          <div class="header__head w-1/5 text-center">
+        {%- endif -%}
+        {% render 'header-logo' %}
+        {%- if request.page_type == 'index' -%}
+          </h1>
+        {% else %}
+          </div>
+        {%- endif -%}
+        {% comment %} End logo {% endcomment %}
+
+        <div class="w-2/5 text-end header__head flex justify-end gap-5">
+          {{ render_search }}
+          {{ render_icons }}
         </div>
-      {%- endif -%}
-      {% comment %} End logo {% endcomment %}
+      {% when 'menu_center_logo_left' %}
+        {% comment %} Logo {% endcomment %}
+        {%- if request.page_type == 'index' -%}
+          <h1 class="header__head w-1/6 text-left">
+        {% else %}
+          <div class="header__head w-1/6 text-left">
+        {%- endif -%}
+        {% render 'header-logo' %}
+        {%- if request.page_type == 'index' -%}
+          </h1>
+        {% else %}
+          </div>
+        {%- endif -%}
+        {% comment %} End logo {% endcomment %}
 
-      <div class="w-2/5 text-end header__head flex justify-end gap-5">
-        {{ render_icons }}
-      </div>
-    {% when 'menu_center_logo_left' %}
-      {% comment %} Logo {% endcomment %}
-      {%- if request.page_type == 'index' -%}
-        <h1 class="header__head w-1/6 text-left">
-      {% else %}
-        <div class="header__head w-1/6 text-left">
-      {%- endif -%}
-      {% render 'header-logo' %}
-      {%- if request.page_type == 'index' -%}
-        </h1>
-      {% else %}
+        <nav class="header__inline-menu w-4/6 flex justify-center">
+          {{ render_menu }}
+        </nav>
+
+        <div class="w-1/6 text-end header__head flex justify-end gap-5">
+          {{ render_search }}
+          {{ render_icons }}
         </div>
-      {%- endif -%}
-      {% comment %} End logo {% endcomment %}
 
-      <nav class="header__inline-menu w-4/6 flex justify-center">
-        {{ render_menu }}
-      </nav>
-
-      <div class="w-1/6 text-end header__head flex justify-end gap-5">
-        {{ render_icons }}
-      </div>
-
-    {% when 'menu_right_logo_left' %}
+      {% when 'menu_right_logo_left' %}
         {% comment %} Logo {% endcomment %}
         {%- if request.page_type == 'index' -%}
           <h1 class="header__head w-1/3 text-start">
@@ -99,258 +101,221 @@
         {% comment %} End logo {% endcomment %}
 
         <nav class="header__inline-menu w-4/6 flex justify-end">
-        {{ render_menu }}
+          {{ render_menu }}
         </nav>
         <div class="w-1/6 text-end header__head flex justify-end gap-5">
-        {{ render_icons }}
+          {{ render_search }}
+          {{ render_icons }}
         </div>
 
-    {% when 'menu_2l_logo_center' %}
-      <div class="w-full flex items-center justify-between header_top_2l">
-        <div class="w-1/3">
-          {% liquid
-            if section.settings.is_show_search
-              render 'header-search-icon'
-            endif
-          %}
-        </div>
-        {% comment %} Logo {% endcomment %}
-        {%- if request.page_type == 'index' -%}
-          <h1 class="header__head w-1/3 text-center">
-        {% else %}
-          <div class="header__head w-1/3 text-center">
-        {%- endif -%}
-        {% render 'header-logo' %}
-        {%- if request.page_type == 'index' -%}
-          </h1>
-        {% else %}
+      {% when 'menu_2l_logo_center' %}
+        <div class="w-full flex items-center justify-between header_top_2l">
+          <div class="w-1/3">
+            {{ render_search }}
           </div>
-        {%- endif -%}
-        {% comment %} End logo {% endcomment %}
-        <div class="w-1/3 justify-end gap-5 hidden lg:flex header-icons">
-          {% if section.settings.is_show_compare %}
-            {% render 'header-compare-icon' %}
-          {% endif %}
-          {% if section.settings.is_show_wishlist %}
-            {% render 'header-wishlist-icon' %}
-          {% endif %}
-          {% if section.settings.is_show_account %}
-            {% render 'header-account-icon' %}
-          {% endif %}
-          {% render 'header-cart-icon' %}
-        </div>
-      </div>
-      </div>
-      <nav class="header__inline-menu flex justify-center w-full py-5">
-        {{ render_menu }}
-      </nav>
-
-    
-    {% when 'menu_2l_logo_left' %}
-      <div class="w-full flex items-center justify-between header_top_2l">
-        {% comment %} Logo {% endcomment %}
-        {%- if request.page_type == 'index' -%}
-          <h1 class="header__head w-1/3 text-start">
-        {% else %}
-          <div class="header__head w-1/3 text-start">
-        {%- endif -%}
-        {% render 'header-logo' %}
-        {%- if request.page_type == 'index' -%}
-          </h1>
-        {% else %}
+          {% comment %} Logo {% endcomment %}
+          {%- if request.page_type == 'index' -%}
+            <h1 class="header__head w-1/3 text-center">
+          {% else %}
+            <div class="header__head w-1/3 text-center">
+          {%- endif -%}
+          {% render 'header-logo' %}
+          {%- if request.page_type == 'index' -%}
+            </h1>
+          {% else %}
+            </div>
+          {%- endif -%}
+          {% comment %} End logo {% endcomment %}
+          <div class="w-1/3 justify-end gap-5 hidden lg:flex header-icons">
+            {{ render_icons }}
           </div>
-        {%- endif -%}
-        {% comment %} End logo {% endcomment %}
-
-        <div class="w-1/3">
-          {% liquid
-            if section.settings.is_show_search
-              render 'header-search-icon'
-            endif
-          %}
         </div>
-
-        <div class="w-1/3 justify-end gap-5 hidden lg:flex header-icons">
-          {% if section.settings.is_show_compare %}
-            {% render 'header-compare-icon' %}
-          {% endif %}
-          {% if section.settings.is_show_wishlist %}
-            {% render 'header-wishlist-icon' %}
-          {% endif %}
-          {% if section.settings.is_show_account %}
-            {% render 'header-account-icon' %}
-          {% endif %}
-          {% render 'header-cart-icon' %}
         </div>
-      </div>
-      </div>
-      <nav class="header__inline-menu flex justify-center w-full py-5">
-        {{ render_menu }}
-      </nav>
+        <nav class="header__inline-menu flex justify-center w-full py-5">
+          {{ render_menu }}
+        </nav>
+
+      {% when 'menu_2l_logo_left' %}
+        <div class="w-full flex items-center justify-between header_top_2l">
+          {% comment %} Logo {% endcomment %}
+          {%- if request.page_type == 'index' -%}
+            <h1 class="header__head w-1/3 text-start">
+          {% else %}
+            <div class="header__head w-1/3 text-start">
+          {%- endif -%}
+          {% render 'header-logo' %}
+          {%- if request.page_type == 'index' -%}
+            </h1>
+          {% else %}
+            </div>
+          {%- endif -%}
+          {% comment %} End logo {% endcomment %}
+
+          <div class="w-1/3">
+            {{ render_search }}
+          </div>
+
+          <div class="w-1/3 justify-end gap-5 hidden lg:flex header-icons">
+            {{ render_icons }}
+          </div>
+        </div>
+        </div>
+        <nav class="header__inline-menu flex justify-center w-full py-5">
+          {{ render_menu }}
+        </nav>
     {% endcase %}
   </div>
 </header>
 
 {% schema %}
 {
-  "name": "Header",
-  "enabled_on": {
-    "groups": ["header"]
-  },
-  "limit": 1,
-  "settings": [
-    {
-      "type": "header",
-      "content": "General"
-    },
-    {
-      "type": "select",
-      "id": "container",
-      "label": "Container width",
-      "options": [
-        {
-          "label": "Container",
-          "value": "container"
-        },
-        {
-          "label": "Narrow",
-          "value": "narrow_width"
-        },
-        {
-          "label": "Full width",
-          "value": "full_width"
-        }
-      ],
-      "default": "container",
-      "info": "Width value of section content"
-    },
-    {
-      "type": "checkbox",
-      "id": "is_show_divider",
-      "label": "Show divider",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "header_style",
-      "options": [
-        {
-          "value": "menu_left_logo_center",
-          "label": "Menu left - Logo center"
-        },
-        {
-          "value": "menu_center_logo_left",
-          "label": "Menu center - Logo left"
-        },
-        {
-          "value": "menu_right_logo_left",
-          "label": "Menu right - Logo left"
-        },
-        {
-          "value": "menu_2l_logo_center",
-          "label": "Menu bottom - Logo center"
-        },
-        {
-          "value": "menu_2l_logo_left",
-          "label": "Menu bottom - Logo left"
-        }
-      ],
-      "default": "menu_center_logo_left",
-      "label": "Header style"
-    },
-    {
-      "type": "header",
-      "content": "Menu settings"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "default": "main-menu",
-      "label": "Menu"
-    },
-    {
-      "type": "select",
-      "id": "menu_type_desktop",
-      "label": "Menu type",
-      "options": [
-        {
-          "label": "Default",
-          "value": "default"
-        },
-        {
-          "label": "Mega menu",
-          "value": "mega"
-        }
-      ],
-      "default": "default"
-    },
-    {
-      "type": "checkbox",
-      "id": "is_show_arrow",
-      "default": true,
-      "label": "Show arrow icons"
-    },
-    {
-      "type": "checkbox",
-      "id": "is_show_wishlist",
-      "default": true,
-      "label": "Show wishlist icon"
-    },
-    {
-      "type": "checkbox",
-      "id": "is_show_account",
-      "default": true,
-      "label": "Show account icon"
-    },
-    {
-      "type": "checkbox",
-      "id": "is_show_compare",
-      "default": true,
-      "label": "Show product compare icon"
-    },
-    {
-      "type": "checkbox",
-      "id": "is_show_search",
-      "default": true,
-      "label": "Show search icon"
-    },
-    {
-      "type": "select",
-      "id": "search_type",
-      "label": "Icon search type",
-      "options": [
-        {
-          "label": "Icon",
-          "value": "icon"
-        },
-        {
-          "label": "Search bar",
-          "value": "input"
-        }
-      ],
-      "default": "input"
-    },
-    {
-      "type": "select",
-      "id": "cart_type",
-      "options": [
-        {
-          "label": "Drawer",
-          "value": "drawer"
-        },
-        {
-          "label": "Page",
-          "value": "page"
-        }
-      ],
-      "default": "drawer",
-      "label": "Open cart type"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Header"
-    }
-  ]
+"name": "Header",
+"enabled_on": {
+"groups": ["header"]
+},
+"limit": 1,
+"settings": [
+{
+"type": "header",
+"content": "General"
+},
+{
+"type": "select",
+"id": "container",
+"label": "Container width",
+"options": [
+{
+"label": "Container",
+"value": "container"
+},
+{
+"label": "Narrow",
+"value": "narrow_width"
+},
+{
+"label": "Full width",
+"value": "full_width"
+}
+],
+"default": "container",
+"info": "Width value of section content"
+},
+{
+"type": "checkbox",
+"id": "is_show_divider",
+"label": "Show divider",
+"default": true
+},
+{
+"type": "select",
+"id": "header_style",
+"options": [
+{
+"value": "menu_left_logo_center",
+"label": "Menu left - Logo center"
+},
+{
+"value": "menu_center_logo_left",
+"label": "Menu center - Logo left"
+},
+{
+"value": "menu_right_logo_left",
+"label": "Menu right - Logo left"
+},
+{
+"value": "menu_2l_logo_center",
+"label": "Menu bottom - Logo center"
+},
+{
+"value": "menu_2l_logo_left",
+"label": "Menu bottom - Logo left"
+}
+],
+"default": "menu_center_logo_left",
+"label": "Header style"
+},
+{
+"type": "header",
+"content": "Menu settings"
+},
+{
+"type": "link_list",
+"id": "menu",
+"default": "main-menu",
+"label": "Menu"
+},
+{
+"type": "select",
+"id": "menu_type_desktop",
+"label": "Menu type",
+"options": [
+{
+"label": "Default",
+"value": "default"
+},
+{
+"label": "Mega menu",
+"value": "mega"
+}
+],
+"default": "default"
+},
+{
+"type": "checkbox",
+"id": "is_show_arrow",
+"default": true,
+"label": "Show arrow icons"
+},
+{
+"type": "checkbox",
+"id": "is_show_account",
+"default": true,
+"label": "Show account icon"
+},
+{
+"type": "checkbox",
+"id": "is_show_search",
+"default": true,
+"label": "Show search icon"
+},
+{
+"type": "select",
+"id": "search_type",
+"label": "Icon search type",
+"options": [
+{
+"label": "Icon",
+"value": "icon"
+},
+{
+"label": "Search bar",
+"value": "input"
+}
+],
+"default": "input"
+},
+{
+"type": "select",
+"id": "cart_type",
+"options": [
+{
+"label": "Drawer",
+"value": "drawer"
+},
+{
+"label": "Page",
+"value": "page"
+}
+],
+"default": "drawer",
+"label": "Open cart type"
+}
+],
+"presets": [
+{
+"name": "Header"
+}
+
+]
 }
 {% endschema %}

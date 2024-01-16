@@ -9,6 +9,9 @@
             "blocks": {
                 "block-section-1":{
                     "type": "text"
+                },
+                "block-section-2":{
+                    "type": "text"
                 }
             },
             "block_order": ["block-section-1"]
@@ -20,10 +23,19 @@
             "settings": {
              
             }
+          },
+          "729ed7ff-cd70-41ab-97b7-db284caa4ad5": {
+            "type": "sticky-sidebar",
+            "custom_css": [
+            ],
+            "settings": {
+             
+            }
           }
     },
     "order": [
         "729ed7ff-cd70-41ab-97b7-db284c5764da",
-        "729ed7ff-cd70-41ab-97b7-db284c5764d5"
+        "729ed7ff-cd70-41ab-97b7-db284c5764d5",
+        "729ed7ff-cd70-41ab-97b7-db284caa4ad5"
     ]
   }

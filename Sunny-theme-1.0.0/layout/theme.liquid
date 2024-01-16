@@ -14,7 +14,7 @@
     <link type="text/css" href="{{ 'theme.css' | asset_url }}" rel="stylesheet">
     {{ content_for_header }}
   </head>
-  <body style="background-color: {{settings.primary_color}};">
+  <body style="background-color: {{settings.primary_color}};" class="relative">
     {%- liquid
       sections 'header-group'
     -%}
@@ -27,6 +27,7 @@
       sections 'footer-group'
     -%}
 
+    
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'theme-global.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'swiper.min.js' | asset_url }}" defer="defer"></script>
