@@ -1,0 +1,80 @@
+
+{% case type %}
+
+{% when 'countries' %}
+<div class="disclosure">
+  <button
+    type="button"
+    class="disclosure__button countries_selector localization-form__select localization-selector link link--text caption-large flex items-center gap-1 text-sm"
+    aria-expanded="false"
+    aria-controls="{{ localPosition }}List"
+    aria-describedby="{{ localPosition }}Label"
+  >
+    <span>
+      {{- localization.country.currency.iso_code }}
+      {{ localization.country.currency.symbol }} | {{ localization.country.name -}}
+    </span>
+    {% render 'icon-caret' %}
+  </button>
+  <div class="disclosure__list-wrapper countries_list absolute left-0 top-full z-10" hidden>
+    <ul id="{{ localPosition }}List" role="list" class="disclosure__list border rounded p-3">
+      {%- for country in localization.available_countries -%}
+        <li class="disclosure__item" tabindex="-1">
+          <a
+            class="link link--text disclosure__link caption-large focus-inset{% if country.iso_code == localization.country.iso_code %}  flex whitespace-nowrap flex-nowrap disclosure__link--active{% endif %}"
+            href="#"
+            {% if country.iso_code == localization.country.iso_code %}
+              aria-current="true"
+            {% endif %}
+            data-value="{{ country.iso_code }}"
+          >
+          <span class="flex flex-nowrap gap-1 ">
+              <span class="localization-form__currency whitespace-nowrap">
+                  {{- country.currency.iso_code }}
+                  {{ country.currency.symbol }} |</span
+                  >
+                  {{ country.name }}
+                  </span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+<input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+
+{% when 'languages' %}
+<div class="disclosure">
+  <button
+    type="button"
+    class="disclosure__button languages_selector localization-form__select localization-selector link link--text caption-large  flex items-center gap-1 text-sm"
+    aria-expanded="false"
+    aria-controls="{{ localPosition }}List"
+    aria-describedby="{{ localPosition }}Label"
+  >
+    <span>{{ localization.language.endonym_name | capitalize }}</span>
+    {% render 'icon-caret' %}
+  </button>
+  <div class="disclosure__list-wrapper languages_list absolute left-0 top-full z-10" hidden>
+    <ul id="{{ localPosition }}List" role="list" class="disclosure__list border rounded p-3">
+      {%- for language in localization.available_languages -%}
+        <li class="disclosure__item" tabindex="-1">
+          <a
+            class="link link--text disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} whitespace-nowrap disclosure__link--active{% endif %} focus-inset"
+            href="#"
+            hreflang="{{ language.iso_code }}"
+            lang="{{ language.iso_code }}"
+            {% if language.iso_code == localization.language.iso_code %}
+              aria-current="true"
+            {% endif %}
+            data-value="{{ language.iso_code }}"
+          >
+            {{ language.endonym_name | capitalize }}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+<input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+{% endcase %}

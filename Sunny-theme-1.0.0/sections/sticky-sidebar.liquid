@@ -1,46 +1,55 @@
 <div class="sidebar-icon fixed {{ section.settings.position }}-0 {% case section.settings.position %} {% when 'left' %}rounded-r-md{% when 'right' %}rounded-l-md{% endcase %} top-1/2 justify-center gap-5 flex flex-col header-icons bg-white border px-2 py-4">
-  {% liquid
-    if section.settings.is_show_compare
-      render 'header-compare-icon'
-    endif
-%}
-<div class="border h-[1px]"></div>
-{% liquid
-    if section.settings.is_show_wishlist
-      render 'header-wishlist-icon'
-    endif
-  %}
+  {% if section.settings.is_show_compare %}
+    {%- assign compare_url = settings.comparison_page.url -%}
+    <a class="comparison-icon" href="{{compare_url}}">
+      {% render 'icons', type: 'compare' %}
+    </a>
+  {% endif %}
+  <div class="border h-[1px]"></div>
+  {% if section.settings.is_show_wishlist %}
+    {%- assign wishlist_url = settings.wishlist_page.url -%}
+    <a class="wishlist-icon" href="{{wishlist_url}}">
+      {% render 'icons', type: 'wishlist' %}
+    </a>
+  {% endif %}
+  
 </div>
 
 {% schema %}
-  {
-    "name": "Sticky sidebar",
-    "settings": [
-      {
-        "type": "select",
-        "label": "Position",
-        "options": [
-          {
-            "value": "left",
-            "label": "Left"
-          }, {
-            "value": "right",
-            "label": "Right"
-          }
-        ],
-        "default": "right",
-        "id": "position"
-      }, {
-        "type": "checkbox",
-        "id": "is_show_wishlist",
-        "default": true,
-        "label": "Show wishlist icon"
-      }, {
-        "type": "checkbox",
-        "id": "is_show_compare",
-        "default": true,
-        "label": "Show product compare icon"
-      }
-    ]
-  }
+{
+  "name": "Sticky sidebar",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "label": "Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right",
+      "id": "position"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_wishlist",
+      "default": true,
+      "label": "Show wishlist icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_compare",
+      "default": true,
+      "label": "Show product compare icon"
+    }
+  ]
+}
 {% endschema %}

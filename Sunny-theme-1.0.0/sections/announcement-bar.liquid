@@ -1,5 +1,5 @@
 <div
-  class="swiper w-full mx-auto annountcement-bar relative {% if section.settings.container == "container" %}w-full max-w-[1920px]{% elsif section.settings.container == "narrow_width" %}w-full md:max-w-7xl{% else %}w-full{% endif %}"
+  class="swiper w-full mx-auto annountcement-bar relative section-{{section.settings.container}}"
   section-id="{{section.id}}"
   duration="{{ section.settings.duration }}"
 >

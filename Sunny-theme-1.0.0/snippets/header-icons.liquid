@@ -1,0 +1,17 @@
+{% case type %}
+  {% when 'others' %}
+    <div class="justify-end flex header-icons gap-2 lg:gap-8">
+      {% if section.settings.is_show_account %}
+        <a class="account-button" href="{{routes.account_url}}">
+          {% render 'icons', type: 'account' %}
+        </a>
+      {% endif %}
+      {% render 'header-cart-icon' %}
+    </div>
+  {% when 'search' %}
+    {% liquid
+      if section.settings.is_show_search
+        render 'header-search-icon'
+      endif
+    %}
+{% endcase %}

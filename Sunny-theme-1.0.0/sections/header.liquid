@@ -1,53 +1,13 @@
-{% capture render_menu %}
-{%- liquid
-if section.settings.menu != blank
-if section.settings.menu_type_desktop == 'default'
-render 'header-menu'
-elsif section.settings.menu_type_desktop == 'mega'
-render 'header-mega-menu'
-endif
-endif
-%}
-{% endcapture %}
-
-{% capture render_icons %}
-<div class="justify-end gap-5 hidden lg:flex header-icons">
-  {%  liquid 
-  if section.settings.is_show_account
-    render 'header-account-icon'
-  endif 
-  %} 
-</div>
-{% render 'header-cart-icon' %}
-{% endcapture %}
-
-{% capture render_search %} 
-  {% liquid
-  if section.settings.is_show_search
-    render 'header-search-icon'
-  endif
-  %}
- {% endcapture %}
-
 <header class="w-full relative {% if section.settings.is_show_divider %}border-b{% endif %}">
-  <div
-    class="
-        mx-auto py-2 px-2 md:py-5 header header-wrapper header--{{section.settings.header_style}} {% if section.settings.container == 'container' %}w-full lg:max-w-[1920px]{% elsif section.settings.container=="
-      narrow_width" %}w-full lg:max-w-7xl{% else %}w-full{% endif %} {% if
-      section.settings.header_style=='menu_2l_logo_center' or section.settings.header_style=='menu_2l_logo_left' %} block
-      {% else %} flex {% endif %} items-center
-    "
-  >
+  <div class="hidden mx-auto py-2 px-2 md:py-5 header header-wrapper header--{{section.settings.header_style}} w-full section-{{section.settings.container}}{% if section.settings.header_style=='menu_2l_logo_center' or section.settings.header_style=='menu_2l_logo_left' %} lg:block {% else %} lg:flex {% endif %}items-center">
     {% case section.settings.header_style %}
       {% when 'menu_left_logo_center' %}
-        <nav class=" header__inline-menu w-2/5">
-          {{ render_menu }}
-        </nav>
+        {% render 'menu-item', section: section, style: 'w-2/5' %}
         {% comment %} Logo {% endcomment %}
         {%- if request.page_type == 'index' -%}
-          <h1 class="header__head w-1/5 text-center">
+          <h1 class="header__head w-1/3 lg:w-1/5 text-center">
         {% else %}
-          <div class="header__head w-1/5 text-center">
+          <div class="header__head w-1/3 lg:w-1/5 text-center">
         {%- endif -%}
         {% render 'header-logo' %}
         {%- if request.page_type == 'index' -%}
@@ -57,16 +17,16 @@ endif
         {%- endif -%}
         {% comment %} End logo {% endcomment %}
 
-        <div class="w-2/5 text-end header__head flex justify-end gap-5">
-          {{ render_search }}
-          {{ render_icons }}
+        <div class="w-2/3 lg:w-2/5 text-end header__head flex justify-end gap-3 lg:gap-8">
+          {% render 'header-icons', type: 'search' %}
+          {% render 'header-icons', type: 'others' %}
         </div>
       {% when 'menu_center_logo_left' %}
         {% comment %} Logo {% endcomment %}
         {%- if request.page_type == 'index' -%}
-          <h1 class="header__head w-1/6 text-left">
+          <h1 class="header__head w-1/3 lg:w-1/6 text-left">
         {% else %}
-          <div class="header__head w-1/6 text-left">
+          <div class="header__head w-1/3 lg:w-1/6 text-left">
         {%- endif -%}
         {% render 'header-logo' %}
         {%- if request.page_type == 'index' -%}
@@ -76,13 +36,11 @@ endif
         {%- endif -%}
         {% comment %} End logo {% endcomment %}
 
-        <nav class="header__inline-menu w-4/6 flex justify-center">
-          {{ render_menu }}
-        </nav>
+        {% render 'menu-item', section: section, style: 'w-4/6 justify-center' %}
 
-        <div class="w-1/6 text-end header__head flex justify-end gap-5">
-          {{ render_search }}
-          {{ render_icons }}
+        <div class="w-2/3 lg:w-1/6 text-end header__head flex justify-end gap-3 lg:gap-8">
+          {% render 'header-icons', type: 'search' %}
+          {% render 'header-icons', type: 'others' %}
         </div>
 
       {% when 'menu_right_logo_left' %}
@@ -92,7 +50,7 @@ endif
         {% else %}
           <div class="header__head w-1/3 text-start">
         {%- endif -%}
-        {% render 'header-logo' %}
+        {% render 'header-logo', style: 'menu_right_logo_left' %}
         {%- if request.page_type == 'index' -%}
           </h1>
         {% else %}
@@ -100,18 +58,16 @@ endif
         {%- endif -%}
         {% comment %} End logo {% endcomment %}
 
-        <nav class="header__inline-menu w-4/6 flex justify-end">
-          {{ render_menu }}
-        </nav>
-        <div class="w-1/6 text-end header__head flex justify-end gap-5">
-          {{ render_search }}
-          {{ render_icons }}
+        {% render 'menu-item', section: section, style: 'w-4/6 justify-end' %}
+        <div class="w-2/3 lg:w-1/6 text-end header__head flex justify-end gap-3 lg:gap-8">
+          {% render 'header-icons', type: 'search' %}
+          {% render 'header-icons', type: 'others' %}
         </div>
 
       {% when 'menu_2l_logo_center' %}
         <div class="w-full flex items-center justify-between header_top_2l">
           <div class="w-1/3">
-            {{ render_search }}
+            {% render 'header-icons', type: 'search' %}
           </div>
           {% comment %} Logo {% endcomment %}
           {%- if request.page_type == 'index' -%}
@@ -126,14 +82,12 @@ endif
             </div>
           {%- endif -%}
           {% comment %} End logo {% endcomment %}
-          <div class="w-1/3 justify-end gap-5 hidden lg:flex header-icons">
-            {{ render_icons }}
+          <div class="w-1/3 justify-end gap-5  header-icons">
+            {% render 'header-icons', type: 'others' %}
           </div>
         </div>
         </div>
-        <nav class="header__inline-menu flex justify-center w-full py-5">
-          {{ render_menu }}
-        </nav>
+        {% render 'menu-item', section: section, style: 'justify-center w-full py-5' %}
 
       {% when 'menu_2l_logo_left' %}
         <div class="w-full flex items-center justify-between header_top_2l">
@@ -143,7 +97,7 @@ endif
           {% else %}
             <div class="header__head w-1/3 text-start">
           {%- endif -%}
-          {% render 'header-logo' %}
+          {% render 'header-logo', style: 'header_top_2l' %}
           {%- if request.page_type == 'index' -%}
             </h1>
           {% else %}
@@ -152,170 +106,214 @@ endif
           {% comment %} End logo {% endcomment %}
 
           <div class="w-1/3">
-            {{ render_search }}
+            {% render 'header-icons', type: 'search' %}
           </div>
 
           <div class="w-1/3 justify-end gap-5 hidden lg:flex header-icons">
-            {{ render_icons }}
+            {% render 'header-icons', type: 'others' %}
           </div>
         </div>
         </div>
-        <nav class="header__inline-menu flex justify-center w-full py-5">
-          {{ render_menu }}
-        </nav>
+        {% render 'menu-item', section: section, style: 'justify-center w-full py-5' %}
     {% endcase %}
   </div>
+    {% case section.settings.header_mobile_type %}
+      {% when '2line_menu_bottom' %}
+        <div class="block lg:hidden border-b py-2">
+          {%- if request.page_type == 'index' -%}
+            <h1 class="header__head w-full text-center">
+          {% else %}
+            <div class="header__head w-full text-center">
+          {%- endif -%}
+          {% render 'header-logo', style: 'header_mobile' %}
+          {%- if request.page_type == 'index' -%}
+            </h1>
+          {% else %}
+            </div>
+          {%- endif -%}
+          <div class="w-full flex items-center">
+            {% render 'hamburger-button', style: '2l' %}
+            <div class="w-full px-5">
+              {% render 'header-search-icon', type: 'icon' %}
+            </div>
+            {% render 'header-icons', type: 'others' %}
+          </div>
+        </div>
+      {% when 'menu_left_logo_center' %}
+        <div class="w-full flex lg:hidden items-center  py-2">
+          {% render 'hamburger-button' %}
+
+          {%- if request.page_type == 'index' -%}
+            <h1 class="header__head w-1/3 text-center">
+          {% else %}
+            <div class="header__head w-1/3 ext-center">
+          {%- endif -%}
+          {% render 'header-logo', style: 'header_mobile' %}
+          {%- if request.page_type == 'index' -%}
+            </h1>
+          {% else %}
+            </div>
+          {%- endif -%}
+          <div class="w-1/3 text-end header__head flex justify-end gap-3 lg:gap-8">
+           
+            {% render 'header-icons', type: 'search' %}
+            {% render 'header-icons', type: 'others' %}
+            
+          </div>
+        </div>
+    {% endcase %}
 </header>
+
+{% render 'mobile-menu-drawer' %}
 
 {% schema %}
 {
-"name": "Header",
-"enabled_on": {
-"groups": ["header"]
-},
-"limit": 1,
-"settings": [
-{
-"type": "header",
-"content": "General"
-},
-{
-"type": "select",
-"id": "container",
-"label": "Container width",
-"options": [
-{
-"label": "Container",
-"value": "container"
-},
-{
-"label": "Narrow",
-"value": "narrow_width"
-},
-{
-"label": "Full width",
-"value": "full_width"
-}
-],
-"default": "container",
-"info": "Width value of section content"
-},
-{
-"type": "checkbox",
-"id": "is_show_divider",
-"label": "Show divider",
-"default": true
-},
-{
-"type": "select",
-"id": "header_style",
-"options": [
-{
-"value": "menu_left_logo_center",
-"label": "Menu left - Logo center"
-},
-{
-"value": "menu_center_logo_left",
-"label": "Menu center - Logo left"
-},
-{
-"value": "menu_right_logo_left",
-"label": "Menu right - Logo left"
-},
-{
-"value": "menu_2l_logo_center",
-"label": "Menu bottom - Logo center"
-},
-{
-"value": "menu_2l_logo_left",
-"label": "Menu bottom - Logo left"
-}
-],
-"default": "menu_center_logo_left",
-"label": "Header style"
-},
-{
-"type": "header",
-"content": "Menu settings"
-},
-{
-"type": "link_list",
-"id": "menu",
-"default": "main-menu",
-"label": "Menu"
-},
-{
-"type": "select",
-"id": "menu_type_desktop",
-"label": "Menu type",
-"options": [
-{
-"label": "Default",
-"value": "default"
-},
-{
-"label": "Mega menu",
-"value": "mega"
-}
-],
-"default": "default"
-},
-{
-"type": "checkbox",
-"id": "is_show_arrow",
-"default": true,
-"label": "Show arrow icons"
-},
-{
-"type": "checkbox",
-"id": "is_show_account",
-"default": true,
-"label": "Show account icon"
-},
-{
-"type": "checkbox",
-"id": "is_show_search",
-"default": true,
-"label": "Show search icon"
-},
-{
-"type": "select",
-"id": "search_type",
-"label": "Icon search type",
-"options": [
-{
-"label": "Icon",
-"value": "icon"
-},
-{
-"label": "Search bar",
-"value": "input"
-}
-],
-"default": "input"
-},
-{
-"type": "select",
-"id": "cart_type",
-"options": [
-{
-"label": "Drawer",
-"value": "drawer"
-},
-{
-"label": "Page",
-"value": "page"
-}
-],
-"default": "drawer",
-"label": "Open cart type"
-}
-],
-"presets": [
-{
-"name": "Header"
-}
-
-]
+  "name": "Header",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "options": [
+        {
+          "label": "Container",
+          "value": "container"
+        },
+        {
+          "label": "Narrow",
+          "value": "narrow_width"
+        },
+        {
+          "label": "Full width",
+          "value": "full_width"
+        }
+      ],
+      "default": "container",
+      "info": "Width value of section content"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_divider",
+      "label": "Show divider",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "header_style",
+      "options": [
+        {
+          "value": "menu_left_logo_center",
+          "label": "Menu left - Logo center"
+        },
+        {
+          "value": "menu_center_logo_left",
+          "label": "Menu center - Logo left"
+        },
+        {
+          "value": "menu_right_logo_left",
+          "label": "Menu right - Logo left"
+        },
+        {
+          "value": "menu_2l_logo_center",
+          "label": "Menu bottom - Logo center"
+        },
+        {
+          "value": "menu_2l_logo_left",
+          "label": "Menu bottom - Logo left"
+        }
+      ],
+      "default": "menu_center_logo_left",
+      "label": "Header style"
+    },
+    {
+      "type": "select",
+      "id": "header_mobile_type",
+      "options": [
+        {
+          "label": "Logo top - Menu bottom",
+          "value": "2line_menu_bottom"
+        },
+        {
+          "label": "Logo center - Menu left",
+          "value": "menu_left_logo_center"
+        }
+      ],
+      "default": "menu_left_logo_center",
+      "label": "Header mobile style"
+    },
+    {
+      "type": "header",
+      "content": "Menu settings"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    },
+    {
+      "type": "select",
+      "id": "menu_type_desktop",
+      "label": "Menu type",
+      "options": [
+        {
+          "label": "Default",
+          "value": "default"
+        },
+        {
+          "label": "Mega menu",
+          "value": "mega"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_arrow",
+      "default": true,
+      "label": "Show arrow icons"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_account",
+      "default": true,
+      "label": "Show account icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_search",
+      "default": true,
+      "label": "Show search icon"
+    },
+    {
+      "type": "select",
+      "id": "search_type",
+      "label": "Icon search type",
+      "options": [
+        {
+          "label": "Icon",
+          "value": "icon"
+        },
+        {
+          "label": "Search bar",
+          "value": "input"
+        }
+      ],
+      "default": "input"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
 }
 {% endschema %}

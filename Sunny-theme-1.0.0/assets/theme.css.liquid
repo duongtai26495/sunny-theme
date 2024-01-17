@@ -9,3 +9,12 @@ header .list-submenu.submenu_level-1:not(.mega-menu), header .list-submenu-child
 .list-menu--link.menu_item_active, .list-menu--link.menu_item_active .icon-caret { color: {{ settings.primary_accent }};}
 .list-menu--link.menu_item_active:after { background-color: {{ settings.primary_accent }};}
 .sn-topbar * {color:{{ settings.topbar_text}};}
+
+@media (min-width:1024px){
+    .section-container{max-width:{{settings.template_fluid_width}}px;}
+    .section-narrow_width{max-width:{{settings.template_width}}px;}
+    .section-full_width{max-width:100%;}
+}
+
+.disclosure__list-wrapper.countries_list,
+.disclosure__list-wrapper.languages_list {background-color: {{settings.topbar_background}};}

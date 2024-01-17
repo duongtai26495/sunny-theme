@@ -81,7 +81,17 @@
                 "type": "range",
                 "id": "template_width",
                 "label": "Template width",
-                "default": 1280,
+                "default": 1200,
+                "min": 1000,
+                "max": 1920,
+                "step": 10,
+                "unit": "px"
+            },
+            {
+                "type": "range",
+                "id": "template_fluid_width",
+                "label": "Template fluild width",
+                "default": 1920,
                 "min": 1200,
                 "max": 1920,
                 "step": 10,
@@ -455,6 +465,31 @@
         ]
     },
     {
+        "name": "Cart",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Cart type"
+            },
+            {
+                "type": "select",
+                "id": "cart_type",
+                "label": "Open cart type",
+                "options": [
+                    {
+                        "label":"Drawer",
+                        "value": "drawer"
+                    },
+                    {
+                        "label":"Cart page",
+                        "value": "page"
+                    }
+                ],
+                "default": "drawer"
+            }
+        ]
+    },
+    {
         "name": "Additional pages",
         "settings": [
             {
@@ -634,7 +669,7 @@
                 "type": "text",
                 "placeholder": "fb.com/",
                 "label": "Facebook link",
-                "id": "facebook_url"
+                "id": "facebook_link"
             },
             {
                 "type": "text",
@@ -646,19 +681,19 @@
                 "type": "text",
                 "placeholder": "ig.com/",
                 "label": "Instagram link",
-                "id": "insta_url"
+                "id": "instagram_link"
             },
             {
                 "type": "text",
                 "default": "X (twitter)",
-                "id": "tw_label",
+                "id": "twitter_label",
                 "label": "X (twitter) label"
             },
             {
                 "type": "text",
                 "placeholder": "twitter.com/",
                 "label": "X link",
-                "id": "tw_url"
+                "id": "twitter_link"
             },
             {
                 "type": "text",
@@ -670,7 +705,7 @@
                 "type": "text",
                 "placeholder": "pinterest.com/",
                 "label": "Pinterest link",
-                "id": "pinterest_url"
+                "id": "pinterest_link"
             }
         ]
     }

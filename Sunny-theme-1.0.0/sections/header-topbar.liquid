@@ -1,6 +1,8 @@
-
 <div class="sn-topbar w-full">
-  <div style="background-color: {{settings.topbar_background}};" class="lg:justify-{{section.settings.content_position}} flex flex-col lg:flex-row items-center p-2 gap-1 {% if section.settings.container == 'container' %}w-full lg:max-w-[1920px]{% elsif section.settings.container=='narrow_width' %}w-full lg:max-w-7xl{% else %}w-full{% endif %} h-fit lg:max-h-[40px] mx-auto" >
+  <div
+    style="background-color: {{settings.topbar_background}};"
+    class="lg:justify-{{section.settings.content_position}} flex flex-col lg:flex-row items-center p-2 gap-1 w-full section-{{ section.settings.container }} h-fit lg:max-h-[40px] mx-auto"
+  >
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'message' %}
@@ -9,36 +11,98 @@
               {{ block.settings.message }}
             </div>
           {% endif %}
-          {% when 'contact' %}
-            <div class="topbar-contact w-fit text-center flex items-center gap-3">
-              {% if block.settings.is_show_phone_num %}
-                {% if settings.store_phone_number %}
+        {% when 'contact' %}
+          <div class="topbar-contact w-fit text-center flex items-center gap-3">
+            {% if block.settings.is_show_phone_num %}
+              {% if settings.store_phone_number %}
                 <div class="w-fit h-fit flex items-center gap-1">
-                  {%  render 'icons', type:'phone', color:{{settings.topbar_text}} %}<a class="underline text-[12px] lg:text-sm" href="tel:+{{ settings.store_phone_number }}">{{ settings.phone_label }}</a>
+                  {% render 'icons', type:'phone', color:{{settings.topbar_text}} -%}
+                  <a class="underline text-[12px] lg:text-sm" href="tel:+{{ settings.store_phone_number }}">
+                    {{- settings.phone_label -}}
+                  </a>
                 </div>
-                {% endif %}
               {% endif %}
-              {% if block.settings.is_show_whatsapp %}
-                {% if settings.whatsapp_link %}
-                  <div class="w-fit h-fit flex items-center gap-1">
-                    {%  render 'icons', type:'whatsapp', color:{{settings.topbar_text}} %}<a class="underline text-[12px] lg:text-sm" href="https://wa.me/{{whatsapp_link}}">{{ settings.whatsapp_label }}</a>
-                  </div>
-                  {% endif %}
+            {% endif %}
+            {% if block.settings.is_show_whatsapp %}
+              {% if settings.whatsapp_link %}
+                <div class="w-fit h-fit flex items-center gap-1">
+                  {% render 'icons', type:'whatsapp', color:{{settings.topbar_text}} -%}
+                  <a class="underline text-[12px] lg:text-sm" href="https://wa.me/{{settings.whatsapp_link}}">
+                    {{- settings.whatsapp_label -}}
+                  </a>
+                </div>
               {% endif %}
-              {% if block.settings.is_show_email %}
-                {% if settings.store_email %}
-                  <div class="w-fit h-fit flex items-center gap-1">
-                    {%  render 'icons', type:'email', color:{{settings.topbar_text}} %}<a class="underline text-[12px] lg:text-sm" href="mailto:{{ settings.store_email }}">{{ settings.mail_label }}</a>
-                  </div>
-                  {% endif %}
+            {% endif %}
+            {% if block.settings.is_show_email %}
+              {% if settings.store_email %}
+                <div class="w-fit h-fit flex items-center gap-1">
+                  {% render 'icons', type:'email', color:{{settings.topbar_text}} -%}
+                  <a class="underline text-[12px] lg:text-sm" href="mailto:{{ settings.store_email }}">
+                    {{- settings.mail_label -}}
+                  </a>
+                </div>
               {% endif %}
-            </div>
-          {% when 'social_media' %}
+            {% endif %}
+          </div>
+        {% when 'social_media' %}
+          <div class="flex gap-3 items-center w-fit h-fit">
+            {% if settings.facebook_link %}
+              <div class="w-fit h-fit">
+                <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.facebook_link}}">
+                  {% render 'icons', type:'facebook', color:{{settings.topbar_text}} -%}
+                  {% if settings.facebook_label != blank %}{{- settings.facebook_label -}}{% endif %}
+                </a>
+              </div>
+            {% endif %}
+            {% if settings.instagram_link %}
+              <div class="w-fit h-fit">
+                <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.instagram_link}}">
+                  {% render 'icons', type:'instagram', color:{{settings.topbar_text}} -%}
+                  {% if settings.instagram_label != blank %}{{- settings.instagram_label -}}{% endif %}
+                </a>
+              </div>
+            {% endif %}
+            {% if settings.twitter_link %}
+              <div class="w-fit h-fit">
+                <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.twitter_link}}">
+                  {% render 'icons', type:'twitter', color:{{settings.topbar_text}} -%}
+                  {% if settings.twitter_label != blank %}{{- settings.twitter_label -}}{% endif %}
+                </a>
+              </div>
+            {% endif %}
+            {% if settings.pinterest_link %}
+              <div class="w-fit h-fit">
+                <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.pinterest_link}}">
+                  {% render 'icons', type:'pinterest', color:{{settings.topbar_text}} -%}
+                  {% if settings.pinterest_label != blank %}{{- settings.pinterest_label -}}{% endif %}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% when 'international' %}
+          <div class="hidden lg:flex items-center gap-5">
 
-          {% when 'international' %}
+            {%- if block.settings.is_show_countries and localization.available_countries.size > 1 -%}
+              
+            
+              <localization-form>
+                {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form relative' -%}
+                    {%- render 'localization', localPosition: 'HeaderCountry', type:'countries' -%}
+                {%- endform -%}
+              </localization-form>
+            {% endif %}
+  
+            {%- if block.settings.is_show_languages and localization.available_languages.size > 1 -%}
+            <localization-form>
+                {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form relative' -%}
+                  {%- render 'localization', localPosition: 'HeaderLanguage', type:'languages' -%}
+                {%- endform -%}
+                </localization-form>
+            {%- endif -%}
+          </div>
 
-          {% when 'divider' %}
-            <div class="hidden lg:block divider h-4 mx-2 w-[1px] bg-slate-700"></div>
+        {% when 'divider' %}
+          <div class="hidden lg:block divider h-4 mx-2 w-[1px] bg-slate-700"></div>
       {% endcase %}
     {% endfor %}
   </div>
@@ -53,28 +117,28 @@
   },
   "settings": [
     {
-      "type":"select",
+      "type": "select",
       "id": "content_position",
       "label": "Content position",
       "options": [
         {
-          "label":"Left",
+          "label": "Left",
           "value": "start"
         },
         {
-          "label":"Center",
+          "label": "Center",
           "value": "center"
         },
         {
-          "label":"Right",
+          "label": "Right",
           "value": "end"
         },
         {
-          "label":"The blocks are equal",
+          "label": "The blocks are equal",
           "value": "evenly"
         },
         {
-          "label":"The blocks at the edges",
+          "label": "The blocks at the edges",
           "value": "between"
         }
       ],
@@ -166,8 +230,8 @@
         {
           "type": "checkbox",
           "default": false,
-          "label": "Show currencies seletor",
-          "id": "is_show_currencies"
+          "label": "Show countries seletor",
+          "id": "is_show_countries"
         },
         {
           "type": "checkbox",
@@ -178,8 +242,8 @@
       ]
     },
     {
-      "type":"divider",
-      "name":"Divider",
+      "type": "divider",
+      "name": "Divider",
       "limit": 3
     }
   ],

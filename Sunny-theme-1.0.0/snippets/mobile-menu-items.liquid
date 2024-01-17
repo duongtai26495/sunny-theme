@@ -1,0 +1,50 @@
+<nav class="header__inline-menu flex h-full overflow-y-auto">
+  {%- if section.settings.menu != blank %}
+    <ul class="list-menu list-menu--inline items-center flex-wrap p-2 flex flex-col dropdown-menu w-full h-fit ">
+      {%- for link in section.settings.menu.links -%}
+      <li class="w-full list-menu-item py-2 relative  border-b {% if link.links != blank %}parent-item{% endif %}">
+        {% if link.links != blank %}
+        <div class="flex items-center justify-between">
+        {% endif %}
+        <a class="{%- if link.active %}menu_item_active{% endif %} w-fit py-1 font-semibold list-menu--link relative text-base flex items-center gap-2" href="{{ link.url }}">
+            {{- link.title | escape -}}
+        </a>
+    
+        {% if link.links != blank %}
+            <button class="open-submenu pl-5">
+                {% render 'icons', type:'plus' %}
+            </button>
+        </div>
+        {% endif %}
+    
+        {% if link.links != blank %}
+        <div class="submenu-mobile-lv1 w-full max-h-fit">
+            <ul class="w-full pl-5 pr-2 flex-col flex gap-3">
+                {% for childlink in link.links %}
+                    <li class="w-full">
+                        <a class="w-full text-sm font-semibold" href="{{childlink.url}}">
+                            {{- childlink.title | escape -}}
+                        </a>
+                        {% if childlink.links != blank %}
+                            <div class="submenu-mobile-lv2 w-full h-fit">
+                                <ul class="w-full pl-5 pr-2 flex flex-col gap-3">
+                                    {% for sub_childlink in childlink.links %}
+                                        <li class="w-full">
+                                            <a class="w-full" href="{{sub_childlink.url}}">
+                                                {{- sub_childlink.title | escape -}}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</nav>

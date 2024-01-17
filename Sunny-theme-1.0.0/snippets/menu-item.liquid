@@ -1,0 +1,35 @@
+
+<nav class="header__inline-menu {{style}} flex">
+{%- if section.settings.menu != blank %}
+    <ul class="list-menu list-menu--inline items-center flex-wrap flex dropdown-menu">
+    {%- for link in section.settings.menu.links -%}
+    <li class="w-fit list-menu-item pr-4 mr-2 {% if section.settings.menu_type_desktop == 'default' %}relative{% endif %}">
+        {% if link.links != blank %}
+        <a class="{%- if link.active %}menu_item_active{% endif %} py-1 {% if link.links != blank %}list-menu-empty{% endif %} font-semibold list-menu--link relative text-base flex items-center gap-2"
+        href="{{ link.url }}">
+        {{- link.title | escape -}}
+        {% if section.settings.is_show_arrow %}
+            <span class="caret-submenu mt-1">
+            {% render 'icon-caret' %}
+            </span>
+        {% endif %}
+        </a>
+
+        {% liquid  if section.settings.menu_type_desktop == 'default'
+            render 'header-menu', link:link
+        elsif section.settings.menu_type_desktop == 'mega'
+            render 'header-mega-menu', link:link
+        endif
+        %}
+
+        {% else %}
+        <a class="{%- if link.active %} menu_item_active{% endif %} font-semibold py-1 list-menu--link relative text-base"
+        href="{{ link.url }}">
+        {{- link.title | escape -}}
+        </a>
+        {% endif %}
+    </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+</nav>

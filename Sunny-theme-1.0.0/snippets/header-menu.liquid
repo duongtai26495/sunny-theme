@@ -1,54 +1,35 @@
-<ul class="list-menu list-menu--inline items-center flex-wrap hidden lg:flex dropdown-menu">
-  {%- for link in section.settings.menu.links -%}
-  <li class="w-fit list-menu-item pr-4 mr-2 relative">
-    {% if link.links != blank %}
-    <a class="{%- if link.active %}menu_item_active{% endif %} py-1 font-bold {% if link.links != blank %}list-menu-empty{% endif %} list-menu--link relative text-base flex items-center gap-2"
-      href="{{ link.url }}">
-      {{- link.title | escape -}}
-      {% if section.settings.is_show_arrow %}
-      <span class="caret-submenu mt-1">
-        {% render 'icon-caret' %}
-      </span>
-      {% endif %}
-    </a>
-
-    <div class="absolute left-0 top-5 list-submenu mt-5 submenu_level-1">
-      <ul class="flex flex-col items-start border">
-        {% for childlink in link.links %}
-        <li class="px-4 py-2 relative list-menu--sub w-full">
-          <div class="flex items-center justify-between gap-2">
-            <a class="whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-base justify-between"
-              href="{{ childlink.url }}">
-              {{- childlink.title | escape -}}
-            </a>
-            {% if childlink.links != blank %}
+<div class="absolute left-0 top-full list-submenu mt-5 submenu_level-1">
+  <ul class="flex flex-col items-start border">
+    {% for childlink in link.links %}
+      <li class="px-4 py-2 relative list-menu--sub w-full">
+        <div class="flex items-center justify-between gap-2">
+          <a
+            class="whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-base justify-between"
+            href="{{ childlink.url }}"
+          >
+            {{- childlink.title | escape -}}
+          </a>
+          {% if childlink.links != blank %}
             <span class="-rotate-90 caret-submenu">
               {% render 'icon-caret' %}
             </span>
-            {% endif %}
-          </div>
-          <div class="absolute z-20 left-full top-0 list-submenu-child">
-            <ul class="flex flex-col items-start border submenu_level-2">
-              {% for subchildlink in childlink.links %}
+          {% endif %}
+        </div>
+        <div class="absolute z-20 left-full top-0 list-submenu-child">
+          <ul class="flex flex-col items-start border submenu_level-2">
+            {% for subchildlink in childlink.links %}
               <li class="px-4 py-2">
-                <a class="whitespace-nowrap w-fit list-menu--link pb-1 list-menu--link--sub--child relative text-base"
-                  href="{{ subchildlink.url }}">
+                <a
+                  class="whitespace-nowrap w-fit list-menu--link pb-1 list-menu--link--sub--child relative text-base"
+                  href="{{ subchildlink.url }}"
+                >
                   {{- subchildlink.title | escape -}}
                 </a>
               </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% else %}
-    <a class="{%- if link.active %}menu_item_active{% endif %} py-1 font-bold list-menu--link relative text-base"
-      href="{{ link.url }}">
-      {{- link.title | escape -}}
-    </a>
-    {% endif %}
-  </li>
-  {% endfor %}
-</ul>
+            {% endfor %}
+          </ul>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
