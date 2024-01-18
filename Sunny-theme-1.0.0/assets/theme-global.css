@@ -12,7 +12,7 @@
     right: 0 !important;
 }
 
-.sn-button {
+.sn-button:not(.sn-primary_button) {
     padding: 3px 7px;
     border-radius: 3px;
     font-weight: 500;
@@ -145,3 +145,32 @@
 
 .open-submenu[submenu-opened] svg g line:first-child{visibility: hidden;}
 
+.sn-button {
+    transition: background .3s ease-in-out, border .3s ease-in-out, color .3s ease-in-out;
+}
+
+
+.sn-p_card-media[image-ratio="square"] .sn-image-wrapper
+{
+    aspect-ratio: 1.0;
+}
+
+.sn-p_card-media[image-ratio="vertical"] .sn-image-wrapper
+{
+    aspect-ratio: 3/4;
+}
+
+.sn-p_card-media[image-ratio="horizontal"] .sn-image-wrapper
+{
+    aspect-ratio: 4/3;
+}
+
+.sn-p_card-media[image-ratio="vertical-2"] .sn-image-wrapper
+{
+    aspect-ratio: 9/16;
+}
+
+.sn-p_card-media[image-ratio="horizontal-2"] .sn-image-wrapper
+{
+    aspect-ratio: 16/9;
+}

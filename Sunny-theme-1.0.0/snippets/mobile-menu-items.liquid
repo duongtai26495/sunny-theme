@@ -1,12 +1,17 @@
+{% assign menu = section.settings.menu %}
+{% assign mobile_menu = section.settings.mobile_menu %}
+{% if mobile_menu == blank or mobile_menu == menu %}
+    {% assign mobile_menu = menu %}
+{% endif %}
 <nav class="header__inline-menu flex h-full overflow-y-auto">
-  {%- if section.settings.menu != blank %}
-    <ul class="list-menu list-menu--inline items-center flex-wrap p-2 flex flex-col w-full h-fit ">
-      {%- for link in section.settings.menu.links -%}
+  {%- if mobile_menu != blank %}
+    <ul class="mobile-menu list-menu list-menu--inline items-center flex-wrap p-2 flex flex-col w-full h-fit ">
+      {%- for link in mobile_menu.links -%}
       <li class="w-full list-menu-item py-2 relative  border-b {% if link.links != blank %}parent-item{% endif %}">
         {% if link.links != blank %}
         <div class="flex items-center justify-between">
         {% endif %}
-        <a style="color:{{ settings.header_text_color }}" class="{%- if link.active %}menu_item_active{% endif %} w-fit py-1 font-semibold list-menu--link relative text-base flex items-center gap-2" href="{{ link.url }}">
+        <a class="{%- if link.active %}menu_item_active{% endif %} list-menu--link w-fit py-1 font-semibold relative text-base flex items-center gap-2" href="{{ link.url }}">
             {{- link.title | escape -}}
         </a>
     
@@ -20,9 +25,10 @@
         {% if link.links != blank %}
         <div class="submenu-mobile-lv1 w-full max-h-fit">
             <ul class="w-full pl-3 pr-2 flex-col flex gap-3 py-2">
+            
                 {% for childlink in link.links %}
                     <li>
-                        <a style="color:{{ settings.header_submenu_text_color }}" class="w-full text-sm font-semibold" href="{{childlink.url}}">
+                        <a style="color:{{ settings.header_submenu_text_color }}" class="{%- if childlink.active %}menu_item_active{% endif %} w-full text-sm font-semibold" href="{{childlink.url}}">
                         {{- childlink.title | escape -}}
                         </a>
                         {% if childlink.links != blank %}
@@ -30,7 +36,7 @@
                                 <ul class="w-full pl-3 pr-2 flex flex-col pt-2">
                                     {% for sub_childlink in childlink.links %}
                                         <li class="border-l pl-3 py-2">
-                                            <a style="color:{{ settings.header_submenu_text_color }}" class="w-full text-sm" href="{{sub_childlink.url}}">
+                                            <a style="color:{{ settings.header_submenu_text_color }}" class="{%- if sub_childlink.active %}menu_item_active{% endif %} w-full text-sm" href="{{sub_childlink.url}}">
                                                 {{- sub_childlink.title | escape -}}
                                             </a>
                                         </li>

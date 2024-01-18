@@ -1,3 +1,21 @@
 {
-    
-}
+    "general": {
+      "settings": {
+        "menu_title": "メニュー"
+      },
+      "cart": {
+        "empty": "カートは空です",
+        "continue_shopping": "ショッピングを続ける",
+        "login": {
+          "title": "ログイン",
+          "paragraph_html": "ログイン段落"
+        },
+        "title": "ショッピングカート",
+        "header_title": "カート"
+      },
+      "accessibility": {
+        "close": "閉じる"
+      }
+    }
+  }
+  

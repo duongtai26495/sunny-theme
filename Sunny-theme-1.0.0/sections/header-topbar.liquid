@@ -1,7 +1,7 @@
 <div class="sn-topbar w-full">
   <div
     style="background-color: {{settings.topbar_background}};"
-    class="lg:justify-{{section.settings.content_position}} flex flex-col lg:flex-row items-center p-2 gap-1 w-full section-{{ section.settings.container }} h-fit lg:max-h-[40px] mx-auto"
+    class="lg:justify-{{section.settings.content_position}} flex flex-col lg:flex-row items-center p-2 gap-3 lg:gap-5 w-full section-{{ section.settings.container }} h-fit lg:max-h-[40px] mx-auto"
   >
     {% for block in section.blocks %}
       {% case block.type %}
@@ -18,7 +18,7 @@
                 <div class="w-fit h-fit flex items-center gap-1">
                   {% render 'icons', type:'phone', color:{{settings.topbar_text}} -%}
                   <a class="underline text-[12px] lg:text-sm" href="tel:+{{ settings.store_phone_number }}">
-                    {{- settings.phone_label -}}
+              {% if settings.phone_label != blank and block.settings.is_show_label == false %}{{- settings.phone_label -}}{% endif %}
                   </a>
                 </div>
               {% endif %}
@@ -28,7 +28,7 @@
                 <div class="w-fit h-fit flex items-center gap-1">
                   {% render 'icons', type:'whatsapp', color:{{settings.topbar_text}} -%}
                   <a class="underline text-[12px] lg:text-sm" href="https://wa.me/{{settings.whatsapp_link}}">
-                    {{- settings.whatsapp_label -}}
+              {% if settings.whatsapp_label != blank and block.settings.is_show_label == false %}{{- settings.whatsapp_label -}}{% endif %}
                   </a>
                 </div>
               {% endif %}
@@ -38,8 +38,8 @@
                 <div class="w-fit h-fit flex items-center gap-1">
                   {% render 'icons', type:'email', color:{{settings.topbar_text}} -%}
                   <a class="underline text-[12px] lg:text-sm" href="mailto:{{ settings.store_email }}">
-                    {{- settings.mail_label -}}
-                  </a>
+                    {% if settings.mail_label != blank and block.settings.is_show_label == false %}{{- settings.mail_label -}}{% endif %}                  
+                    </a>
                 </div>
               {% endif %}
             {% endif %}
@@ -50,7 +50,7 @@
               <div class="w-fit h-fit">
                 <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.facebook_link}}">
                   {% render 'icons', type:'facebook', color:{{settings.topbar_text}} -%}
-                  {% if settings.facebook_label != blank %}{{- settings.facebook_label -}}{% endif %}
+                  {% if settings.facebook_label != blank and block.settings.is_show_label == false %}{{- settings.facebook_label -}}{% endif %}
                 </a>
               </div>
             {% endif %}
@@ -58,7 +58,7 @@
               <div class="w-fit h-fit">
                 <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.instagram_link}}">
                   {% render 'icons', type:'instagram', color:{{settings.topbar_text}} -%}
-                  {% if settings.instagram_label != blank %}{{- settings.instagram_label -}}{% endif %}
+                  {% if settings.instagram_label != blank and block.settings.is_show_label == false %}{{- settings.instagram_label -}}{% endif %}
                 </a>
               </div>
             {% endif %}
@@ -66,7 +66,7 @@
               <div class="w-fit h-fit">
                 <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.twitter_link}}">
                   {% render 'icons', type:'twitter', color:{{settings.topbar_text}} -%}
-                  {% if settings.twitter_label != blank %}{{- settings.twitter_label -}}{% endif %}
+                  {% if settings.twitter_label != blank and block.settings.is_show_label == false %}{{- settings.twitter_label -}}{% endif %}
                 </a>
               </div>
             {% endif %}
@@ -74,7 +74,7 @@
               <div class="w-fit h-fit">
                 <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.pinterest_link}}">
                   {% render 'icons', type:'pinterest', color:{{settings.topbar_text}} -%}
-                  {% if settings.pinterest_label != blank %}{{- settings.pinterest_label -}}{% endif %}
+                  {% if settings.pinterest_label != blank and block.settings.is_show_label == false %}{{- settings.pinterest_label -}}{% endif %}
                 </a>
               </div>
             {% endif %}
@@ -205,6 +205,12 @@
           "default": false,
           "label": "Show store email",
           "info": "Add your email address in Store contact setting"
+        },
+        {
+          "type": "checkbox",
+          "default": false,
+          "id": "is_show_label",
+          "label": "Ony show icons"
         }
       ]
     },
@@ -219,6 +225,12 @@
           "id": "is_show_social",
           "label": "Show social media icons",
           "info": "Add information in Store contact setting"
+        },
+        {
+          "type": "checkbox",
+          "default": true,
+          "id": "is_show_label",
+          "label": "Ony show icons"
         }
       ]
     },
@@ -229,13 +241,13 @@
       "settings": [
         {
           "type": "checkbox",
-          "default": false,
+          "default": true,
           "label": "Show countries seletor",
           "id": "is_show_countries"
         },
         {
           "type": "checkbox",
-          "default": false,
+          "default": true,
           "label": "Show languages seletor",
           "id": "is_show_languages"
         }

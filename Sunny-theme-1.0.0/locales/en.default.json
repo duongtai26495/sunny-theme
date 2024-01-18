@@ -2,6 +2,20 @@
   "general":{
     "settings":{
       "menu_title":"Menu"
+    },
+    "cart":{
+      "empty":"Your cart is empty",
+      "continue_shopping":"Continue shopping",
+      "login":{
+        "title":"Login",
+        "paragraph_html":"Login paragraph"
+      },
+      "title":"Shopping Cart",
+      "header_title":"Cart"
+    },
+    "accessibility":
+    {
+      "close":"Close"
     }
   }
 }

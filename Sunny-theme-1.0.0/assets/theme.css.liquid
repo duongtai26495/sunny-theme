@@ -14,7 +14,23 @@ header .list-submenu.submenu_level-1:not(.mega-menu), header .list-submenu-child
     .section-container{max-width:{{settings.template_fluid_width}}px;}
     .section-narrow_width{max-width:{{settings.template_width}}px;}
     .section-full_width{max-width:100%;}
+    .sn-primary_button:hover {
+        background-color:{{settings.primary_button_hover}};
+        border-color:{{settings.primary_outline_hover}};
+        color:{{settings.primary_text_hover}};
+    }
 }
 
 .disclosure__list-wrapper.countries_list,
 .disclosure__list-wrapper.languages_list {background-color: {{settings.topbar_background}};}
+
+
+.sn-primary_button {
+    background-color:{{settings.primary_button}};
+    border-color:{{settings.primary_outline}};
+    color:{{settings.primary_text}};
+}
+
+.mobile-menu .list-menu--link:not(.menu_item_active){
+    color: {{ settings.header_mega_text }};
+}

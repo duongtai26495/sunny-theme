@@ -17,11 +17,11 @@
     {% render 'icon-caret' %}
   </button>
   <div class="disclosure__list-wrapper countries_list absolute left-0 top-full z-10" hidden>
-    <ul id="{{ localPosition }}List" role="list" class="disclosure__list border rounded p-3">
+    <ul id="{{ localPosition }}List" role="list" class="disclosure__list border rounded p-1">
       {%- for country in localization.available_countries -%}
-        <li class="disclosure__item" tabindex="-1">
+        <li class="disclosure__item my-2" tabindex="-1">
           <a
-            class="link link--text disclosure__link caption-large focus-inset{% if country.iso_code == localization.country.iso_code %}  flex whitespace-nowrap flex-nowrap disclosure__link--active{% endif %}"
+            class="link link--text disclosure__link caption-large focus-inset whitespace-nowrap text-sm flex  lg:hover:bg-slate-200 transition-all p-2{% if country.iso_code == localization.country.iso_code %} whitespace-nowrap flex-nowrap disclosure__link--active{% endif %}"
             href="#"
             {% if country.iso_code == localization.country.iso_code %}
               aria-current="true"
@@ -56,11 +56,11 @@
     {% render 'icon-caret' %}
   </button>
   <div class="disclosure__list-wrapper languages_list absolute left-0 top-full z-10" hidden>
-    <ul id="{{ localPosition }}List" role="list" class="disclosure__list border rounded p-3">
+    <ul id="{{ localPosition }}List" role="list" class="disclosure__list border rounded p-1">
       {%- for language in localization.available_languages -%}
-        <li class="disclosure__item" tabindex="-1">
+        <li class="disclosure__item my-2" tabindex="-1">
           <a
-            class="link link--text disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} whitespace-nowrap disclosure__link--active{% endif %} focus-inset"
+            class="link link--text disclosure__link caption-large whitespace-nowrap text-sm lg:hover:bg-slate-200 transition-all p-2{% if language.iso_code == localization.language.iso_code %} whitespace-nowrap disclosure__link--active{% endif %} focus-inset"
             href="#"
             hreflang="{{ language.iso_code }}"
             lang="{{ language.iso_code }}"

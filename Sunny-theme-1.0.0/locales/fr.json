@@ -1,3 +1,21 @@
 {
-    
-}
+    "general": {
+      "settings": {
+        "menu_title": "Menu"
+      },
+      "cart": {
+        "empty": "Votre panier est vide",
+        "continue_shopping": "Continuer vos achats",
+        "login": {
+          "title": "Connexion",
+          "paragraph_html": "Paragraphe de connexion"
+        },
+        "title": "Panier d'achat",
+        "header_title": "Panier"
+      },
+      "accessibility": {
+        "close": "Fermer"
+      }
+    }
+  }
+  

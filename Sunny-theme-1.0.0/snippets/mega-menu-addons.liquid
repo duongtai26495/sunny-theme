@@ -1,0 +1,23 @@
+{% case block.type %}
+  {% when 'collection' %}
+    {% assign collection = block.settings.mega_collection %}
+    {% assign products = collection.products %}
+    <div class="mega_menu-collection swiper w-full mx-auto relative" 
+    duration="{{ block.settings.duration }}"
+    products-per-view="{{block.settings.products_per_view}}">
+      <div class="swiper-wrapper flex justify-start">
+        {% for product in products %}
+          <div class="swiper-slide">
+            {% render 'product-card', product: product %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  {% when 'images' %}
+
+  {% when 'products' %}
+
+  {% when 'collection_list' %}
+
+{% endcase %}

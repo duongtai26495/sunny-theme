@@ -543,6 +543,26 @@
                 "default": "#ffffff",
                 "label": "Primary button title"
             },
+
+            {
+                "type": "color",
+                "id": "primary_button_hover",
+                "default": "#ffffff",
+                "label": "Primary button"
+            },
+            {
+                "type": "color",
+                "id": "primary_outline_hover",
+                "default": "#ffffff",
+                "label": "Primary button outline"
+            },
+            {
+                "type": "color",
+                "id": "primary_text_hover",
+                "default": "#000000",
+                "label": "Primary button title"
+            },
+
             {
                 "type": "color",
                 "id": "secondary_button",
@@ -622,6 +642,65 @@
         ]
     },
     {
+        "name": "Product card",
+        "settings": [
+            {
+                "type": "select",
+                "label": "Product card style",
+                "id": "product_card_style",
+                "options": [
+                    {
+                        "label":"Style 1",
+                        "value": "style-1"
+                    },
+                    {
+                        "label":"Style 2",
+                        "value": "style-2"
+                    },
+                    {
+                        "label":"Style 3",
+                        "value": "style-3"
+                    }
+                ],
+                "default": "style-1"
+            },
+            {
+                "type": "select",
+                "label": "Image aspect ratio",
+                "id": "image_ratio",
+                "options": [
+                    {
+                        "label":"Square (1:1)",
+                        "value": "square"
+                    },
+                    {
+                        "label":"Verical (3:4)",
+                        "value": "vertical"
+                    },
+                    {
+                        "label":"Verical (6:19)",
+                        "value": "vertical-2"
+                    },
+                    {
+                        "label":"Horizontal (4:3)",
+                        "value": "horizontal"
+                    },
+                    {
+                        "label":"Horizontal (9:16)",
+                        "value": "horizontal-2"
+                    }
+                ],
+                "default": "vertical"
+            },
+            {
+                "type": "checkbox",
+                "label": "Show add to cart button",
+                "default": true,
+                "id": "is_show_atc"
+            }
+        ]
+    },
+    {
         "name": "Store contact",
         "settings": [
             {
@@ -685,7 +764,7 @@
             },
             {
                 "type": "text",
-                "default": "X (twitter)",
+                "default": "Twitter",
                 "id": "twitter_label",
                 "label": "X (twitter) label"
             },

@@ -1,10 +1,11 @@
-<div class="absolute left-0 top-full list-submenu submenu_level-1 mega-menu mega-menu-wrapper shadow w-full mt-2">
-  <div class="flex justify-between gap-10 items-start max-h-[60vh] min-h-64 mx-auto pt-2 section-{{section.settings.container}}">
-    <ul class="flex justify-between gap-10 max-w-[50%]">
+<div class="absolute left-0 top-full list-submenu submenu_level-1 mega-menu mega-menu-wrapper shadow w-full mt-[.5px]">
+  <div class="flex justify-between gap-10 items-start max-h-[60vh] min-h-64 mx-auto relative pt-2 section-{{section.settings.container}}">
+    {% if link.links != blank %}
+    <ul class="flex justify-start gap-10 w-full flex-1">
       {% for childlink in link.links %}
-        <li class="p-2 relative list-menu--sub w-fit">
+        <li class="p-2 relative list-menu--sub w-fit mr-5">
           <a
-            class="whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-base font-semibold justify-between"
+            class="{%- if childlink.active %}menu_item_active{% endif %} whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-base font-semibold justify-between"
             href="{{ childlink.url }}"
           >
             {{- childlink.title | escape -}}
@@ -13,7 +14,7 @@
             {% for sub_childlink in childlink.links %}
               <li class="py-2 relative list-menu--sub w-fit">
                 <a
-                  class="whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-sm justify-between"
+                  class="{%- if sub_childlink.active %}menu_item_active{% endif %} whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-sm justify-between"
                   href="{{ sub_childlink.url }}"
                 >
                   {{- sub_childlink.title | escape -}}
@@ -24,6 +25,9 @@
         </li>
       {% endfor %}
     </ul>
-    <div class="megamenu-addon max-w-[50%]"></div>
+    {% endif %}
+  <div class="mega_menu-addons w-full flex-1 overflow-hidden">
+        {% render 'mega-menu-addons', block:block %}
+    </div>
   </div>
 </div>

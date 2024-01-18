@@ -1,2 +1,33 @@
 <div class="cart-drawer fixed right-0 top-0 w-[400px] max-w-[80vw] md:max-w-[500px] z-[99] h-full bg-white border-l-2">
+  <cart-drawer class="cart-drawer__wrapper h-full w-full{% if cart == empty %} is-empty{% endif %} p-2 block relative">
+    <div class="cart-drawer__header">
+          <h2 class="cart-drawer__heading w-full text-start block text-xl">{{ 'general.cart.title' | t }}</h2>
+          </div>
+    {%- if cart == empty -%}
+      <div class="cart-drawer__inner-empty w-full h-full flex justify-center items-center">
+        <div class="cart-drawer__warnings text-center {% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
+          <div class="cart-drawer__empty-content">
+            <h2 class="cart__empty-text text-lg">{{ 'general.cart.empty' | t }}</h2>
+            <a href="{{ routes.all_products_collection_url }}" class="mt-2 p-2 rounded block sn-button sn-primary_button">
+              {{ 'general.cart.continue_shopping' | t }}
+            </a>
+
+            {%- if shop.customer_accounts_enabled and customer == null -%}
+              <p class="cart__login-title h3">{{ 'general.cart.login.title' | t }}</p>
+              <p class="cart__login-paragraph">
+                {{ 'general.cart.login.paragraph_html' | t: link: routes.account_login_url }}
+              </p>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- if settings.cart_drawer_collection != blank -%}
+          <div class="cart-drawer__collection">
+            {% render 'card-collection', card_collection: settings.cart_drawer_collection, columns: 1 %}
+          </div>
+        {%- endif -%}
+      </div>
+      {% else %}
+      
+        {%- endif -%}
+  </cart-drawer>
 </div>

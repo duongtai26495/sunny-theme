@@ -14,7 +14,22 @@
                     "type": "text"
                 }
             },
-            "block_order": ["block-section-1"]
+            "block_order": ["block-section-1", "block-section-2"]
+          },
+          "top-bar":{
+            "type": "header-topbar",
+            "blocks": {
+              "social_media":{
+                "type": "social_media"
+              },
+              "international":{
+                "type": "international"
+              },
+              "contact":{
+                "type": "contact"
+              }
+            },
+            "block_order": ["social_media","international","contact"]
           },
         "729ed7ff-cd70-41ab-97b7-db284c5764d5": {
             "type": "header",
@@ -36,6 +51,7 @@
     "order": [
         "729ed7ff-cd70-41ab-97b7-db284c5764da",
         "729ed7ff-cd70-41ab-97b7-db284c5764d5",
+        "top-bar",
         "729ed7ff-cd70-41ab-97b7-db284caa4ad5"
     ]
   }

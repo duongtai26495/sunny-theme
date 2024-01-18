@@ -1,0 +1,15 @@
+<div class="w-full h-full p-3">
+  <div class="sn-p_card-wrapper shadow border">
+    <div class="sn-p_card-media" image-ratio="{{ settings.image_ratio }}">
+        <a href="{{product.url}}" >
+            {% render 'responsive-image', image:product.featured_image, div_class:'w-full overflow-hidden block', image_ratio:{{ settings.image_ratio }}, image_class:'block object-cover object-center w-full h-full' %}
+            </a>
+    </div>
+    <div class="sn-p_card-infor flex flex-col my-3">
+      <h3 class="w-full text-xl text-center my-1">{{ product.title }}</h3>
+      <div class="w-full text-center">
+          <p class="text-sm font-semibold">{{ product.price }}</p>
+      </div>
+    </div>
+  </div>
+</div>

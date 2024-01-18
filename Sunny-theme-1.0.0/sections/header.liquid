@@ -117,53 +117,50 @@
         {% render 'menu-item', section: section, style: 'justify-center w-full py-5' %}
     {% endcase %}
   </div>
-    {% case section.settings.header_mobile_type %}
-      {% when '2line_menu_bottom' %}
-        <div class="block lg:hidden border-b py-2">
-          {%- if request.page_type == 'index' -%}
-            <h1 class="header__head w-full text-center">
-          {% else %}
-            <div class="header__head w-full text-center">
-          {%- endif -%}
-          {% render 'header-logo', style: 'header_mobile' %}
-          {%- if request.page_type == 'index' -%}
-            </h1>
-          {% else %}
-            </div>
-          {%- endif -%}
-          <div class="w-full flex items-center">
-            {% render 'hamburger-button', style: '2l' %}
-            <div class="w-full px-5">
-              {% render 'header-search-icon', type: 'icon' %}
-            </div>
-            {% render 'header-icons', type: 'others' %}
+  {% case section.settings.header_mobile_type %}
+    {% when '2line_menu_bottom' %}
+      <div class="block lg:hidden border-b py-2">
+        {%- if request.page_type == 'index' -%}
+          <h1 class="header__head w-full text-center">
+        {% else %}
+          <div class="header__head w-full text-center">
+        {%- endif -%}
+        {% render 'header-logo', style: 'header_mobile' %}
+        {%- if request.page_type == 'index' -%}
+          </h1>
+        {% else %}
           </div>
+        {%- endif -%}
+        <div class="w-full flex items-center">
+          {% render 'hamburger-button', style: '2l' %}
+          <div class="w-full px-5">
+            {% render 'header-search-icon', type: 'icon' %}
+          </div>
+          {% render 'header-icons', type: 'others' %}
         </div>
-      {% when 'menu_left_logo_center' %}
-        <div class="w-full flex lg:hidden items-center  py-2">
-          {% render 'hamburger-button' %}
+      </div>
+    {% when 'menu_left_logo_center' %}
+      <div class="w-full flex lg:hidden items-center  py-2">
+        {% render 'hamburger-button' %}
 
-          {%- if request.page_type == 'index' -%}
-            <h1 class="header__head w-1/3 text-center">
-          {% else %}
-            <div class="header__head w-1/3 text-center">
-          {%- endif -%}
-          {% render 'header-logo', style: 'header_mobile' %}
-          {%- if request.page_type == 'index' -%}
-            </h1>
-          {% else %}
-            </div>
-          {%- endif -%}
-          <div class="w-1/3 text-end header__head flex justify-end gap-3 lg:gap-8">
-           
-            {% render 'header-icons', type: 'search' %}
-            {% render 'header-icons', type: 'others' %}
-            
+        {%- if request.page_type == 'index' -%}
+          <h1 class="header__head w-1/3 text-center">
+        {% else %}
+          <div class="header__head w-1/3 text-center">
+        {%- endif -%}
+        {% render 'header-logo', style: 'header_mobile' %}
+        {%- if request.page_type == 'index' -%}
+          </h1>
+        {% else %}
           </div>
+        {%- endif -%}
+        <div class="w-1/3 text-end header__head flex justify-end gap-3 lg:gap-8">
+          {% render 'header-icons', type: 'search' %}
+          {% render 'header-icons', type: 'others' %}
         </div>
-    {% endcase %}
+      </div>
+  {% endcase %}
 </header>
-
 {% render 'mobile-menu-drawer' %}
 
 {% schema %}
@@ -260,6 +257,12 @@
       "label": "Menu"
     },
     {
+      "type": "link_list",
+      "id": "mobile_menu",
+      "default": "main-menu",
+      "label": "Mobile menu"
+    },
+    {
       "type": "select",
       "id": "menu_type_desktop",
       "label": "Menu type",
@@ -308,6 +311,63 @@
         }
       ],
       "default": "input"
+    }
+  ],
+  "blocks": [
+    {
+      "name":"Collection",
+      "type": "collection",
+      "settings": [
+        {
+          "type": "text",
+          "id": "for_item",
+          "default": "Shop",
+          "label": "Menu item title",
+          "placeholder": "Home, /mens, etc"
+        },
+        {
+          "type": "select",
+          "id":"item_type",
+          "options": [
+            {
+              "value": "title",
+              "label":"Menu title"
+            },
+            {
+              "value": "handle",
+              "label":"Menu handle"
+            }
+          ],
+          "default": "title",
+          "label": "For item",
+          "info": "How to get handle ? Check here."
+        },
+        {
+          "type": "collection",
+          "id": "mega_collection",
+          "label": "Select collection"
+        },
+        {
+          "type": "range",
+          "id": "duration",
+          "min": 3,
+          "max": 10,
+          "default": 5,
+          "step": 1,
+          "unit": "s",
+          "info": "Product conversion speed",
+          "label": "Duration"
+        },
+        {
+          "type": "range",
+          "id": "products_per_view",
+          "min": 1,
+          "max": 4,
+          "default": 2,
+          "step": 1,
+          "label": "Product per row"
+        }
+      ]
     }
   ],
   "presets": [

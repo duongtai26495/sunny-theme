@@ -1,11 +1,11 @@
-<div class="sidebar-icon fixed {{ section.settings.position }}-0 {% case section.settings.position %} {% when 'left' %}rounded-r-md{% when 'right' %}rounded-l-md{% endcase %} top-1/2 justify-center gap-5 flex flex-col header-icons bg-white border px-2 py-4">
+<div class="sidebar-icon fixed items-center bg-opacity-65 {{ section.settings.position }}-0 {% case section.settings.position %} {% when 'left' %}rounded-r-md{% when 'right' %}rounded-l-md{% endcase %} top-1/2 justify-center gap-5 flex flex-col header-icons  border px-2 py-4" style="background-color: {{settings.primary_color}};">
   {% if section.settings.is_show_compare %}
     {%- assign compare_url = settings.comparison_page.url -%}
     <a class="comparison-icon" href="{{compare_url}}">
       {% render 'icons', type: 'compare' %}
     </a>
   {% endif %}
-  <div class="border h-[1px]"></div>
+  <div class="border h-[1px] w-full"></div>
   {% if section.settings.is_show_wishlist %}
     {%- assign wishlist_url = settings.wishlist_page.url -%}
     <a class="wishlist-icon" href="{{wishlist_url}}">
