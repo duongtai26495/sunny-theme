@@ -1,16 +1,10 @@
 
 .swiper-button:after {
     font-size: 15px !important;
-    color: white;
+    color: black;
+    font-weight: 600;
 }
 
-.swiper-button-prev {
-    left: 0 !important;
-}
-
-.swiper-button-next {
-    right: 0 !important;
-}
 
 .sn-button:not(.sn-primary_button) {
     padding: 3px 7px;
@@ -173,4 +167,18 @@
 .sn-p_card-media[image-ratio="horizontal-2"] .sn-image-wrapper
 {
     aspect-ratio: 16/9;
+}
+
+.collection-card .sn-p_card-media[image-style="rounded"] .sn-image-wrapper{
+    border-radius: .5rem;
+}
+
+.collection-card .sn-p_card-media[image-style="circle"] .sn-image-wrapper{
+    border-radius: 9999px;
+}
+
+.swiper-button {
+    height: 40px !important;
+    width: 40px !important;
+    border-radius: 50%;
 }

@@ -1,7 +1,7 @@
 <div class="absolute left-0 top-full list-submenu submenu_level-1 mega-menu mega-menu-wrapper shadow w-full mt-[.5px]">
-  <div class="flex justify-between gap-10 items-start max-h-[60vh] min-h-64 mx-auto relative pt-2 section-{{section.settings.container}}">
+  <div class="flex justify-between gap-10 items-start max-h-[500px] min-h-64 mx-auto relative pt-2 section-{{section.settings.container}}">
     {% if link.links != blank %}
-    <ul class="flex justify-start gap-10 w-full flex-1">
+    <ul class="flex justify-start gap-10 w-1/2 flex-1">
       {% for childlink in link.links %}
         <li class="p-2 relative list-menu--sub w-fit mr-5">
           <a
@@ -26,7 +26,13 @@
       {% endfor %}
     </ul>
     {% endif %}
-  <div class="mega_menu-addons w-full flex-1 overflow-hidden">
+  <div class="mega_menu-addons 
+{% case block.settings.slides_per_view %} 
+{% when 1 %}max-w-[20%]
+{% when 2 %}max-w-[35%]
+{% else %}max-w-[50%]
+{% endcase %}
+  flex-1 overflow-hidden mx-auto h-full">
         {% render 'mega-menu-addons', block:block %}
     </div>
   </div>

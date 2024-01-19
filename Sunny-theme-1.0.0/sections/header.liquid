@@ -315,37 +315,173 @@
   ],
   "blocks": [
     {
-      "name":"Collection",
-      "type": "collection",
+      "name": "Collections",
+      "type": "collections",
       "settings": [
+        {
+          "type": "header",
+          "content": "Collection list"
+        },
         {
           "type": "text",
           "id": "for_item",
           "default": "Shop",
           "label": "Menu item title",
-          "placeholder": "Home, /mens, etc"
+          "placeholder": "Home, /mens, etc",
+          "info": "How to get handle url ?"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Heading for section",
+          "placeholder": "Heading"
+        },
+        
+        {
+          "type": "checkbox",
+          "id":"is_show_heading",
+          "label": "Show heading",
+          "default": true
         },
         {
           "type": "select",
-          "id":"item_type",
+          "id": "content_alignment",
+          "label": "Content alignment",
+          "options": [
+              {
+                "label":"Left",
+                "value": "start"
+              },
+              {
+                "label":"Center",
+                "value": "center"
+              },
+              {
+                "label":"Right",
+                "value": "end"
+              }
+          ],
+          "default": "start"
+        },
+        {
+          "type": "select",
+          "id": "item_type",
           "options": [
             {
               "value": "title",
-              "label":"Menu title"
+              "label": "Menu title"
             },
             {
               "value": "handle",
-              "label":"Menu handle"
+              "label": "Menu handle"
             }
           ],
           "default": "title",
           "label": "For item",
-          "info": "How to get handle ? Check here."
+          "info": "Use handle will work properly with multiple languages"
+        },
+        {
+          "type": "header",
+          "content": "Collections"
         },
         {
           "type": "collection",
-          "id": "mega_collection",
-          "label": "Select collection"
+          "id": "collection-1",
+          "label": "Select collection 1"
+        },
+        {
+          "type": "collection",
+          "id": "collection-2",
+          "label": "Select collection 2"
+        },
+        {
+          "type": "collection",
+          "id": "collection-3",
+          "label": "Select collection 3"
+        },
+        {
+          "type": "collection",
+          "id": "collection-4",
+          "label": "Select collection 4"
+        },
+        {
+          "type": "collection",
+          "id": "collection-5",
+          "label": "Select collection 5"
+        },
+        {
+          "type": "collection",
+          "id": "collection-6",
+          "label": "Select collection 6"
+        },
+        {
+          "type": "collection",
+          "id": "collection-7",
+          "label": "Select collection 7"
+        },
+        {
+          "type": "collection",
+          "id": "collection-8",
+          "label": "Select collection 8"
+        },
+        {
+          "type": "select",
+          "label": "Image style",
+          "options": [
+            {
+              "label": "rounded",
+              "value": "rounded"
+            },
+            {
+              "label": "Circle",
+              "value": "circle"
+            }
+          ],
+          "default": "rounded",
+          "id": "image_style"
+        },
+        {
+          "type": "select",
+          "id": "title_position",
+          "label": "Title position",
+          "options": [
+            {
+              "label": "Left",
+              "value": "start"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "end"
+            }
+          ],
+          "default": "start"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_count",
+          "label": "Show product count",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Slide controls"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_auto_play",
+          "label": "Auto slide",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "default": true,
+          "label": "Show pagination dots",
+          "id": "is_show_pagination"
         },
         {
           "type": "range",
@@ -360,12 +496,96 @@
         },
         {
           "type": "range",
-          "id": "products_per_view",
+          "id": "slides_per_view",
           "min": 1,
           "max": 4,
           "default": 2,
           "step": 1,
           "label": "Product per row"
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "type": "images",
+      "settings": [
+        {
+          "type": "text",
+          "id": "for_item",
+          "default": "Shop",
+          "label": "Menu item title",
+          "placeholder": "Home, /mens, etc",
+          "info": "How to get handle url ?"
+        },
+        {
+          "type": "select",
+          "id": "item_type",
+          "options": [
+            {
+              "value": "title",
+              "label": "Menu title"
+            },
+            {
+              "value": "handle",
+              "label": "Menu handle"
+            }
+          ],
+          "default": "title",
+          "label": "For item",
+          "info": "Use handle will work properly with multiple languages"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-1",
+          "label": "Select an image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-2",
+          "label": "Select an image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-3",
+          "label": "Select an image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-4",
+          "label": "Select an image"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_slide",
+          "label": "Enable slider",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "duration",
+          "min": 3,
+          "max": 10,
+          "default": 5,
+          "step": 1,
+          "unit": "s",
+          "info": "Images conversion speed",
+          "label": "Duration"
+        },
+        {
+          "type": "select",
+          "id": "slides_per_view",
+          "options": [
+            {
+              "label": "Single",
+              "value": "1"
+            },
+            {
+              "label": "Double",
+              "value": "2"
+            }
+          ],
+          "default": "1",
+          "label": "Images per row"
         }
       ]
     }

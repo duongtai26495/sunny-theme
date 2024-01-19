@@ -1,23 +1,55 @@
+
 {% case block.type %}
-  {% when 'collection' %}
-    {% assign collection = block.settings.mega_collection %}
-    {% assign products = collection.products %}
-    <div class="mega_menu-collection swiper w-full mx-auto relative" 
+{% when 'collections' %}
+    {% liquid
+      assign collection_list_id = 'collection-1,collection-2,collection-3,collection-4,collection-5,collection-6,collection-7,collection-8' | split: ','
+      assign content_empty = true
+
+      for collection_id in collection_list_id
+        if block.settings[collection_id] != blank
+          assign content_empty = false
+        endif
+      endfor
+    %}
+
+    {% unless content_empty %} 
+      
+    <div class="mega_menu-collections swiper swiper-container w-full mx-auto relative flex items-center gap-5" 
     duration="{{ block.settings.duration }}"
-    products-per-view="{{block.settings.products_per_view}}">
+    slides-per-view="{{ block.settings.slides_per_view }}"
+    data-auto-play="{{ block.settings.is_auto_play }}"
+    data-pagination="{{ block.settings.is_show_pagination}}">
+      {% if block.settings.is_show_heading %}
+        {% render 'theme-heading', block:block%}
+      {% endif %}
       <div class="swiper-wrapper flex justify-start">
-        {% for product in products %}
-          <div class="swiper-slide">
-            {% render 'product-card', product: product %}
+        {% for collection_id in collection_list_id %}
+          {% liquid
+          if block.settings[collection_id] == blank
+          continue
+          endif
+          assign collection_handle = block.settings[collection_id]
+          assign collection = collections[collection_handle]
+          %}
+          <div class="swiper-slide py-4">
+            {% render 'collection-card', collection: collection, block:block %}
+            </div>
+          {% endfor %}
           </div>
-        {% endfor %}
-      </div>
+          {% if block.settings.is_show_pagination %}
+          <div class="swiper-pagination"></div>
+          {% endif %}
+          
     </div>
-
-  {% when 'images' %}
-
+        {% endunless %} 
+  {% when 'images' %} 
+    <div class="mega-menu-images {% if block.settings.is_slide %}swiper{% endif %}
+      duration="{{ block.settings.duration }}"
+      slides-per-view="{{block.settings.slides_per_view}}">
+      
+    </div>
   {% when 'products' %}
-
-  {% when 'collection_list' %}
-
+    Products
+  {% when 'product_list' %}
+    Product list
 {% endcase %}

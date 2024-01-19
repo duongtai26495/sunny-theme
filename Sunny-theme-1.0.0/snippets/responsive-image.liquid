@@ -15,7 +15,7 @@
         alt="{{ alt | default: image.alt | escape }}"
         loading="lazy"
         image-ratio="{{ aspect_ratio }}"
-        class="sn-image{{ image_class }}"
+        class="sn-image {{ image_class }}"
         width="{{ image.width }}"
         height="{{ image.height }}"
         {{ image_attributes }}

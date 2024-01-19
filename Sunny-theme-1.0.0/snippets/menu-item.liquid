@@ -1,3 +1,4 @@
+{%  assign iso =  request.locale.iso_code %}
 <nav class="header__inline-menu {{style}} flex">
   {%- if section.settings.menu != blank %}
     <ul class="list-menu list-menu--inline items-center flex-wrap flex dropdown-menu">
@@ -6,11 +7,18 @@
           {% assign isShowMega = false %}
           {% assign currentBlock = blank %}
           {% for block in section.blocks %}
+            
             {% assign item_value = block.settings.for_item %}
             {% assign item_type = block.settings.item_type %}
+            
             {% case item_type %}
               {% when 'handle' %}
-                {% if item_value == link.handle %}
+                {% if request.locale.primary %}
+                  {% assign item_w_iso = '/' | append: item_value %}
+                  {% else %}
+                  {% assign item_w_iso = '/' | append: iso | append: '/' | append: item_value %}
+                {% endif %}
+                {% if item_w_iso == link.url %}
                   {% assign isShowMega = true %}
                   {% assign currentBlock = block %}
                 {% endif %}
@@ -27,7 +35,6 @@
               href="{{ link.url }}"
             >
               {{- link.title | escape -}}
-
               {% if section.settings.is_show_arrow or isShowMega %}
                 <span class="caret-submenu mt-1">
                   {% render 'icon-caret' %}

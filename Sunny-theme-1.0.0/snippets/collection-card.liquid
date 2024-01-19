@@ -1,0 +1,22 @@
+
+<div class="collection-card p-5">
+  <div class="collection-card-wrapper">
+    <div class="sn-p_card-media" image-ratio="square" image-style="{{ block.settings.image_style }}">
+      <a href="{{ collection.url }}">
+        {% render 'responsive-image',
+          image: collection.featured_image,
+          div_class: "w-full overflow-hidden block sn-image-wrapper",
+          image_ratio: 'square',
+          image_class: 'object-cover object-center w-full h-full'
+        %}
+        <div class="w-full flex items-center">
+            <h3 class="text-md my-2 w-full font-bold text-{{block.settings.title_position}}">{{ collection.title }}  
+                {% if block.settings.is_show_count %}
+                <sup>{{ collection.all_products_count }}</sup>
+                {% endif %}     
+            </h3>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
