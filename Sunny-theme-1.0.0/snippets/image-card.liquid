@@ -1,11 +1,8 @@
-
-<div class="collection-card p-5">
-  <div class="collection-card-wrapper">
-    <div class="sn-card_media" image-ratio="square" image-style="{{ block.settings.image_style }}">
-      <a href="{{ collection.url }}">
+<div class="w-full">
+    <a href="{{ image_url }}">
         {% render 'responsive-image',
-          image: collection.featured_image,
-          div_class: "w-full overflow-hidden block",
+          image: image,
+          div_class: "w-full overflow-hidden block sn-image-wrapper",
           image_ratio: 'square',
           image_class: 'object-cover object-center w-full h-full'
         %}
@@ -17,6 +14,4 @@
             </h3>
         </div>
       </a>
-    </div>
-  </div>
 </div>

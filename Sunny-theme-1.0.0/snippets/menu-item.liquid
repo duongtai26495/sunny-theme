@@ -1,41 +1,42 @@
-{%  assign iso =  request.locale.iso_code %}
+{% assign iso =  request.locale.iso_code %}
 <nav class="header__inline-menu {{style}} flex">
   {%- if section.settings.menu != blank %}
     <ul class="list-menu list-menu--inline items-center flex-wrap flex dropdown-menu">
       {%- for link in section.settings.menu.links -%}
-        <li class="w-fit list-menu-item pr-4 mr-2 {% if section.settings.menu_type_desktop == 'default' %}relative{% endif %}">
-          {% assign isShowMega = false %}
-          {% assign currentBlock = blank %}
-          {% for block in section.blocks %}
-            
-            {% assign item_value = block.settings.for_item %}
-            {% assign item_type = block.settings.item_type %}
-            
-            {% case item_type %}
-              {% when 'handle' %}
-                {% if request.locale.primary %}
-                  {% assign item_w_iso = '/' | append: item_value %}
-                  {% else %}
-                  {% assign item_w_iso = '/' | append: iso | append: '/' | append: item_value %}
-                {% endif %}
-                {% if item_w_iso == link.url %}
-                  {% assign isShowMega = true %}
-                  {% assign currentBlock = block %}
-                {% endif %}
-              {% when 'title' %}
-                {% if item_value == link.title %}
-                  {% assign isShowMega = true %}
-                  {% assign currentBlock = block %}
-                {% endif %}
-            {% endcase %}
-          {% endfor %}
-          {% if link.links != blank or isShowMega %}
+        {% assign hasMegaBlock = false %}
+        {% assign currentBlock = blank %}
+        {% for block in section.blocks %}
+          
+          {% assign item_value = block.settings.for_item %}
+          {% assign item_type = block.settings.item_type %}
+          
+          {% case item_type %}
+            {% when 'handle' %}
+              {% if request.locale.primary %}
+                {% assign item_w_iso = '/' | append: item_value %}
+                {% else %}
+                {% assign item_w_iso = '/' | append: iso | append: '/' | append: item_value %}
+              {% endif %}
+              {% if item_w_iso == link.url %}
+                {% assign hasMegaBlock = true %}
+                {% assign currentBlock = block %}
+              {% endif %}
+            {% when 'title' %}
+              {% if item_value == link.title %}
+                {% assign hasMegaBlock = true %}
+                {% assign currentBlock = block %}
+              {% endif %}
+          {% endcase %}
+        {% endfor %}
+        <li class="w-fit list-menu-item pr-4 mr-2 {% if link.links != blank and hasMegaBlock == false and section.settings.menu_type_desktop == 'default' %}relative{% endif %}">
+
+          {% if link.links != blank or hasMegaBlock %}
             <a
-              class="{%- if link.active %}menu_item_active{% endif %} py-1 {% if link.links != blank or link.url == '#' or isShowMega %}list-menu-empty{% endif %} cursor-pointer font-semibold list-menu--link relative text-base flex items-center gap-2"
+              class="{%- if link.active %}menu_item_active{% endif %} py-1 {% if link.links != blank or hasMegaBlock == true %} list-menu-empty{% endif %} cursor-pointer font-semibold list-menu--link relative text-base flex items-center gap-2"
               href="{{ link.url }}"
             >
               {{- link.title | escape -}}
-              {% if section.settings.is_show_arrow or isShowMega %}
+              {% if section.settings.is_show_arrow == true and hasMegaBlock == true or link.links != blank %}
                 <span class="caret-submenu mt-1">
                   {% render 'icon-caret' %}
                 </span>
@@ -43,9 +44,9 @@
             </a>
 
             {% liquid
-              if section.settings.menu_type_desktop == 'default'
-                render 'header-menu', link: link
-              elsif section.settings.menu_type_desktop == 'mega' or isShowMega
+              if link.links != blank and hasMegaBlock == false and section.settings.menu_type_desktop == 'default'
+                render 'header-dropdown-menu', link: link
+              elsif section.settings.menu_type_desktop == 'mega' or hasMegaBlock  == true
                 render 'header-mega-menu', link: link, block: currentBlock
               endif
             %}

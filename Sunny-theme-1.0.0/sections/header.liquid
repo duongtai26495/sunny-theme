@@ -279,6 +279,38 @@
       "default": "default"
     },
     {
+      "type": "select",
+      "id": "mega_menu_content",
+      "label": "Mega menu content display",
+      "options": [
+        {
+          "label": "All in left",
+          "value": "start"
+        },
+        {
+          "label": "All in center",
+          "value": "center"
+        },
+        {
+          "label": "All in right",
+          "value": "end"
+        },
+        {
+          "label": "Space between",
+          "value": "between"
+        },
+        {
+          "label": "Space evenly",
+          "value": "evenly"
+        },
+        {
+          "label": "Space around",
+          "value": "around"
+        }
+      ],
+      "default": "start"
+    },
+    {
       "type": "checkbox",
       "id": "is_show_arrow",
       "default": true,
@@ -331,40 +363,6 @@
           "info": "How to get handle url ?"
         },
         {
-          "type": "textarea",
-          "id": "heading",
-          "label": "Heading",
-          "default": "Heading for section",
-          "placeholder": "Heading"
-        },
-        
-        {
-          "type": "checkbox",
-          "id":"is_show_heading",
-          "label": "Show heading",
-          "default": true
-        },
-        {
-          "type": "select",
-          "id": "content_alignment",
-          "label": "Content alignment",
-          "options": [
-              {
-                "label":"Left",
-                "value": "start"
-              },
-              {
-                "label":"Center",
-                "value": "center"
-              },
-              {
-                "label":"Right",
-                "value": "end"
-              }
-          ],
-          "default": "start"
-        },
-        {
           "type": "select",
           "id": "item_type",
           "options": [
@@ -380,6 +378,38 @@
           "default": "title",
           "label": "For item",
           "info": "Use handle will work properly with multiple languages"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "placeholder": "Heading for section"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_heading",
+          "label": "Show heading",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content alignment",
+          "options": [
+            {
+              "label": "Left",
+              "value": "start"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "end"
+            }
+          ],
+          "default": "start"
         },
         {
           "type": "header",
@@ -479,6 +509,12 @@
         },
         {
           "type": "checkbox",
+          "id": "is_loop",
+          "label": "Loop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
           "default": true,
           "label": "Show pagination dots",
           "id": "is_show_pagination"
@@ -540,9 +576,19 @@
           "label": "Select an image"
         },
         {
+          "type": "url",
+          "id": "image-1-url",
+          "label": "Image url 1"
+        },
+        {
           "type": "image_picker",
           "id": "image-2",
           "label": "Select an image"
+        },
+        {
+          "type": "url",
+          "id": "image-2-url",
+          "label": "Image url 2"
         },
         {
           "type": "image_picker",
@@ -550,15 +596,57 @@
           "label": "Select an image"
         },
         {
+          "type": "url",
+          "id": "image-3-url",
+          "label": "Image url 3"
+        },
+        {
           "type": "image_picker",
           "id": "image-4",
           "label": "Select an image"
         },
         {
+          "type": "url",
+          "id": "image-4-url",
+          "label": "Image url 4"
+        },
+        {
+          "type": "range",
+          "label": "Image rounded",
+          "id": "image_rounded",
+          "min": 0,
+          "max": 20,
+          "step": 5,
+          "default": 0,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "Slide controls"
+        },
+        {
           "type": "checkbox",
           "id": "is_slide",
-          "label": "Enable slider",
+          "label": "Enable slide",
           "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "is_loop",
+          "label": "Loop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "is_auto_play",
+          "label": "Auto slide",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "default": true,
+          "label": "Show pagination dots",
+          "id": "is_show_pagination"
         },
         {
           "type": "range",
@@ -572,20 +660,13 @@
           "label": "Duration"
         },
         {
-          "type": "select",
+          "type": "range",
           "id": "slides_per_view",
-          "options": [
-            {
-              "label": "Single",
-              "value": "1"
-            },
-            {
-              "label": "Double",
-              "value": "2"
-            }
-          ],
-          "default": "1",
-          "label": "Images per row"
+          "min": 1,
+          "max": 4,
+          "default": 2,
+          "step": 1,
+          "label": "Image(s) per row"
         }
       ]
     }

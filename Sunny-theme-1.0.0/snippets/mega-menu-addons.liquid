@@ -1,6 +1,5 @@
-
 {% case block.type %}
-{% when 'collections' %}
+  {% when 'collections' %}
     {% liquid
       assign collection_list_id = 'collection-1,collection-2,collection-3,collection-4,collection-5,collection-6,collection-7,collection-8' | split: ','
       assign content_empty = true
@@ -12,44 +11,88 @@
       endfor
     %}
 
-    {% unless content_empty %} 
-      
-    <div class="mega_menu-collections swiper swiper-container w-full mx-auto relative flex items-center gap-5" 
-    duration="{{ block.settings.duration }}"
-    slides-per-view="{{ block.settings.slides_per_view }}"
-    data-auto-play="{{ block.settings.is_auto_play }}"
-    data-pagination="{{ block.settings.is_show_pagination}}">
-      {% if block.settings.is_show_heading %}
-        {% render 'theme-heading', block:block%}
-      {% endif %}
-      <div class="swiper-wrapper flex justify-start">
-        {% for collection_id in collection_list_id %}
-          {% liquid
-          if block.settings[collection_id] == blank
-          continue
-          endif
-          assign collection_handle = block.settings[collection_id]
-          assign collection = collections[collection_handle]
-          %}
-          <div class="swiper-slide py-4">
-            {% render 'collection-card', collection: collection, block:block %}
+    {% unless content_empty %}
+      <div
+        class="mega_menu-collections swiper swiper-container w-full mx-auto relative flex items-center gap-5"
+        duration="{{ block.settings.duration }}"
+        slides-per-view="{{ block.settings.slides_per_view }}"
+        data-auto-play="{{ block.settings.is_auto_play }}"
+        data-pagination="{{ block.settings.is_show_pagination }}"
+        data-loop="{{ block.settings.is_loop }}"
+      >
+        {% if block.settings.is_show_heading %}
+          {% render 'theme-heading', block: block %}
+        {% endif %}
+        <div class="swiper-wrapper flex justify-start">
+          {% for collection_id in collection_list_id %}
+            {% liquid
+              if block.settings[collection_id] == blank
+                continue
+              endif
+              assign collection_handle = block.settings[collection_id]
+              assign collection = collections[collection_handle]
+            %}
+            <div class="swiper-slide py-4">
+              {% render 'collection-card', collection: collection, block: block %}
             </div>
           {% endfor %}
-          </div>
-          {% if block.settings.is_show_pagination %}
+        </div>
+        {% if block.settings.is_show_pagination %}
           <div class="swiper-pagination"></div>
-          {% endif %}
-          
-    </div>
-        {% endunless %} 
-  {% when 'images' %} 
-    <div class="mega-menu-images {% if block.settings.is_slide %}swiper{% endif %}
-      duration="{{ block.settings.duration }}"
-      slides-per-view="{{block.settings.slides_per_view}}">
-      
-    </div>
+        {% endif %}
+      </div>
+    {% endunless %}
+  {% when 'images' %}
+    {% liquid
+      assign image_list_id = 'image-1,image-2,image-3,image-4' | split: ','
+      assign image_list_url_id = 'image-1-url,image-2-url,image-3-url,image-4-url' | split: ','
+      assign content_empty = true
+      assign enable_slide = block.settings.is_slide
+
+      for image_id in image_list_id
+        if block.settings[image_id] != blank
+          assign content_empty = false
+        endif
+      endfor
+    %}
+
+    {% unless content_empty %}
+      <div
+        class="mega-menu-images {% if enable_slide %}swiper swiper-container{% endif %} w-full mx-auto relative flex items-center gap-5"
+        duration="{{ block.settings.duration }}"
+        slides-per-view="{{ block.settings.slides_per_view }}"
+        data-auto-play="{{ block.settings.is_auto_play }}"
+        data-pagination="{{ block.settings.is_show_pagination }}"
+        data-loop="{{ block.settings.is_loop }}"
+      >
+        <div class="{% if enable_slide %}swiper-wrapper{% else %}flex-wrap gap-4{% endif %} flex">
+          {% for image_id in image_list_id %}
+            {% if block.settings[image_id] != blank %}
+              {% assign rounded = block.settings.image_rounded %}
+              {% assign image = block.settings[image_id] %}
+              <div
+                image-ratio="square"
+                class="{% if enable_slide %}swiper-slide w-full p-2{% else %}max-w-[45%] {% endif %}h-full sn-card_media {% unless rounded < 5 %}rounded-[{{rounded}}px] overflow-hidden{% endunless %}"
+              >
+                {% render 'responsive-image',
+                  image: image,
+                  div_class: 'w-full h-full overflow-hidden block',
+                  image_ratio: 'square',
+                  image_class: 'object-cover object-center w-full h-full'
+                %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% if block.settings.is_show_pagination %}
+          <div class="swiper-pagination"></div>
+        {% endif %}
+      </div>
+    {% endunless %}
   {% when 'products' %}
     Products
-  {% when 'product_list' %}
-    Product list
+  {% when 'custom_liquid' %}
+    Custom_liquid
+  {% when 'mega_menu' %}
+    Mega Menu
 {% endcase %}

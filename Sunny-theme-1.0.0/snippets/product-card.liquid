@@ -1,6 +1,6 @@
 <div class="w-full h-full p-3">
   <div class="sn-p_card-wrapper shadow border">
-    <div class="sn-p_card-media" image-ratio="{{ settings.image_ratio }}">
+    <div class="sn-card_media" image-ratio="{{ settings.image_ratio }}">
         <a href="{{product.url}}" >
             {% render 'responsive-image', image:product.featured_image, div_class:'w-full overflow-hidden block', image_ratio:{{ settings.image_ratio }}, image_class:'block object-cover object-center w-full h-full' %}
             </a>
