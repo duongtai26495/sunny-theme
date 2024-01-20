@@ -32,13 +32,15 @@
               assign collection_handle = block.settings[collection_id]
               assign collection = collections[collection_handle]
             %}
-            <div class="swiper-slide py-4">
+            <div class="swiper-slide">
               {% render 'collection-card', collection: collection, block: block %}
             </div>
           {% endfor %}
         </div>
         {% if block.settings.is_show_pagination %}
-          <div class="swiper-pagination"></div>
+          <div class="relative min-h-8">
+            <div class="swiper-pagination"></div>
+          </div>
         {% endif %}
       </div>
     {% endunless %}
@@ -50,9 +52,9 @@
       assign enable_slide = block.settings.is_slide
 
       for image_id in image_list_id
-        if block.settings[image_id] != blank
+        unless block.settings[image_id] == blank
           assign content_empty = false
-        endif
+        endunless
       endfor
     %}
 
@@ -66,13 +68,19 @@
         data-loop="{{ block.settings.is_loop }}"
       >
         <div class="{% if enable_slide %}swiper-wrapper{% else %}flex-wrap gap-4{% endif %} flex">
-          {% for image_id in image_list_id %}
+          {% for index in (0..image_list_id.size) %}
+            {% assign image_id = image_list_id[index] %}
+            {% assign image_url_id = image_list_url_id[index] %}
+
             {% if block.settings[image_id] != blank %}
               {% assign rounded = block.settings.image_rounded %}
               {% assign image = block.settings[image_id] %}
-              <div
+              {% assign image_url = block.settings[image_url_id] %}
+
+              <a
+                href="{{image_url | default: '#'}}"
                 image-ratio="square"
-                class="{% if enable_slide %}swiper-slide w-full p-2{% else %}max-w-[45%] {% endif %}h-full sn-card_media {% unless rounded < 5 %}rounded-[{{rounded}}px] overflow-hidden{% endunless %}"
+                class="{% if enable_slide %}swiper-slide w-full p-2{% else %}max-w-[45%] {% endif %} {% if image_url != blank %}cursor-pointer{% else %}cursor-auto{% endif %} h-full sn-card_media {% unless rounded < 5 %}rounded-[{{rounded}}px] overflow-hidden{% endunless %}"
               >
                 {% render 'responsive-image',
                   image: image,
@@ -80,19 +88,74 @@
                   image_ratio: 'square',
                   image_class: 'object-cover object-center w-full h-full'
                 %}
-              </div>
+              </a>
             {% endif %}
           {% endfor %}
         </div>
-        {% if block.settings.is_show_pagination %}
-          <div class="swiper-pagination"></div>
+
+        {% if  enable_slide and block.settings.is_show_pagination %}
+          <div class="relative min-h-12">
+            <div class="swiper-pagination"></div>
+          </div>
         {% endif %}
       </div>
     {% endunless %}
+
   {% when 'products' %}
-    Products
+    {% liquid
+      assign product_list_id = 'product-1,product-2,product-3,product-4,product-5,product-6,product-7,product-8' | split: ','
+      assign content_empty = true
+
+      for product_id in product_list_id
+        unless block.settings[product_id] == blank
+          assign content_empty = false
+        endunless
+      endfor
+    %}
+    
+    {% unless content_empty %}
+      <div
+        class="mega-menu-products swiper swiper-container w-full mx-auto relative flex items-center gap-5"
+        duration="{{ block.settings.duration }}"
+        slides-per-view="{{ block.settings.slides_per_view }}"
+        data-auto-play="{{ block.settings.is_auto_play }}"
+        data-pagination="{{ block.settings.is_show_pagination }}"
+        data-loop="{{ block.settings.is_loop }}"
+      >
+      <div class="flex w-full items-center gap-5 justify-start">
+        {% if block.settings.is_show_heading %}
+          {% render 'theme-heading', block: block %}
+        {% endif %}
+        {% if block.settings.button_title %}
+          <a class="font-semibold whitespace-nowrap border-b border-b-black" href="{{block.settings.button_url}}" >{{ block.settings.button_title }}</a>
+        {% endif %}
+        </div>
+        <div class="swiper-wrapper flex justify-start">
+          {% for product_id in product_list_id %}
+            {% liquid
+              if block.settings[product_id] == blank
+                continue
+              endif
+              assign product = block.settings[product_id]
+            %}
+            <div class="swiper-slide">
+              {% render 'product-card', product:product, block: block %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if block.settings.is_show_pagination %}
+          <div class="relative min-h-12">
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+      </div>
+    {% endunless %}
   {% when 'custom_liquid' %}
-    Custom_liquid
+    <div class="mega-menu-custom_liquid w-full mx-auto p-4">
+      {% if block.settings.custom_liquid != blank %}
+        {{ block.settings.custom_liquid }}
+      {% endif %}
+    </div>
   {% when 'mega_menu' %}
-    Mega Menu
+    <div class="mega-menu-empty-block w-full"></div>
 {% endcase %}

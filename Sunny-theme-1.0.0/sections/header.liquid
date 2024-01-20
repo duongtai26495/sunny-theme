@@ -669,6 +669,246 @@
           "label": "Image(s) per row"
         }
       ]
+    },
+    {
+      "name": "Products",
+      "type": "products",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Product list"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "default": "Shop",
+          "label": "Menu item title",
+          "placeholder": "Home, /mens, etc",
+          "info": "How to get handle url ?"
+        },
+        {
+          "type": "select",
+          "id": "item_type",
+          "options": [
+            {
+              "value": "title",
+              "label": "Menu title"
+            },
+            {
+              "value": "handle",
+              "label": "Menu handle"
+            }
+          ],
+          "default": "title",
+          "label": "For item",
+          "info": "Use handle will work properly with multiple languages"
+        },
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "placeholder": "Heading for section"
+        },
+        {
+          "type": "text",
+          "id":"button_title",
+          "label": "Button title",
+          "default": "See more",
+          "placeholder": "See more"
+        },
+        {
+          "type": "url",
+          "id":"button_url",
+          "label": "Button url"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_heading",
+          "label": "Show heading",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "label": "Content alignment",
+          "options": [
+            {
+              "label": "Left",
+              "value": "start"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "end"
+            }
+          ],
+          "default": "start"
+        },
+        {
+          "type": "header",
+          "content": "Products"
+        },
+        {
+          "type": "product",
+          "id": "product-1",
+          "label": "Select product 1"
+        },
+        {
+          "type": "product",
+          "id": "product-2",
+          "label": "Select product 2"
+        },
+        {
+          "type": "product",
+          "id": "product-3",
+          "label": "Select product 3"
+        },
+        {
+          "type": "product",
+          "id": "product-4",
+          "label": "Select product 4"
+        },
+        {
+          "type": "product",
+          "id": "product-5",
+          "label": "Select product 5"
+        },
+        {
+          "type": "product",
+          "id": "product-6",
+          "label": "Select product 6"
+        },
+        {
+          "type": "product",
+          "id": "product-7",
+          "label": "Select product 7"
+        },
+        {
+          "type": "product",
+          "id": "product-8",
+          "label": "Select product 8"
+        },
+        {
+          "type": "header",
+          "content": "Slide controls"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_auto_play",
+          "label": "Auto slide",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "is_loop",
+          "label": "Loop",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "default": true,
+          "label": "Show pagination dots",
+          "id": "is_show_pagination"
+        },
+        {
+          "type": "range",
+          "id": "duration",
+          "min": 3,
+          "max": 10,
+          "default": 5,
+          "step": 1,
+          "unit": "s",
+          "info": "Product conversion speed",
+          "label": "Duration"
+        },
+        {
+          "type": "range",
+          "id": "slides_per_view",
+          "min": 1,
+          "max": 4,
+          "default": 2,
+          "step": 1,
+          "label": "Product per row"
+        }
+      ]
+    },
+    {
+      "name": "Custom liquid",
+      "type": "custom_liquid",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Custom liquid content"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "default": "Shop",
+          "label": "Menu item title",
+          "placeholder": "Home, /mens, etc",
+          "info": "How to get handle url ?"
+        },
+        {
+          "type": "select",
+          "id": "item_type",
+          "options": [
+            {
+              "value": "title",
+              "label": "Menu title"
+            },
+            {
+              "value": "handle",
+              "label": "Menu handle"
+            }
+          ],
+          "default": "title",
+          "label": "For item",
+          "info": "Use handle will work properly with multiple languages"
+        },
+        {
+          "type": "liquid",
+          "id":"custom_liquid",
+          "label": "Custom liquid"
+        }
+      ]
+    },
+    {
+      "name": "Mega menu",
+      "type": "mega_menu",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Mega menu"
+        },
+        {
+          "type": "text",
+          "id": "for_item",
+          "default": "Shop",
+          "label": "Menu item title",
+          "placeholder": "Home, /mens, etc",
+          "info": "How to get handle url ?"
+        },
+        {
+          "type": "select",
+          "id": "item_type",
+          "options": [
+            {
+              "value": "title",
+              "label": "Menu title"
+            },
+            {
+              "value": "handle",
+              "label": "Menu handle"
+            }
+          ],
+          "default": "title",
+          "label": "For item",
+          "info": "Use handle will work properly with multiple languages"
+        }
+      ]
     }
   ],
   "presets": [

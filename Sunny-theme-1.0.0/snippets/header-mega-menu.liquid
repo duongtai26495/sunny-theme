@@ -1,6 +1,6 @@
 <div class="absolute left-0 top-full list-submenu submenu_level-1 mega-menu mega-menu-wrapper shadow w-full mt-[.5px]">
-<div class="flex justify-{{ section.settings.mega_menu_content }} gap-10 items-start {% case block.type %} {% when 'collection' %} max-h-[500px]{% when 'images'%} max-h-700px {% endcase %} min-h-64 mx-auto relative pt-2 section-{{section.settings.container}}">
-    {% if link.links != blank %}
+<div class="flex justify-{{ section.settings.mega_menu_content }} gap-10 items-start {% case block.type %} {% when 'collection' %} max-h-[500px]{% when 'images'%} max-h-700px {% endcase %} min-h-64 mx-auto relative section-{{section.settings.container}}">
+  {% if link.links != blank %}
       <ul class="flex justify-start gap-10 w-fit max-w-[50%]">
         {% for childlink in link.links %}
           <li class="p-2 relative list-menu--sub w-fit mr-5">
@@ -12,7 +12,7 @@
             </a>
             <ul class="w-full">
               {% for sub_childlink in childlink.links %}
-                <li class="py-2 relative list-menu--sub w-fit">
+                <li class="py-1 relative list-menu--sub w-fit">
                   <a
                     class="{%- if sub_childlink.active %}menu_item_active{% endif %} whitespace-nowrap w-fit list-menu--link pb-1 relative flex items-center gap-2 text-sm justify-between"
                     href="{{ sub_childlink.url }}"
@@ -29,24 +29,35 @@
     <div
       class="
         mega_menu-addons
-        {% case block.type %}
-        {% when 'collections' %}
-        {% case block.settings.slides_per_view %}
-        {% when 1 %}max-w-[20%]
-        {% when 2 %}max-w-[35%]
-        {% else %}max-w-[50%]
-        {% endcase %}
-        {% when 'images' %}
-          {% case section.settings.container %}
-          {% when 'narrow_width' %}
-            max-w-[40%]
-          {% when 'container' %}
-          max-w-[30%]
-          {% when 'full_width' %}
-          max-w-[25%]
+          {% case block.type %}
+          {% when 'collections' %}
+          {% case block.settings.slides_per_view %}
+          {% when 1 %}
+          {% if link.links != blank %}max-w-[25%]{% else %}max-w-[35%] mx-auto{% endif %}
+          {% when 2 %}
+          {% if link.links != blank %}max-w-[40%]{% else %}max-w-[50%] mx-auto{% endif %}
+          {% else %}
+          {% if link.links != blank %}max-w-[50%]{% else %}max-w-[70%] mx-auto{% endif %}
           {% endcase %}
-          py-4
-      {% endcase %}
+          {% when 'images' %}
+            {% case section.settings.container %}
+            {% when 'narrow_width' %}
+            {% if link.links != blank %}max-w-[50%]{% else %}max-w-[40%] mx-auto{% endif %}
+            {% when 'container' %}
+            {% if link.links != blank %}max-w-[40%]{% else %}max-w-[45%] mx-auto{% endif %}
+            {% when 'full_width' %}
+            {% if link.links != blank %}max-w-[30%]{% else %}max-w-[50%] mx-auto{% endif %}
+            {% endcase %}
+            py-4
+          {% when 'products' %}
+            {% case block.settings.slides_per_view %}
+              {% when 1 %}{% if link.links != blank %}max-w-[25%]{% else %}max-w-[30%] mx-auto{% endif %}
+              {% when 2 %}{% if link.links != blank %}max-w-[45%]{% else %}max-w-[50%] mx-auto{% endif %}
+              {% else %}{% if link.links != blank %}max-w-[50%]{% else %}max-w-[65%] mx-auto{% endif %}
+            {% endcase %}
+          {% else %}
+            max-w-[50%] mx-auto
+          {% endcase %}
           flex-1 overflow-hidden h-full 
       ">
       {% render 'mega-menu-addons', block: block %}
