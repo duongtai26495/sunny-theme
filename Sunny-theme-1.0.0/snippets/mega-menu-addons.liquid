@@ -23,7 +23,7 @@
         {% if block.settings.is_show_heading %}
           {% render 'theme-heading', block: block %}
         {% endif %}
-        <div class="swiper-wrapper flex justify-start">
+        <div class="hidden lg:flex swiper-wrapper justify-start">
           {% for collection_id in collection_list_id %}
             {% liquid
               if block.settings[collection_id] == blank
@@ -44,6 +44,7 @@
         {% endif %}
       </div>
     {% endunless %}
+
   {% when 'images' %}
     {% liquid
       assign image_list_id = 'image-1,image-2,image-3,image-4' | split: ','

@@ -1,53 +1,82 @@
+{% assign iso =  request.locale.iso_code %}
 {% assign menu = section.settings.menu %}
 {% assign mobile_menu = section.settings.mobile_menu %}
 {% if mobile_menu == blank or mobile_menu == menu %}
-    {% assign mobile_menu = menu %}
+{% assign mobile_menu = menu %}
 {% endif %}
 <nav class="header__inline-menu flex h-full overflow-y-auto">
   {%- if mobile_menu != blank %}
     <ul class="mobile-menu list-menu list-menu--inline items-center flex-wrap p-2 flex flex-col w-full h-fit ">
       {%- for link in mobile_menu.links -%}
-      <li class="w-full list-menu-item py-2 relative  border-b {% if link.links != blank %}parent-item{% endif %}">
-        {% if link.links != blank %}
+        {% assign hasMegaBlock = false %}
+        {% assign currentBlock = blank %}
+
+        {% for block in section.blocks %}
+        
+            {% assign item_value = block.settings.for_item %}
+            {% assign item_type = block.settings.item_type %}
+            
+            {% case item_type %}
+                {% when 'handle' %}
+                {% if request.locale.primary %}
+                    {% assign item_w_iso = '/' | append: item_value %}
+                    {% else %}
+                    {% assign item_w_iso = '/' | append: iso | append: '/' | append: item_value %}
+                {% endif %}
+                {% if item_w_iso == link.url %}
+                    {% assign hasMegaBlock = true %}
+                    {% assign currentBlock = block %}
+                {% endif %}
+                {% when 'title' %}
+                {% if item_value == link.title %}
+                    {% assign hasMegaBlock = true %}
+                    {% assign currentBlock = block %}
+                {% endif %}
+            {% endcase %}
+        {% endfor %}  
+    
+    <li class="w-full list-menu-item py-2 relative  border-b {% if link.links != blank or hasMegaBlock %}parent-item{% endif %}">
+        {% if link.links != blank or hasMegaBlock %}
         <div class="flex items-center justify-between">
         {% endif %}
         <a class="{%- if link.active %}menu_item_active{% endif %} list-menu--link w-fit py-1 font-semibold relative text-base flex items-center gap-2" href="{{ link.url }}">
             {{- link.title | escape -}}
         </a>
     
-        {% if link.links != blank %}
+        {% if link.links != blank or hasMegaBlock%}
             <button class="open-submenu pl-5">
                 {% render 'icons', type:'plus' %}
             </button>
         </div>
         {% endif %}
     
-        {% if link.links != blank %}
-        <div class="submenu-mobile-lv1 w-full max-h-fit">
-            <ul class="w-full pl-3 pr-2 flex-col flex gap-3 py-2">
-            
-                {% for childlink in link.links %}
-                    <li>
-                        <a style="color:{{ settings.header_submenu_text_color }}" class="{%- if childlink.active %}menu_item_active{% endif %} w-full text-sm font-semibold" href="{{childlink.url}}">
-                        {{- childlink.title | escape -}}
-                        </a>
-                        {% if childlink.links != blank %}
-                            <div class="submenu-mobile-lv2 w-full h-fit">
-                                <ul class="w-full pl-3 pr-2 flex flex-col pt-2">
-                                    {% for sub_childlink in childlink.links %}
-                                        <li class="border-l pl-3 py-2">
-                                            <a style="color:{{ settings.header_submenu_text_color }}" class="{%- if sub_childlink.active %}menu_item_active{% endif %} w-full text-sm" href="{{sub_childlink.url}}">
-                                                {{- sub_childlink.title | escape -}}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+        {% if link.links != blank or hasMegaBlock%}
+            <div class="submenu-mobile-lv1 w-full max-h-fit">
+                
+                <ul class="w-full pl-3 pr-2 flex-col flex gap-3 py-2 {% if hasMegaBlock %}border-b{% endif %}">
+                    {% for childlink in link.links %}
+                        <li>
+                            <a style="color:{{ settings.header_submenu_text_color }}" class="{%- if childlink.active %}menu_item_active{% endif %} w-full text-sm font-semibold" href="{{childlink.url}}">
+                            {{- childlink.title | escape -}}
+                            </a>
+                            {% if childlink.links != blank %}
+                                <div class="submenu-mobile-lv2 w-full h-fit">
+                                    <ul class="w-full pl-3 pr-2 flex flex-col pt-2">
+                                        {% for sub_childlink in childlink.links %}
+                                            <li class="border-l pl-3 py-2">
+                                                <a style="color:{{ settings.header_submenu_text_color }}" class="{%- if sub_childlink.active %}menu_item_active{% endif %} w-full text-sm" href="{{sub_childlink.url}}">
+                                                    {{- sub_childlink.title | escape -}}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% render 'mega-menu-addons', block: currentBlock %}
+            </div>
         {% endif %}
     </li>
       {% endfor %}
