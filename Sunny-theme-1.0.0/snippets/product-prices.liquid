@@ -1,0 +1,95 @@
+
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  if use_variant
+    assign target = selected_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 0000
+
+  if is_product_card and settings.pcard_show_lowest_prices
+    assign price = product.price
+    assign compare_at_price = product.compare_at_price
+  endif
+
+  assign available = target.available | default: false
+  assign money_price = price | money
+
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+  endif
+
+  if target == product and product.price_varies and settings.pcard_show_lowest_prices
+    assign money_price = 'products.product.from_text_html' | t: price: money_price
+  endif
+
+  assign sale_badge_type = sale_badge_type | default: 'percentage'
+-%}
+
+
+
+<div class="p_prices inline-flex items-center flex-wrap
+  
+  {%- if price_class %} {{ price_class }}{% endif -%}
+  {%- if available == false %} p_out-of-stock {% endif -%}
+  {%- if compare_at_price > price %} p_on_sale {% endif -%}
+  data-sale-badge="{{ sale_badge_type }}"
+>
+
+  {% comment %} <div class="p_price__regular">
+    <span class="p_price-item m_price-original">
+        {{ money_price }}
+      </span>
+  </div> {% endcomment %}
+  <div class="p_price__sale">
+    <span class="p_price-item p_price-item--sale">
+        {{ money_price }}
+      </span>
+    {%- unless target.price_varies == false and target.compare_at_price_varies %}
+      <s class="p_price-item p_price-item--original">
+        {% if settings.currency_code_enabled %}
+          {{ compare_at_price | money_with_currency }}
+        {% else %}
+          {{ compare_at_price | money }}
+        {% endif %}
+      </s>
+    {%- endunless -%}
+  </div>
+  
+{% comment %} 
+  {% if show_sale_badge %}
+    <div class="m-price__badges">
+      {% if show_sale_badge %}
+        {% liquid
+          assign save_amount = 0
+          if compare_at_price > price
+            assign save_amount = compare_at_price | minus: price
+          endif
+
+          assign discount = ''
+          if sale_badge_type == 'percentage'
+            assign discount = save_amount | times: 100 | divided_by: compare_at_price | append: '%'
+          elsif sale_badge_type == 'fixed_amount'
+            if settings.currency_code_enabled
+              assign discount = save_amount | money_with_currency
+            else
+              assign discount = save_amount | money
+            endif
+          endif
+        %}
+        <div class="m-price__badge-sale" data-type="{{ sale_badge_type }}">
+          <span class="m-product-tag m-product-tag--discounted">
+            {% unless sale_badge_type == 'text' %}
+              {% render 'new-locale', key: 'products.product.save_html', param: '{{ amount }}', value: discount %}
+            {% else %}
+              {% render 'new-locale', key: 'products.product.sale_text' %}
+            {% endunless %}
+          </span>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %} {% endcomment %}
+</div>

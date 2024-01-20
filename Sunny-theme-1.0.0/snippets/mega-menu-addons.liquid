@@ -1,7 +1,7 @@
 {% case block.type %}
   {% when 'collections' %}
     {% liquid
-      assign collection_list_id = 'collection-1,collection-2,collection-3,collection-4,collection-5,collection-6,collection-7,collection-8' | split: ','
+      assign collection_list_id = 'collection-1,collection-2,collection-3,collection-4,collection-5,collection-6' | split: ','
       assign content_empty = true
 
       for collection_id in collection_list_id
@@ -104,7 +104,7 @@
 
   {% when 'products' %}
     {% liquid
-      assign product_list_id = 'product-1,product-2,product-3,product-4,product-5,product-6,product-7,product-8' | split: ','
+      assign product_list_id = 'product-1,product-2,product-3,product-4,product-5,product-6' | split: ','
       assign content_empty = true
 
       for product_id in product_list_id
