@@ -1,5 +1,5 @@
 <div class="absolute left-0 top-full list-submenu submenu_level-1 mega-menu mega-menu-wrapper shadow w-full mt-[.5px]">
-<div class="flex justify-{{ section.settings.mega_menu_content }} gap-10 items-start {% case block.type %} {% when 'collection' %} max-h-[500px]{% when 'images'%} max-h-700px {% endcase %} min-h-64 mx-auto relative section-{{section.settings.container}}">
+<div class="flex justify-{{ section.settings.mega_menu_content }} gap-10 items-start {% case block.type %} {% when 'collection' %} max-h-[500px]{% when 'images'%} max-h-700px {% endcase %} min-h-fit mx-auto relative section-{{section.settings.container}}">
   {% if link.links != blank %}
       <ul class="flex justify-start gap-10 w-fit max-w-[50%]">
         {% for childlink in link.links %}
@@ -33,11 +33,11 @@
           {% when 'collections' %}
           {% case block.settings.slides_per_view %}
           {% when 1 %}
-          {% if link.links != blank %}max-w-[25%]{% else %}max-w-[35%] mx-auto{% endif %}
+          {% if link.links != blank %}max-w-[25%]{% else %}max-w-[30%] mx-auto{% endif %}
           {% when 2 %}
           {% if link.links != blank %}max-w-[40%]{% else %}max-w-[50%] mx-auto{% endif %}
           {% else %}
-          {% if link.links != blank %}max-w-[50%]{% else %}max-w-[70%] mx-auto{% endif %}
+          {% if link.links != blank %}max-w-[50%]{% else %}max-w-[60%] mx-auto{% endif %}
           {% endcase %}
           {% when 'images' %}
             {% case section.settings.container %}
@@ -51,9 +51,9 @@
             py-4
           {% when 'products' %}
             {% case block.settings.slides_per_view %}
-              {% when 1 %}{% if link.links != blank %}max-w-[25%]{% else %}max-w-[30%] mx-auto{% endif %}
-              {% when 2 %}{% if link.links != blank %}max-w-[45%]{% else %}max-w-[50%] mx-auto{% endif %}
-              {% else %}{% if link.links != blank %}max-w-[50%]{% else %}max-w-[65%] mx-auto{% endif %}
+              {% when 1 %}{% if link.links != blank %}max-w-[20%]{% else %}max-w-[30%] mx-auto{% endif %}
+              {% when 2 %}{% if link.links != blank %}max-w-[30%]{% else %}max-w-[50%] mx-auto{% endif %}
+              {% else %}{% if link.links != blank %}max-w-[40%]{% else %}max-w-[65%] mx-auto{% endif %}
             {% endcase %}
           {% else %}
             max-w-[50%] mx-auto
