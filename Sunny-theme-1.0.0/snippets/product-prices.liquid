@@ -9,8 +9,17 @@
 
   assign compare_at_price = target.compare_at_price
   assign price = target.price | default: 0000
+  
+  assign max_price = 0000
+  assign min_price = 0000
 
-  if is_product_card and settings.pcard_show_lowest_prices
+  if is_product_card and settings.pcard_show_min_max_prices == 'min'
+    assign min_price = product.variants | sort: 'price' | first
+    assign compare_at_price = product.compare_at_price
+  else if is_product_card and settings.pcard_show_min_max_prices == 'max'
+    assign max_price = product.variants | sort: 'price' | last
+    assign compare_at_price = product.compare_at_price
+  else
     assign price = product.price
     assign compare_at_price = product.compare_at_price
   endif
@@ -39,14 +48,21 @@
   data-sale-badge="{{ sale_badge_type }}"
 >
 
-  {% comment %} <div class="p_price__regular">
+  {% comment %} <div class="p_price__regular"> 
     <span class="p_price-item m_price-original">
         {{ money_price }}
       </span>
   </div> {% endcomment %}
   <div class="p_price__sale">
     <span class="p_price-item p_price-item--sale">
+      {% case settings.pcard_show_min_max_prices %}
+      {% when 'min' %}
+        {{ 'products.product.prices.from' | t }} {{ price | money }}
+      {% when 'max' %}
+        {{ max_price.price | money }}
+      {%  when 'default' %}
         {{ money_price }}
+      {% endcase %}
       </span>
     {%- unless target.price_varies == false and target.compare_at_price_varies %}
       <s class="p_price-item p_price-item--original">

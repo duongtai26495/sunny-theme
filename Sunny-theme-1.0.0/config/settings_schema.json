@@ -697,6 +697,26 @@
                 "label": "Show add to cart button",
                 "default": true,
                 "id": "is_show_atc"
+            },
+            {
+                "type": "select",
+                "label": "Show lowest/highest price",
+                "id": "pcard_show_min_max_prices",
+                "options": [
+                    {
+                        "label":"Lowest",
+                        "value": "min"
+                    },
+                    {
+                        "label":"Default",
+                        "value": "default"
+                    },
+                    {
+                        "label":"Highest",
+                        "value": "max"
+                    }
+                ],
+                "default": "default"
             }
         ]
     },

@@ -17,5 +17,12 @@
     {
       "close":"Close"
     }
+  },
+  "products":{
+    "product":{
+      "prices":{
+        "from":"From "
+      }
+    }
   }
 }

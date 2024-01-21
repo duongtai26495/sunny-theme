@@ -1186,10 +1186,6 @@ video {
     width: 40%;
   }
 
-  .lg\:max-w-\[45\%\] {
-    max-width: 45%;
-  }
-
   .lg\:flex-row {
     flex-direction: row;
   }
