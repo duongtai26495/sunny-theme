@@ -16,7 +16,7 @@
     </span>
     {% render 'icon-caret' %}
   </button>
-  <div class="disclosure__list-wrapper countries_list absolute left-0 top-full z-10" hidden>
+  <div class="disclosure__list-wrapper countries_list absolute left-0 top-full z-10" style="background-color:{{ settings.primary_color }}" hidden>
     <ul id="{{ localPosition }}List" role="list" class="disclosure__list border rounded p-1">
       {%- for country in localization.available_countries -%}
         <li class="disclosure__item my-2" tabindex="-1">
@@ -27,6 +27,7 @@
               aria-current="true"
             {% endif %}
             data-value="{{ country.iso_code }}"
+            style="color: {{ settings.text }}"
           >
           <span class="flex flex-nowrap gap-1 ">
               <span class="localization-form__currency whitespace-nowrap">
@@ -55,7 +56,7 @@
     <span>{{ localization.language.endonym_name | capitalize }}</span>
     {% render 'icon-caret' %}
   </button>
-  <div class="disclosure__list-wrapper languages_list absolute left-0 top-full z-10" hidden>
+  <div class="disclosure__list-wrapper languages_list absolute left-0 top-full z-10" style="background-color:{{ settings.primary_color }}" hidden>
     <ul id="{{ localPosition }}List" role="list" class="disclosure__list border rounded p-1">
       {%- for language in localization.available_languages -%}
         <li class="disclosure__item my-2" tabindex="-1">
@@ -68,6 +69,7 @@
               aria-current="true"
             {% endif %}
             data-value="{{ language.iso_code }}"
+            style="color: {{ settings.text }}"
           >
             {{ language.endonym_name | capitalize }}
           </a>

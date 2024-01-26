@@ -1,6 +1,6 @@
 <div class="sn-topbar w-full">
   <div
-    style="background-color: {{settings.topbar_background}};"
+    style="background-color: {{settings.top_bar_background}};"
     class="lg:justify-{{section.settings.content_position}} flex flex-col lg:flex-row items-center p-2 gap-3 lg:gap-5 w-full section-{{ section.settings.container }} h-fit lg:max-h-[40px] mx-auto"
   >
     {% for block in section.blocks %}
@@ -16,7 +16,7 @@
             {% if block.settings.is_show_phone_num %}
               {% if settings.store_phone_number %}
                 <div class="w-fit h-fit flex items-center gap-1">
-                  {% render 'icons', type:'phone', color:{{settings.topbar_text}} -%}
+                  {% render 'icons', type:'phone', color:{{settings.top_bar_text}} -%}
                   <a class="underline text-[12px] lg:text-sm" href="tel:+{{ settings.store_phone_number }}">
               {% if settings.phone_label != blank and block.settings.is_show_label == false %}{{- settings.phone_label -}}{% endif %}
                   </a>
@@ -26,7 +26,7 @@
             {% if block.settings.is_show_whatsapp %}
               {% if settings.whatsapp_link %}
                 <div class="w-fit h-fit flex items-center gap-1">
-                  {% render 'icons', type:'whatsapp', color:{{settings.topbar_text}} -%}
+                  {% render 'icons', type:'whatsapp', color:{{settings.top_bar_text}} -%}
                   <a class="underline text-[12px] lg:text-sm" href="https://wa.me/{{settings.whatsapp_link}}">
               {% if settings.whatsapp_label != blank and block.settings.is_show_label == false %}{{- settings.whatsapp_label -}}{% endif %}
                   </a>
@@ -36,7 +36,7 @@
             {% if block.settings.is_show_email %}
               {% if settings.store_email %}
                 <div class="w-fit h-fit flex items-center gap-1">
-                  {% render 'icons', type:'email', color:{{settings.topbar_text}} -%}
+                  {% render 'icons', type:'email', color:{{settings.top_bar_text}} -%}
                   <a class="underline text-[12px] lg:text-sm" href="mailto:{{ settings.store_email }}">
                     {% if settings.mail_label != blank and block.settings.is_show_label == false %}{{- settings.mail_label -}}{% endif %}                  
                     </a>
@@ -45,40 +45,7 @@
             {% endif %}
           </div>
         {% when 'social_media' %}
-          <div class="flex gap-3 items-center w-fit h-fit">
-            {% if settings.facebook_link %}
-              <div class="w-fit h-fit">
-                <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.facebook_link}}">
-                  {% render 'icons', type:'facebook', color:{{settings.topbar_text}} -%}
-                  {% if settings.facebook_label != blank and block.settings.is_show_label == false %}{{- settings.facebook_label -}}{% endif %}
-                </a>
-              </div>
-            {% endif %}
-            {% if settings.instagram_link %}
-              <div class="w-fit h-fit">
-                <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.instagram_link}}">
-                  {% render 'icons', type:'instagram', color:{{settings.topbar_text}} -%}
-                  {% if settings.instagram_label != blank and block.settings.is_show_label == false %}{{- settings.instagram_label -}}{% endif %}
-                </a>
-              </div>
-            {% endif %}
-            {% if settings.twitter_link %}
-              <div class="w-fit h-fit">
-                <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.twitter_link}}">
-                  {% render 'icons', type:'twitter', color:{{settings.topbar_text}} -%}
-                  {% if settings.twitter_label != blank and block.settings.is_show_label == false %}{{- settings.twitter_label -}}{% endif %}
-                </a>
-              </div>
-            {% endif %}
-            {% if settings.pinterest_link %}
-              <div class="w-fit h-fit">
-                <a class="flex items-center gap-1 underline text-[12px] lg:text-sm" href="{{settings.pinterest_link}}">
-                  {% render 'icons', type:'pinterest', color:{{settings.topbar_text}} -%}
-                  {% if settings.pinterest_label != blank and block.settings.is_show_label == false %}{{- settings.pinterest_label -}}{% endif %}
-                </a>
-              </div>
-            {% endif %}
-          </div>
+          {% render 'social-media-links', block: block %}
         {% when 'international' %}
           <div class="flex items-center gap-5">
 

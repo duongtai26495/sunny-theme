@@ -1,5 +1,5 @@
 <header class="w-full relative {% if section.settings.is_show_divider %}border-b{% endif %}">
-  <div class="hidden mx-auto py-2 px-2 md:py-5 header header-wrapper header--{{section.settings.header_style}} w-full section-{{section.settings.container}}{% if section.settings.header_style=='menu_2l_logo_center' or section.settings.header_style=='menu_2l_logo_left' %} lg:block {% else %} lg:flex {% endif %}items-center">
+  <div class="hidden mx-auto px-2 header header-wrapper header--{{ section.settings.header_style }} w-full section-{{ section.settings.container }}{% if section.settings.header_style == 'menu_2l_logo_center' or section.settings.header_style == 'menu_2l_logo_left' %} lg:block {% else %} lg:flex {% endif %}items-center">
     {% case section.settings.header_style %}
       {% when 'menu_left_logo_center' %}
         {% render 'menu-item', section: section, style: 'w-2/5' %}
@@ -119,7 +119,7 @@
   </div>
   {% case section.settings.header_mobile_type %}
     {% when '2line_menu_bottom' %}
-      <div class="block lg:hidden border-b py-2">
+      <div class="block lg:hidden border-b pb-2">
         {%- if request.page_type == 'index' -%}
           <h1 class="header__head w-full text-center">
         {% else %}
@@ -140,7 +140,7 @@
         </div>
       </div>
     {% when 'menu_left_logo_center' %}
-      <div class="w-full flex lg:hidden items-center  py-2">
+      <div class="w-full flex lg:hidden items-center pb-2">
         {% render 'hamburger-button' %}
 
         {%- if request.page_type == 'index' -%}
@@ -278,6 +278,7 @@
       ],
       "default": "default"
     },
+   
     {
       "type": "select",
       "id": "mega_menu_content",

@@ -28,11 +28,11 @@
               {% endif %}
           {% endcase %}
         {% endfor %}
-        <li class="w-fit list-menu-item pr-4 mr-2 py-2 {% if link.links != blank and hasMegaBlock == false and section.settings.menu_type_desktop == 'default' %}relative{% endif %}">
+        <li class="w-fit list-menu-item pr-4 mr-2 py-4 {% if link.links != blank and hasMegaBlock == false and section.settings.menu_type_desktop == 'default' %}relative{% endif %}">
 
           {% if link.links != blank or hasMegaBlock %}
             <a
-              class="{%- if link.active %}menu_item_active{% endif %} py-1 {% if link.links != blank or hasMegaBlock == true %} list-menu-empty{% endif %} cursor-pointer font-semibold list-menu--link relative text-base flex items-center gap-2"
+              class="{%- if link.active %}menu_item_active{% endif %}{% if link.links != blank or hasMegaBlock == true %} list-menu-empty{% endif %} cursor-pointer font-semibold list-menu--link relative text-base flex items-center gap-2"
               href="{{ link.url }}"
             >
               {{- link.title | escape -}}

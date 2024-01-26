@@ -137,6 +137,18 @@
     animation: shake 0.3s ease-in-out;
   }
 
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateX(10px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.slide-content-inner {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: fadeUp 0.8s ease-in-out forwards;
+    animation-delay: 0.3s;
+}
+
 .open-submenu[submenu-opened] svg g line:first-child{visibility: hidden;}
 
 .sn-button {
@@ -198,4 +210,37 @@
 
 .mega-menu-wrapper {
     box-shadow: 0px 2px 3px 0px #0000001c;
+}
+
+.swiper-button.style-light:after { color:black;}
+
+.swiper-button.style-dark:after { color:white;}
+
+@media (min-width:767px){
+   
+.swiper-button.style-dark:hover:after{ color:black;}
+
+.swiper-button.style-light:hover:after{ color:white;}
+ 
+}
+
+.swiper-pagination.style-dark span.swiper-pagination-bullet
+{ 
+    background-color: black; 
+    border-color:white;
+}
+
+.swiper-pagination.style-light span.swiper-pagination-bullet
+{ 
+    border-color: black;
+    background-color: white ; 
+}
+
+:root {
+    --size-panigation-dot: 13px;
+}
+body span.swiper-pagination-bullet{
+    border: 1px solid #878787;
+    width: var(--size-panigation-dot);
+    height: var(--size-panigation-dot);
 }

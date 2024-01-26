@@ -2,14 +2,15 @@
   assign heading = block.settings.heading
   assign sub_heading = block.settings.sub_heading
   assign text_alignment = block.settings.content_alignment
+  
 %}
 
-<div class="w-full block p-5 text-{{text_alignment}}">
+<div class="w-full block p-2 lg:p-5 text-{{text_alignment}}">
   {% if heading != blank %}
-    <h2 class="w-full text-lg lg:text-xl font-bold">{{ heading }}</h2>
+    <h2 style="color: {% if heading_color == blank %} {{ settings.heading }} {% else %} {{ heading_color }} {% endif %}" class="w-full text-lg lg:text-xl font-bold">{{ heading }}</h2>
   {% endif %}
   {% if sub_heading != blank %}
-    <h3 class="w-full text-md lg:text-lg">
+    <h3 style="color: {% if sub_heading_color == blank %} {{ settings.text }} {% else %} {{ sub_heading_color }} {% endif %}" style="color: {{ settings.sub_heading }}" class="w-full text-md lg:text-lg">
       {{ sub_heading }}
     </h3>
   {% endif %}

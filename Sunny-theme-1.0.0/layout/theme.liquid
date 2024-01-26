@@ -17,9 +17,10 @@
     <link rel="stylesheet" href="{{ 'theme-global.css' | asset_url }}">
     <link rel="stylesheet" href="{{ 'swiper-bundle.min.css' | asset_url }}">
     <link type="text/css" href="{{ 'theme.css' | asset_url }}" rel="stylesheet">
+    {% comment %} {% render 'style-tags' %} {% endcomment %}
     {{ content_for_header }}
   </head>
-  <body style="background-color: {{settings.primary_color}};" class="relative overflow-x-hidden">
+  <body class="relative overflow-x-hidden" style="background-color: {{settings.primary_color }};">
     {%- liquid
       sections 'header-group'
     -%}
@@ -32,11 +33,11 @@
       sections 'footer-group'
     -%}
 
-    {% liquid  
+    {%- liquid  
     if settings.cart_type == 'drawer' 
       render 'cart-drawer'
     endif 
-    %}
+    -%}
 
     <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'theme-global.min.js' | asset_url }}" defer="defer"></script>

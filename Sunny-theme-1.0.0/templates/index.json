@@ -1,9 +1,9 @@
 {
   "sections": {
-    "main": {
-      "type": "main-content",
+    "slideshow": {
+      "type": "slide",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": ["slideshow"]
 }

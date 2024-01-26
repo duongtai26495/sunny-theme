@@ -1,4 +1,5 @@
-<div class="cart-drawer fixed right-0 top-0 w-[400px] max-w-[80vw] md:max-w-[500px] z-[99] h-full bg-white border-l-2">
+
+<div class="cart-drawer fixed right-0 top-0 w-[400px] max-w-[80vw] md:max-w-[500px] z-[99] h-full border-l-2" style="background-color: {{ settings.cart_background }};">
   <cart-drawer class="cart-drawer__wrapper h-full w-full{% if cart == empty %} is-empty{% endif %} p-2 block relative">
     <div class="cart-drawer__header">
           <h2 class="cart-drawer__heading w-full text-start block text-xl">{{ 'general.cart.title' | t }}</h2>

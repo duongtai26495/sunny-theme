@@ -1,0 +1,105 @@
+{% if blocks.size > 0 %}
+  <div class="sn-footer-wrapper mx-auto px-1 py-4 section-{{ section.settings.container }}">
+    <div class="sn-footer-inner w-full sn-footer-mobile_collapsible flex flex-col lg:flex-row">
+      {% for block in blocks %}
+        {% liquid
+          case block.settings.width
+            when '20%'
+              assign block_width = 'lg:w-1/5'
+            when '25%'
+              assign block_width = 'lg:w-1/4'
+            when '33%'
+              assign block_width = 'lg:w-1/3'
+            when '50%'
+              assign block_width = 'lg:w-1/2'
+            when '75%'
+              assign block_width = 'lg:w-3/4'
+            when '80%'
+              assign block_width = 'lg:w-4/5'
+            when '100%'
+              assign block_width = 'lg:w-full'
+          endcase
+
+          assign block_title = block.settings.title
+        %}
+        <div class="sn-footer-block footer-block collapsible-block w-full {{ block_width }} px-2">
+          <div class="sn-footer-block-inner">
+            {% if block_title != blank %}
+              <h3 class="w-full pb-2 flex items-center justify-between cursor-pointer lg:cursor-default text-md lg:text-lg font-bold">
+                {{ block_title }}
+                <span class="caret-footer mt-1 visible lg:invisible">
+                  {% render 'icon-caret' %}
+                </span>
+              </h3>
+            {% endif %}
+            {% case block.type %}
+              {% when 'menu' %}
+                {%- liquid
+                  assign menu = linklists[block.settings.footer_menu]
+                -%}
+                {% if menu.links != blank %}
+                  <ul class="sn-footer-menu mobile-collapsible">
+                    {% for link in menu.links %}
+                      <li class="sn-footer-menu_item pt-1">
+                        <a href="{{ link.url }}" class="sn-footer-menu_link">
+                          {{ link.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+
+              {% when 'image' %}
+
+              {% when 'information' %}
+                <div class="sn-footer-block_content mobile-collapsible">
+                  {% unless block.settings.description == blank %}
+                    <div class="block-text">
+                      {{ block.settings.description }}
+                    </div>
+                  {% endunless %}
+                  <div class="block-text flex flex-col gap-3 mt-3">
+                    {% if settings.store_phone_number and block.settings.show_phone %}
+                      <div class="w-fit h-fit flex items-center gap-1">
+                        {% render 'icons', type:'phone', color:{{settings.footer_text}} -%}
+                        <a class="underline text-[12px] lg:text-sm" href="tel:+{{ settings.store_phone_number }}">
+                          {% if settings.phone_label != blank %}
+                            {{- settings.phone_label -}}
+                          {% endif %}
+                        </a>
+                      </div>
+                    {% endif %}
+                    {% if settings.store_email and block.settings.show_email %}
+                      <div class="w-fit h-fit flex items-center gap-1">
+                        {% render 'icons', type:'email', color:{{settings.footer_text}} -%}
+                        <a class="underline text-[12px] lg:text-sm" href="mailto:{{ settings.store_email }}">
+                          {% if settings.mail_label != blank %}{{- settings.mail_label -}}{% endif %}
+                        </a>
+                      </div>
+                    {% endif %}
+                    {% if settings.whatsapp_link and block.settings.show_whatsapp %}
+                      <div class="w-fit h-fit flex items-center gap-1">
+                        {% render 'icons', type:'whatsapp', color:{{settings.footer_text}} -%}
+                        <a class="underline text-[12px] lg:text-sm" href="https://wa.me/{{settings.whatsapp_link}}">
+                          {% if settings.whatsapp_label != blank %}{{- settings.whatsapp_label -}}{% endif %}
+                        </a>
+                      </div>
+                    {% endif %}
+                    {% if block.settings.show_socials_icons %}
+                      <div class="mt-2">
+                        {% render 'social-media-links', type: 'footer' %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% when 'newsletter' %}
+
+              {% when 'spacing' %}
+
+            {% endcase %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

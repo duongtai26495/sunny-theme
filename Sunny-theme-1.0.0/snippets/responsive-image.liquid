@@ -18,7 +18,7 @@
         class="sn-image {{ image_class }}"
         width="{{ image.width }}"
         height="{{ image.height }}"
-        {{ image_attributes }}
+         {{ image_attributes }}
     >
     <noscript>
       <img class="{{ image_class }}" loading="lazy" width="" height="" src="{{ image | image_url: width: 2048, height: 2048 }}" alt="{{ alt | default: image.alt | escape }}">

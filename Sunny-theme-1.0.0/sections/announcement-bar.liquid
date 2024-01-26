@@ -1,5 +1,5 @@
 <div
-  class="swiper w-full mx-auto annountcement-bar relative section-{{section.settings.container}}"
+  class="swiper w-full mx-auto annountcement-bar relative"
   section-id="{{section.id}}"
   duration="{{ section.settings.duration }}"
   data-auto-play="true"
@@ -11,7 +11,7 @@
       {% if block.settings.use_button %}
           <div
       class="{% if section.settings.show_navigations %}px-7{% endif %} h-10 w-full announcement-bar--inner flex items-center justify-{{block.settings.position}}"
-            style="background-color:{{block.settings.background}};"
+  style="background-color:{{block.settings.background}};"
           >
       {% else %}
         <a
@@ -50,27 +50,6 @@
     {
       "type": "header",
       "content": "General"
-    },
-    {
-      "type": "select",
-      "id": "container",
-      "label": "Container width",
-      "options": [
-        {
-          "label": "Container",
-          "value": "container"
-        },
-        {
-          "label": "Narrow",
-          "value": "narrow_width"
-        },
-        {
-          "label": "Full width",
-          "value": "full_width"
-        }
-      ],
-      "default": "full_width",
-      "info": "Width value of section content"
     },
     {
       "type": "range",

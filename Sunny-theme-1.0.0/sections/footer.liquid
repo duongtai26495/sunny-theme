@@ -1,0 +1,462 @@
+<footer class="footer sn-footer" section-id="{{ section.id }}" data-section-type="footer"  style="background-color:{{ settings.footer_background_top }}">
+  {% render 'footer-blocks', blocks: section.blocks %}
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "options": [
+        {
+          "label": "Container",
+          "value": "container"
+        },
+        {
+          "label": "Narrow",
+          "value": "narrow_width"
+        },
+        {
+          "label": "Full width",
+          "value": "full_width"
+        }
+      ],
+      "default": "container",
+      "info": "Width value of section content"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_divider",
+      "label": "Show divider",
+      "default": true
+    }
+  ],
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "name": "Footer menu",
+      "type": "menu",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "footer_menu",
+          "label": "Menu",
+          "default": "main-menu"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "See more"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_title",
+          "default": true,
+          "label": "Show block title"
+        },
+        {
+          "type": "checkbox",
+          "id": "default_open",
+          "label": "Default open on mobile",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase",
+          "default": false,
+          "label": "Items uppercase"
+        },
+        {
+          "type": "select",
+          "id": "block_width",
+          "label": "Desktop block width",
+          "default": "25%",
+          "options": [
+            {
+              "value": "20%",
+              "label": "20%"
+            },
+            {
+              "value": "25%",
+              "label": "25%"
+            },
+            {
+              "value": "33%",
+              "label": "33%"
+            },
+            {
+              "value": "50%",
+              "label": "50%"
+            },
+            {
+              "value": "66%",
+              "label": "66%"
+            },
+            {
+              "value": "75%",
+              "label": "75%"
+            },
+            {
+              "value": "80%",
+              "label": "80%"
+            },
+            {
+              "value": "100%",
+              "label": "100%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Image",
+      "type": "image",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Our services"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_title",
+          "default": true,
+          "label": "Show block title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select image"
+        },
+        {
+          "type": "range",
+          "label": "Image rounded",
+          "id": "image_rounded",
+          "min": 0,
+          "max": 20,
+          "step": 5,
+          "default": 0,
+          "unit": "px"
+        },
+        {
+          "type": "select",
+          "id": "block_width",
+          "label": "Desktop block width",
+          "default": "25%",
+          "options": [
+            {
+              "value": "20%",
+              "label": "20%"
+            },
+            {
+              "value": "25%",
+              "label": "25%"
+            },
+            {
+              "value": "33%",
+              "label": "33%"
+            },
+            {
+              "value": "50%",
+              "label": "50%"
+            },
+            {
+              "value": "66%",
+              "label": "66%"
+            },
+            {
+              "value": "75%",
+              "label": "75%"
+            },
+            {
+              "value": "80%",
+              "label": "80%"
+            },
+            {
+              "value": "100%",
+              "label": "100%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Information",
+      "type": "information",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Information"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_title",
+          "default": true,
+          "label": "Show block title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Find a location nearest you.</p>"
+        },
+        {
+          "type": "header",
+          "content": "Store information",
+          "info": "Go to \"Theme settings > Store contact\" to update these information."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_email",
+          "label": "Show email",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_phone",
+          "label": "Show phone number",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_whatsapp",
+          "label": "Show whatsapp call link",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_socials_icons",
+          "label": "Show social icons",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "block_width",
+          "label": "Desktop block width",
+          "default": "25%",
+          "options": [
+            {
+              "value": "20%",
+              "label": "20%"
+            },
+            {
+              "value": "25%",
+              "label": "25%"
+            },
+            {
+              "value": "33%",
+              "label": "33%"
+            },
+            {
+              "value": "50%",
+              "label": "50%"
+            },
+            {
+              "value": "66%",
+              "label": "66%"
+            },
+            {
+              "value": "75%",
+              "label": "75%"
+            },
+            {
+              "value": "80%",
+              "label": "80%"
+            },
+            {
+              "value": "100%",
+              "label": "100%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Newsletter",
+      "type": "newsletter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Subscribe"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_title",
+          "default": true,
+          "label": "Show block title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select image",
+          "info": "This image will show above block title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Enter your email below to be the first to know about new collections and product launches."
+        },
+        {
+          "type": "text",
+          "id": "email_input",
+          "label": "Email",
+          "placeholder": "Your contact email"
+        },
+        {
+          "type": "select",
+          "id": "input_style",
+          "label": "Input style",
+          "default": "bordered",
+          "options": [
+            {
+              "value": "bordered",
+              "label": "Bordered"
+            },
+            {
+              "value": "simply",
+              "label": "Simply"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "input_rounded",
+          "default": true,
+          "label": "Input rounded",
+          "info": "Only for bordered style"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show social icons",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_agree_checkbox",
+          "label": "Show \"Terms & conditions\" checkbox",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "block_width",
+          "label": "Desktop block width",
+          "default": "25%",
+          "options": [
+            {
+              "value": "20%",
+              "label": "20%"
+            },
+            {
+              "value": "25%",
+              "label": "25%"
+            },
+            {
+              "value": "33%",
+              "label": "33%"
+            },
+            {
+              "value": "50%",
+              "label": "50%"
+            },
+            {
+              "value": "66%",
+              "label": "66%"
+            },
+            {
+              "value": "75%",
+              "label": "75%"
+            },
+            {
+              "value": "80%",
+              "label": "80%"
+            },
+            {
+              "value": "100%",
+              "label": "100%"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Spacing",
+      "type": "spacing",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Add a white spacing"
+        },
+        {
+          "type": "select",
+          "id": "block_width",
+          "label": "Desktop block width",
+          "default": "25%",
+          "options": [
+            {
+              "value": "20%",
+              "label": "20%"
+            },
+            {
+              "value": "25%",
+              "label": "25%"
+            },
+            {
+              "value": "33%",
+              "label": "33%"
+            },
+            {
+              "value": "50%",
+              "label": "50%"
+            },
+            {
+              "value": "66%",
+              "label": "66%"
+            },
+            {
+              "value": "75%",
+              "label": "75%"
+            },
+            {
+              "value": "80%",
+              "label": "80%"
+            },
+            {
+              "value": "100%",
+              "label": "100%"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

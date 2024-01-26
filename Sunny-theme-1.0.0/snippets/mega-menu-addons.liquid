@@ -123,14 +123,14 @@
         data-pagination="{{ block.settings.is_show_pagination }}"
         data-loop="{{ block.settings.is_loop }}"
       >
-      <div class="flex w-full items-center gap-5 justify-start">
+      <div class="flex flex-col lg:flex-row w-full items-center gap-2 lg:gap-5 justify-start">
         {% if block.settings.is_show_heading %}
           {% render 'theme-heading', block: block %}
         {% endif %}
         {% if block.settings.button_title %}
           <a class="font-semibold whitespace-nowrap border-b border-b-black" href="{{block.settings.button_url}}" >{{ block.settings.button_title }}</a>
         {% endif %}
-        </div>
+      </div>
         <div class="swiper-wrapper flex justify-start">
           {% for product_id in product_list_id %}
             {% liquid

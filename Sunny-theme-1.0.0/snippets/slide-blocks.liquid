@@ -1,0 +1,98 @@
+{% if block.settings.is_show_overlay %}
+  <div class="slideshow-overlay absolute top-0 left-0 z-[9] w-full h-full bg-slate-900 bg-opacity-30"></div>
+{% endif %}
+{% capture slide_content %}
+  <div
+      class="
+        slide-content w-full h-full absolute left-0 top-0 justify-center items-center flex z-[10]
+        {% case block.settings.content_position %}
+        {% when 'top-left' %}
+            lg:justify-start lg:items-start
+        {% when 'top-center' %}
+            lg:justify-center lg:items-start
+        {% when 'top-right' %}
+            lg:justify-end lg:items-start
+        {% when 'middle-left' %}
+            lg:justify-start lg:items-center
+        {% when 'middle-center' %}
+            lg:justify-center lg:items-center
+        {% when 'middle-right' %}
+            lg:justify-end lg:items-center
+        {% when 'bottom-left' %}
+            lg:justify-start lg:items-end
+        {% when 'bottom-center' %}
+            lg:justify-center lg:items-end
+        {% when 'bottom-right' %}
+            lg:justify-end lg:items-end
+        {% endcase %}
+      "
+    >
+      <div
+        class="slide-content-inner w-full h-full lg:h-fit lg:w-fit flex flex-col justify-center text-{{ block.settings.mobile_content_alignment }} lg:text-{{ block.settings.content_alignment }}"
+        style="padding:{{ block.settings.block_spacing }}px"
+      >
+        <h3
+          style="color: {{ block.settings.content_color }}"
+          class="
+            {% case block.settings.heading_size %}
+            {%- when 'small' -%}
+                text-lg lg:text-xl
+            {%- when 'medium' -%}
+                text-xl lg:text-2xl
+            {% when 'large' %}
+                text-2xl lg:text-3xl
+            {% endcase %} font-bold w-full
+          "
+        >
+          {{ block.settings.heading }}
+        </h3>
+        <div style="color: {{ block.settings.content_color }}" class="w-full">{{ block.settings.description }}</div>
+      </div>
+    </div>
+{% endcapture %}
+{% case type %}
+  {% when 'image' %}
+    {% liquid
+      assign image = block.settings.desktop_image
+      assign mobile_image = block.settings.mobile_image
+      unless mobile_image != blank
+        assign mobile_image = image
+      endunless
+    %}
+    {% render 'responsive-image',
+      image: image,
+      div_class: 'w-full h-full overflow-hidden hidden lg:block',
+      image_class: 'object-cover object-center w-full h-full'
+    %}
+    {% render 'responsive-image',
+      image: mobile_image,
+      div_class: 'w-full h-full overflow-hidden flex lg:hidden',
+      image_class: 'object-cover object-center w-full h-full'
+    %}
+    {{ slide_content }}
+    
+
+  {% when 'video' %}
+      <video playsinline muted autoplay loop preload="auto" class="h-full w-full object-center object-cover block">
+        {% for video in block.settings.video %}
+          {% liquid
+          assign video_url = video | split: '?v='
+          assign video_url = video_url | first | strip_newlines
+          assign format = 'mp4'
+          if video_url contains '.webm' or video_url contains '.WEBM'
+          assign format = 'webm'
+          endif
+          
+          if video_url contains '.mov' or video_url contains '.MOV'
+          assign format = 'mp4'
+          endif
+          %}
+        {% comment %}theme-check-disable RemoteAsset{% endcomment %}
+        <source src="{{ video_url }}" type="video/{{ format }}">
+      {% comment %}theme-check-enable RemoteAsset{% endcomment %}
+    {% endfor %}
+    </video>
+    {{ slide_content }}
+    {% when 'custom' %}
+
+{% endcase %}
