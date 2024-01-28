@@ -1,0 +1,210 @@
+<section class="spf-section" section-id="{{ section.id }}">
+  {% if block.settings.is_show_heading %}
+    {% render 'theme-heading', block: block %}
+  {% endif %}
+  <div
+        class="collection-list swiper swiper-container w-full mx-auto relative flex items-center gap-5"
+        duration="{{ block.settings.duration }}"
+        slides-per-view="{{ block.settings.slides_per_view }}"
+        data-auto-play="{{ block.settings.is_auto_play }}"
+        data-pagination="{{ block.settings.is_show_pagination }}"
+        data-navigation="{{ block.settings.is_show_navigation }}"
+        data-loop="{{ block.settings.is_loop }}"
+      >
+        
+        <div class="hidden lg:flex swiper-wrapper justify-start">
+          {% for collection_id in collection_list_id %}
+            {% liquid
+              if block.settings[collection_id] == blank
+                continue
+              endif
+              assign collection_handle = block.settings[collection_id]
+              assign collection = collections[collection_handle]
+            %}
+            <div class="swiper-slide">
+              {% render 'collection-card', collection: collection, block: block %}
+            </div>
+          {% endfor %}
+        </div>
+        {% if block.settings.is_show_pagination %}
+          <div class="relative min-h-8">
+            <div class="swiper-pagination"></div>
+          </div>
+        {% endif %}
+      </div>
+
+</section>
+{% schema %}
+{
+  "name": "Collection list",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "options": [
+        {
+          "label": "Container",
+          "value": "container"
+        },
+        {
+          "label": "Narrow",
+          "value": "narrow_width"
+        },
+        {
+          "label": "Full width",
+          "value": "full_width"
+        }
+      ],
+      "default": "container",
+      "info": "Width value of section content"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Section spacing top"
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Section spacing bottom"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background section",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Slider settings"
+    },
+    {
+        "type": "checkbox",
+        "id": "slider",
+        "label": "Enable slide",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "mobile_grid",
+        "default": false,
+        "label": "Show grid on mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_loop",
+      "default": true,
+      "label": "Loop"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_auto_play",
+      "default": true,
+      "label": "Autoplay"
+    },
+    {
+      "type": "range",
+      "id": "duration",
+      "min": 3,
+      "max": 15,
+      "default": 5,
+      "step": 1,
+      "unit": "s",
+      "info": "Content conversion speed",
+      "label": "Duration"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_pagination",
+      "default": true,
+      "label": "Show pagination dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_navigation",
+      "default": true,
+      "label": "Show navigation arrows"
+    },
+    {
+      "type": "select",
+      "id": "navigation_style",
+      "options": [
+        {
+          "label": "Light",
+          "value": "light"
+        },
+        {
+          "label": "Dark",
+          "value": "dark"
+        }
+      ],
+      "default": "dark",
+      "label": "Navigation style"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Collection",
+      "type": "collection",
+      "limit": 12,
+      "settings": [
+        {
+            "type": "header",
+            "content":"Select collection"
+        },
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Collection image"
+        },
+        {
+            "type": "checkbox",
+            "id": "use_default_image",
+            "default": true,
+            "label": "Show collection image"
+        },
+        {
+            "type": "select",
+            "id": "image_style",
+            "label": "Image style",
+            "options": [
+                {
+                    "label":"Square",
+                    "value": "square"
+                },
+                {
+                    "label":"Circle",
+                    "value": "circle"
+                }
+            ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection list"
+    }
+  ]
+}
+{% endschema %}

@@ -51,7 +51,7 @@
     ></div>
   {% endif %}
   {% if section.settings.is_show_pagination and block_count > 1 %}
-    <div class="min-h-12 absolute bottom-0 left-0 w-full">
+    <div class="min-h-12 absolute bottom-10 left-0 w-full">
       <div class="swiper-pagination style-{{ section.settings.navigation_style }}"></div>
     </div>
   {% endif %}
@@ -395,7 +395,7 @@
           "type": "textarea",
           "id": "video",
           "label": "Video",
-          "default": "https://cdn.shopify.com/videos/c/o/v/fbb140fd46e3429eba459e1549dbbe38.mp4",
+          "default": "https://cdn.shopify.com/videos/c/o/v/95e37d84513b43b3be5fdeb1d7d0e83b.mp4",
           "info": "Allow multiple format, each video in a new line. MP4, MOV and WEBM supported."
         },
         {
@@ -410,6 +410,32 @@
           "label": "Mobile cover image",
           "info": "600 x 480px recommended"
         },
+        {
+          "type":"checkbox",
+          "id":"autoplay",
+          "default": true,
+          "label": "Autoplay"
+        },
+        {
+          "type":"checkbox",
+          "id":"loop",
+          "default": true,
+          "label": "Loop"
+        },
+        {
+          "type":"checkbox",
+          "id":"muted",
+          "default": true,
+          "label": "Muted",
+          "info": "Video is possible to autoplay when this option is enabled"
+        },
+        {
+          "type":"checkbox",
+          "id":"controls",
+          "default": false,
+          "label": "Controls"
+        },
+        
         {
           "type": "checkbox",
           "id": "is_show_overlay",
@@ -542,6 +568,12 @@
           ],
           "default": "middle-center",
           "label": "Content position"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_content",
+          "default": false,
+          "label": "Show content"
         },
         {
           "type": "range",

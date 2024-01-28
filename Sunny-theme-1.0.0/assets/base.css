@@ -594,8 +594,8 @@ video {
   position: relative;
 }
 
-.bottom-0 {
-  bottom: 0px;
+.bottom-10 {
+  bottom: 2.5rem;
 }
 
 .left-0 {
@@ -712,6 +712,10 @@ video {
 
 .inline-flex {
   display: inline-flex;
+}
+
+.grid {
+  display: grid;
 }
 
 .hidden {
@@ -1250,6 +1254,10 @@ video {
 @media (min-width: 1024px) {
   .lg\:invisible {
     visibility: hidden;
+  }
+
+  .lg\:absolute {
+    position: absolute;
   }
 
   .lg\:block {

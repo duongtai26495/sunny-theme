@@ -1,10 +1,17 @@
 {% if block.settings.is_show_overlay %}
   <div class="slideshow-overlay absolute top-0 left-0 z-[9] w-full h-full bg-slate-900 bg-opacity-30"></div>
 {% endif %}
+{% liquid
+  assign content_empty = false
+  if block.settings.heading == blank and block.settings.description == blank
+    assign content_empty = true
+  endif
+%}
 {% capture slide_content %}
+  {% unless content_empty %} 
   <div
       class="
-        slide-content w-full h-full absolute left-0 top-0 justify-center items-center flex z-[10]
+  slide-content w-full h-full {% if section.settings.mobile_content_below %}relative lg:absolute{% else %}absolute{% endif %} left-0 top-0 justify-center items-center flex z-[10]
         {% case block.settings.content_position %}
         {% when 'top-left' %}
             lg:justify-start lg:items-start
@@ -49,6 +56,7 @@
         <div style="color: {{ block.settings.content_color }}" class="w-full">{{ block.settings.description }}</div>
       </div>
     </div>
+  {% endunless %}
 {% endcapture %}
 {% case type %}
   {% when 'image' %}
@@ -69,30 +77,52 @@
       div_class: 'w-full h-full overflow-hidden flex lg:hidden',
       image_class: 'object-cover object-center w-full h-full'
     %}
+
     {{ slide_content }}
-    
 
   {% when 'video' %}
-      <video playsinline muted autoplay loop preload="auto" class="h-full w-full object-center object-cover block">
-        {% for video in block.settings.video %}
-          {% liquid
+    {% liquid
+      assign muted = block.settings.muted
+      assign autoplay = block.settings.autoplay
+      assign loop = block.settings.loop
+      assign controls = block.settings.controls
+    %}
+    <video
+      playsinline
+      {% if muted %}
+        muted
+      {% endif %}
+      {% if autoplay %}
+        autoplay
+      {% endif %}
+      {% if loop %}
+        loop
+      {% endif %}
+      {% if controls %}
+        controls
+      {% endif %}
+      preload="auto"
+      class="h-full w-full object-center object-cover block"
+    >
+      {% for video in block.settings.video %}
+        {% liquid
           assign video_url = video | split: '?v='
           assign video_url = video_url | first | strip_newlines
           assign format = 'mp4'
           if video_url contains '.webm' or video_url contains '.WEBM'
-          assign format = 'webm'
+            assign format = 'webm'
           endif
-          
+
           if video_url contains '.mov' or video_url contains '.MOV'
-          assign format = 'mp4'
+            assign format = 'mp4'
           endif
-          %}
+        %}
         {% comment %}theme-check-disable RemoteAsset{% endcomment %}
         <source src="{{ video_url }}" type="video/{{ format }}">
-      {% comment %}theme-check-enable RemoteAsset{% endcomment %}
-    {% endfor %}
+        {% comment %}theme-check-enable RemoteAsset{% endcomment %}
+      {% endfor %}
     </video>
+    {% if block.settings.is_show_content %}
     {{ slide_content }}
-    {% when 'custom' %}
-
+    {% endif %}
 {% endcase %}

@@ -1,4 +1,4 @@
-<div class="sidebar-icon fixed items-center bg-opacity-65 {{ section.settings.position }}-0 {% case section.settings.position %} {% when 'left' %}rounded-r-md{% when 'right' %}rounded-l-md{% endcase %} top-1/2 justify-center gap-5 flex flex-col header-icons  border px-2 py-4" style="background-color: {{settings.primary_color}};">
+<div class="z-[99] sidebar-icon fixed items-center bg-opacity-65 {{ section.settings.position }}-0 {% case section.settings.position %} {% when 'left' %}rounded-r-md{% when 'right' %}rounded-l-md{% endcase %} top-1/2 justify-center gap-5 flex flex-col header-icons  border px-2 py-4" style="background-color: {{settings.primary_color}};">
   {% if section.settings.is_show_compare %}
     {%- assign compare_url = settings.comparison_page.url -%}
     <a class="comparison-icon" href="{{compare_url}}">
