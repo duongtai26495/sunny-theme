@@ -32,22 +32,28 @@
 >
   <div class="w-full h-full swiper-wrapper">
     {% for block in section.blocks %}
-      {% if block.settings.is_use_button or block.settings.button_title == blank %}
+      {%liquid 
+      assign show_button = false
+      if block.settings.is_show_button and block.settings.button_label != blank
+        assign show_button = true
+      endif
+      %}
+      {% unless show_button and block.settings.button_url == blank %}
+        <a class="swiper-slide relative" href="{{ block.settings.button_url }}">
+        {% else %}
         <div class="swiper-slide relative">
-      {% else %}
-        <a class="swiper-slide relative" href="{{ block.settings.button_link }}">
-      {% endif %}
+      {% endunless %}
       {% case block.type %}
         {% when 'image' %}
-          {% render 'slide-blocks', type: 'image', block: block %}
+          {% render 'slide-blocks', type: 'image', block: block, show_button:show_button %}
         {% when 'video' %}
           {% render 'slide-blocks', type: 'video', block: block %}
       {% endcase %}
-      {% if block.settings.is_use_button or block.settings.button_title == blank %}
-        </div>
-      {% else %}
+      {% unless show_button and block.settings.button_url == blank %}
         </a>
-      {% endif %}
+        {% else %}
+        </div>
+      {% endunless %}
     {% endfor %}
   </div>
   {% assign block_count = section.blocks | size %}
@@ -308,7 +314,7 @@
         },
         {
           "type": "checkbox",
-          "id": "is_use_button",
+          "id": "is_show_button",
           "default": false,
           "label": "Use button"
         },

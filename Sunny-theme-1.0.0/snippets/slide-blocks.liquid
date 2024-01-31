@@ -54,7 +54,7 @@
           {{ block.settings.heading }}
         </h3>
         <div style="color: {{ block.settings.content_color }}" class="w-fit">{{ block.settings.description }}</div>
-          {% if block.settings.button_label and block.settings.is_use_button %}
+          {% if show_button %}
           <a href="{{ block.settings.button_link }}" class="transition-all font-semibold sn-{{ block.settings.button_style }}_button w-fit rounded-sm {% case block.settings.button_size %}{% when 'small' %}px-3 py-2 text-base lg:text-md{% when 'medium' %}px-4 py-2 text-md lg:text-lg{% when 'large' %}px-6 py-3 text-lg lg:text-xl{% endcase %} ">{{ block.settings.button_label }}</a>
           {% endif %}
         </div>
