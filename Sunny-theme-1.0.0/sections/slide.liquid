@@ -28,17 +28,26 @@
   data-pagination="{{ section.settings.is_show_pagination }}"
   data-navigation="{{ section.settings.is_show_navigation }}"
   data-loop="{{ section.settings.is_loop }}"
+  style="padding-top:{{ section.settings.spacing_top }}px;padding-bottom:{{ section.settings.spacing_bottom }}px"
 >
   <div class="w-full h-full swiper-wrapper">
     {% for block in section.blocks %}
-      <div class="swiper-slide relative">
-        {% case block.type %}
+      {% if block.settings.is_use_button or block.settings.button_title == blank %}
+        <div class="swiper-slide relative">
+      {% else %}
+        <a class="swiper-slide relative" href="{{ block.settings.button_link }}">
+      {% endif %}
+      {% case block.type %}
         {% when 'image' %}
-          {% render 'slide-blocks', type:'image', block: block %}
+          {% render 'slide-blocks', type: 'image', block: block %}
         {% when 'video' %}
-          {% render 'slide-blocks', type:'video',block:block %}
-        {% endcase %}
-      </div>
+          {% render 'slide-blocks', type: 'video', block: block %}
+      {% endcase %}
+      {% if block.settings.is_use_button or block.settings.button_title == blank %}
+        </div>
+      {% else %}
+        </a>
+      {% endif %}
     {% endfor %}
   </div>
   {% assign block_count = section.blocks | size %}
@@ -138,7 +147,7 @@
       "id": "spacing_top",
       "min": 0,
       "max": 100,
-      "default": 50,
+      "default": 0,
       "step": 5,
       "unit": "px",
       "label": "Section spacing top"
@@ -148,7 +157,7 @@
       "id": "spacing_bottom",
       "min": 0,
       "max": 100,
-      "default": 50,
+      "default": 0,
       "step": 5,
       "unit": "px",
       "label": "Section spacing bottom"
@@ -267,6 +276,63 @@
           "label": "Content color"
         },
         {
+          "type": "text",
+          "id": "button_label",
+          "default": "Explore now",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "label": "Button style",
+          "id": "button_style",
+          "options": [
+            {
+              "label": "Primary button",
+              "value": "primary"
+            },
+            {
+              "label": "Secondary",
+              "value": "secondary"
+            },
+            {
+              "label": "Simple",
+              "value": "simple"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_use_button",
+          "default": false,
+          "label": "Use button"
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button size",
+          "options": [
+            {
+              "label": "Small",
+              "value": "small"
+            },
+            {
+              "label": "Medium",
+              "value": "medium"
+            },
+            {
+              "label": "Large",
+              "value": "large"
+            }
+          ],
+          "default": "medium"
+        },
+        {
           "type": "select",
           "id": "heading_size",
           "options": [
@@ -324,7 +390,7 @@
             }
           ],
           "default": "center",
-          "label": "Content alignment"
+          "label": "Mobile content alignment"
         },
         {
           "type": "select",
@@ -395,7 +461,7 @@
           "type": "textarea",
           "id": "video",
           "label": "Video",
-          "default": "https://cdn.shopify.com/videos/c/o/v/95e37d84513b43b3be5fdeb1d7d0e83b.mp4",
+          "default": "https://cdn.shopify.com/videos/c/o/v/aea5808f170644d6ad64e23452ce6537.mp4",
           "info": "Allow multiple format, each video in a new line. MP4, MOV and WEBM supported."
         },
         {
@@ -411,31 +477,31 @@
           "info": "600 x 480px recommended"
         },
         {
-          "type":"checkbox",
-          "id":"autoplay",
+          "type": "checkbox",
+          "id": "autoplay",
           "default": true,
           "label": "Autoplay"
         },
         {
-          "type":"checkbox",
-          "id":"loop",
+          "type": "checkbox",
+          "id": "loop",
           "default": true,
           "label": "Loop"
         },
         {
-          "type":"checkbox",
-          "id":"muted",
+          "type": "checkbox",
+          "id": "muted",
           "default": true,
           "label": "Muted",
           "info": "Video is possible to autoplay when this option is enabled"
         },
         {
-          "type":"checkbox",
-          "id":"controls",
+          "type": "checkbox",
+          "id": "controls",
           "default": false,
           "label": "Controls"
         },
-        
+
         {
           "type": "checkbox",
           "id": "is_show_overlay",
@@ -523,7 +589,7 @@
             }
           ],
           "default": "center",
-          "label": "Content alignment"
+          "label": "Mobile content alignment"
         },
         {
           "type": "select",

@@ -35,7 +35,7 @@
       "
     >
       <div
-        class="slide-content-inner w-full h-full lg:h-fit lg:w-fit flex flex-col justify-center text-{{ block.settings.mobile_content_alignment }} lg:text-{{ block.settings.content_alignment }}"
+        class="slide-content-inner w-full h-full lg:h-fit lg:w-fit flex flex-col justify-center gap-3 items-{{ block.settings.mobile_content_alignment }} lg:items-{{ block.settings.content_alignment }}"
         style="padding:{{ block.settings.block_spacing }}px"
       >
         <h3
@@ -48,37 +48,42 @@
                 text-xl lg:text-2xl
             {% when 'large' %}
                 text-2xl lg:text-3xl
-            {% endcase %} font-bold w-full
+            {% endcase %} font-bold w-fit
           "
         >
           {{ block.settings.heading }}
         </h3>
-        <div style="color: {{ block.settings.content_color }}" class="w-full">{{ block.settings.description }}</div>
-      </div>
+        <div style="color: {{ block.settings.content_color }}" class="w-fit">{{ block.settings.description }}</div>
+          {% if block.settings.button_label and block.settings.is_use_button %}
+          <a href="{{ block.settings.button_link }}" class="transition-all font-semibold sn-{{ block.settings.button_style }}_button w-fit rounded-sm {% case block.settings.button_size %}{% when 'small' %}px-3 py-2 text-base lg:text-md{% when 'medium' %}px-4 py-2 text-md lg:text-lg{% when 'large' %}px-6 py-3 text-lg lg:text-xl{% endcase %} ">{{ block.settings.button_label }}</a>
+          {% endif %}
+        </div>
     </div>
   {% endunless %}
 {% endcapture %}
 {% case type %}
   {% when 'image' %}
-    {% liquid
-      assign image = block.settings.desktop_image
-      assign mobile_image = block.settings.mobile_image
-      unless mobile_image != blank
-        assign mobile_image = image
-      endunless
-    %}
-    {% render 'responsive-image',
-      image: image,
-      div_class: 'w-full h-full overflow-hidden hidden lg:block',
-      image_class: 'object-cover object-center w-full h-full'
-    %}
-    {% render 'responsive-image',
-      image: mobile_image,
-      div_class: 'w-full h-full overflow-hidden flex lg:hidden',
-      image_class: 'object-cover object-center w-full h-full'
-    %}
+    
+      {% liquid
+        assign image = block.settings.desktop_image
+        assign mobile_image = block.settings.mobile_image
 
-    {{ slide_content }}
+        unless mobile_image != blank
+          assign mobile_image = image
+        endunless
+      %}
+      {% render 'responsive-image',
+        image: image,
+        div_class: 'w-full h-full overflow-hidden hidden lg:block',
+        image_class: 'object-cover object-center w-full h-full'
+      %}
+      {% render 'responsive-image',
+        image: mobile_image,
+        div_class: 'w-full h-full overflow-hidden flex lg:hidden',
+        image_class: 'object-cover object-center w-full h-full'
+      %}
+
+      {{ slide_content }}
 
   {% when 'video' %}
     {% liquid
@@ -123,6 +128,6 @@
       {% endfor %}
     </video>
     {% if block.settings.is_show_content %}
-    {{ slide_content }}
+      {{ slide_content }}
     {% endif %}
 {% endcase %}
