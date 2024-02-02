@@ -772,6 +772,18 @@ video {
   max-height: fit-content;
 }
 
+.max-h-\[400px\] {
+  max-height: 400px;
+}
+
+.max-h-\[250px\] {
+  max-height: 250px;
+}
+
+.max-h-\[200px\] {
+  max-height: 200px;
+}
+
 .min-h-12 {
   min-height: 3rem;
 }
@@ -864,6 +876,22 @@ video {
 
 .max-w-full {
   max-width: 100%;
+}
+
+.max-w-\[\] {
+  max-width: ;
+}
+
+.max-w-\[300px\] {
+  max-width: 300px;
+}
+
+.max-w-\[250px\] {
+  max-width: 250px;
+}
+
+.max-w-\[200px\] {
+  max-width: 200px;
 }
 
 .flex-1 {

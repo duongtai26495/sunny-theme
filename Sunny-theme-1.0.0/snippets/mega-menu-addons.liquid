@@ -32,8 +32,8 @@
               assign collection_handle = block.settings[collection_id]
               assign collection = collections[collection_handle]
             %}
-            <div class="swiper-slide">
-              {% render 'collection-card', collection: collection, block: block %}
+            <div class="swiper-slide max-w-[300px]">
+              {% render 'collection-card', collection: collection, is_show_count: block.settings.is_show_count, title_position: block.settings.title_position, image_style: block.settings.image_style %}
             </div>
           {% endfor %}
         </div>

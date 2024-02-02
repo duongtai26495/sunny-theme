@@ -2,26 +2,25 @@
   class="m-auto section-{{ section.settings.container }} px-4 lg:px-0"
   style="background-color: {{ section.settings.background }};padding-top:{{ section.settings.spacing_top }}px;padding-bottom:{{ section.settings.spacing_bottom }}px"
 >
-
   <div class="sn-collection-list flex-col flex {% case section.settings.style %}{% when 'style-1' %}lg:flex-row{% when 'style-2' %}lg:flex-col{% endcase %}">
-  <div class="sn-collection-list__heading w-full {% case section.settings.style %}{% when 'style-1' %}lg:w-1/4{% when 'style-2' %}lg:w-full{% endcase %}">
-    <h3
-      style="color: {{ section.settings.content_color }}"
-      class="
-      text-center lg:text-start 
-        {% case section.settings.heading_size %}
-        {%- when 'small' -%}
-            text-lg lg:text-xl
-        {%- when 'medium' -%}
-            text-xl lg:text-2xl
-        {% when 'large' %}
-            text-2xl lg:text-3xl
-        {% endcase %} font-bold w-full
-      "
-    >
-      {{ section.settings.heading }}
-    </h3>
-  </div>
+    <div class="sn-collection-list__heading w-full {% case section.settings.style %}{% when 'style-1' %}lg:w-1/4{% when 'style-2' %}lg:w-full{% endcase %}">
+      <h3
+        style="color: {{ section.settings.content_color }}"
+        class="
+                text-center lg:text-start
+          {% case section.settings.heading_size %}
+          {%- when 'small' -%}
+              text-lg lg:text-xl
+          {%- when 'medium' -%}
+              text-xl lg:text-2xl
+          {% when 'large' %}
+              text-2xl lg:text-3xl
+          {% endcase %} font-bold w-full
+        "
+      >
+        {{ section.settings.heading }}
+      </h3>
+    </div>
     <div
       class="sn-collection-list swiper swiper-container {% case section.settings.style %}{% when 'style-1' %}lg:w-3/4{% when 'style-2' %}lg:w-full{% endcase %} mx-auto relative flex items-center gap-5"
       duration="{{ section.settings.duration }}"
@@ -29,13 +28,16 @@
       data-auto-play="{{ section.settings.is_auto_play }}"
       data-pagination="{{ section.settings.is_show_pagination }}"
       data-navigation="{{ section.settings.is_show_navigation }}"
-      data-loop="{{ section.settings.is_loop }}"
     >
-      
       <div class="flex swiper-wrapper justify-start">
         {% for block in section.blocks %}
           <div class="swiper-slide">
-            {% render 'collection-card', collection: block.settings.collection, block: block %}
+            {% render 'collection-card',
+              collection: block.settings.collection,
+              title_position: section.settings.title_position,
+              is_show_count: section.settings.is_show_count,
+              image_style: section.settings.image_style
+            %}
           </div>
         {% endfor %}
       </div>
@@ -147,6 +149,32 @@
     },
     {
       "type": "select",
+      "id": "title_position",
+      "label": "Title position",
+      "options": [
+        {
+          "label": "Left",
+          "value": "start"
+        },
+        {
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "end"
+        }
+      ],
+      "default": "start"
+    },
+    {
+      "type": "checkbox",
+      "id": "is_show_count",
+      "label": "Show product count",
+      "default": true
+    },
+    {
+      "type": "select",
       "id": "style",
       "options": [
         {
@@ -176,12 +204,6 @@
       "id": "mobile_grid",
       "default": false,
       "label": "Show grid on mobile"
-    },
-    {
-      "type": "checkbox",
-      "id": "is_loop",
-      "default": true,
-      "label": "Loop"
     },
     {
       "type": "checkbox",
