@@ -244,3 +244,30 @@ body span.swiper-pagination-bullet{
     width: var(--size-panigation-dot);
     height: var(--size-panigation-dot);
 }
+.image-with-text_inner {
+    --image-width: 50;
+}
+
+@media (min-width:1024px){
+    .image-with-text-img__block{ 
+        flex: var(--image-width);
+    }
+    .image-with-text-content__block {
+        flex: calc(100 - var(--image-width));
+    }
+}
+
+.sn-collection-list.swiper h2:not(.mega) {font-size:3rem}
+.sn-collection-list.swiper h3:not(.mega) {font-size: 2.5rem;}
+.sn-collection-list.swiper h4:not(.mega) {font-size: 2rem;}
+.sn-collection-list.swiper h5:not(.mega) {font-size: 1.5rem;}
+.sn-collection-list.swiper h6:not(.mega) {font-size: 1rem;}
+
+@media (max-width:767px){
+.sn-collection-list.swiper h2:not(.mega) {font-size:2rem}
+.sn-collection-list.swiper h3:not(.mega) {font-size: 1.5rem;}
+.sn-collection-list.swiper h4:not(.mega) {font-size: 1.2rem;}
+.sn-collection-list.swiper h5:not(.mega) {font-size: 1rem;}
+.sn-collection-list.swiper h6:not(.mega) {font-size: .8rem;}
+
+}

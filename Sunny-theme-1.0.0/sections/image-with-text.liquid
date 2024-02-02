@@ -1,0 +1,366 @@
+<section
+  class="m-auto section-{{ section.settings.container }} px-4 lg:px-0"
+  style="background-color: {{ section.settings.background }};padding-top:{{ section.settings.spacing_top }}px;padding-bottom:{{ section.settings.spacing_bottom }}px"
+>
+  <div class="image-with-text_wrapper m-auto">
+    {% for block in section.blocks %}
+      {% liquid
+        assign content_empty = false
+        if block.settings.content == blank
+          assign content_empty = true
+        endif
+      %}
+
+      <div class="image-with-text_inner w-full h-fit flex flex-col {% if block.settings.reverse %}lg:flex-row-reverse{% else %}lg:flex-row{% endif %}">
+        {% liquid
+          assign image = block.settings.image
+          assign mobile_image = block.settings.mobile_image
+
+          unless mobile_image != blank
+            assign mobile_image = image
+          endunless
+          
+        %}
+        {% if image != blank and mobile_image != blank %}
+        <div
+          class="image-with-text-img__block w-full h-fit overflow-hidden"
+          style="border-radius: {{ section.settings.image_rounded }}px;--image-width:{{ block.settings.image_width }}"
+        >
+          {% render 'responsive-image',
+            image: image,
+            div_class: 'w-full h-full overflow-hidden hidden lg:block',
+            image_class: 'object-cover object-center w-full h-full'
+          %}
+          {% render 'responsive-image',
+            image: mobile_image,
+            div_class: 'w-full h-full overflow-hidden flex lg:hidden',
+            image_class: 'object-cover object-center w-full h-full'
+          %}
+        </div>
+        {% endif %}
+        {% if block.settings.is_show_content and content_empty == false %}
+          <div class="image-with-text-content__block w-full relative">
+            <div
+              style="padding: {{ block.settings.block_spacing }}px"
+              class="
+        slide-content w-full h-full relative {% if image == blank and mobile_image == blank %}lg:relative{% else %}lg:absolute{% endif %} left-0 top-0 justify-center flex z-[10]
+                {% case block.settings.content_position %}
+                {% when 'top-left' %}
+                    lg:justify-start lg:items-start
+                {% when 'top-center' %}
+                    lg:justify-center lg:items-start
+                {% when 'top-right' %}
+                    lg:justify-end lg:items-start
+                {% when 'middle-left' %}
+                    lg:justify-start lg:items-center
+                {% when 'middle-center' %}
+                    lg:justify-center lg:items-center
+                {% when 'middle-right' %}
+                    lg:justify-end lg:items-center
+                {% when 'bottom-left' %}
+                    lg:justify-start lg:items-end
+                {% when 'bottom-center' %}
+                    lg:justify-center lg:items-end
+                {% when 'bottom-right' %}
+                    lg:justify-end lg:items-end
+                {% endcase %}
+              "
+            >
+            <div class="w-fit items-{{ block.settings.mobile_content_alignment }} lg:items-{{ block.settings.content_alignment }} flex-col flex">
+
+              {{ block.settings.content }}
+              {% if block.settings.button_label != blank %}
+                <a
+                href="{{ block.settings.button_link }}"
+              class="w-fit transition-all font-semibold sn-{{ block.settings.button_style }}_button w-fit rounded-sm {% case block.settings.button_size %}{% when 'small' %}px-3 py-2 text-base lg:text-md{% when 'medium' %}px-4 py-2 text-md lg:text-lg{% when 'large' %}px-6 py-3 text-lg lg:text-xl{% endcase %} "
+                >
+                {{- block.settings.button_label -}}
+                </a>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Image with text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "container",
+      "label": "Container width",
+      "options": [
+        {
+          "label": "Container",
+          "value": "container"
+        },
+        {
+          "label": "Narrow",
+          "value": "narrow_width"
+        },
+        {
+          "label": "Full width",
+          "value": "full_width"
+        }
+      ],
+      "default": "container",
+      "info": "Width value of section content"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "image_rounded",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "unit": "px",
+      "label": "Image rounded"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Section spacing top"
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 100,
+      "default": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Section spacing bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Content",
+      "type": "content",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Select mobile image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "label": "Image width",
+          "min": 20,
+          "max": 80,
+          "step": 5,
+          "unit": "%",
+          "default": 50
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "default": "<p>Content here</p>",
+          "label": "Content"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_show_content",
+          "default": true,
+          "label": "Show content column"
+        },
+
+        {
+          "type": "checkbox",
+          "id": "reverse",
+          "label": "Column reverse",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "content_color",
+          "default": "#000000",
+          "label": "Content color"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Explore now",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "label": "Button style",
+          "id": "button_style",
+          "options": [
+            {
+              "label": "Primary button",
+              "value": "primary"
+            },
+            {
+              "label": "Secondary",
+              "value": "secondary"
+            },
+            {
+              "label": "Simple",
+              "value": "simple"
+            }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button size",
+          "options": [
+            {
+              "label": "Small",
+              "value": "small"
+            },
+            {
+              "label": "Medium",
+              "value": "medium"
+            },
+            {
+              "label": "Large",
+              "value": "large"
+            }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "select",
+          "id": "content_alignment",
+          "options": [
+            {
+              "label": "Left",
+              "value": "start"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "end"
+            }
+          ],
+          "default": "center",
+          "label": "Content alignment"
+        },
+        {
+          "type": "select",
+          "id": "mobile_content_alignment",
+          "options": [
+            {
+              "label": "Left",
+              "value": "start"
+            },
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Right",
+              "value": "end"
+            }
+          ],
+          "default": "center",
+          "label": "Mobile content alignment"
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "options": [
+            {
+              "label": "Top left",
+              "value": "top-left"
+            },
+            {
+              "label": "Top center",
+              "value": "top-center"
+            },
+            {
+              "label": "Top right",
+              "value": "top-right"
+            },
+            {
+              "label": "Middle left",
+              "value": "middle-left"
+            },
+            {
+              "label": "Middle center",
+              "value": "middle-center"
+            },
+            {
+              "label": "Middle right",
+              "value": "middle-right"
+            },
+            {
+              "label": "Bottom left",
+              "value": "bottom-left"
+            },
+            {
+              "label": "Bottom center",
+              "value": "bottom-center"
+            },
+            {
+              "label": "Bottom right",
+              "value": "bottom-right"
+            }
+          ],
+          "default": "middle-center",
+          "label": "Content position"
+        },
+        {
+          "type": "range",
+          "id": "block_spacing",
+          "min": 0,
+          "max": 50,
+          "default": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Content spacing"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text",
+      "blocks": [
+        {
+          "type":"content"
+        },
+        {
+          "type":"content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
